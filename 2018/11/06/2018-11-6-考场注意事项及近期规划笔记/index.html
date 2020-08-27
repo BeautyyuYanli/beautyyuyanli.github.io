@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/custom-logo.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/custom-logo.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/custom-logo.jpg">
+  <link rel="mask-icon" href="/uploads/custom-logo.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"beautyyu.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="2018-11-6 NOIp2018倒计时3天. 这两天听了一些考场技巧,自己做了一些模拟赛,顺便查缺补漏一下.大概总结一下考场注意事项.  考场注意事项考前 记得带笔,纸,身份证,准考证 早点睡 熟悉一下考场的NOI Linux环境,了解一下frc的配置和非还原分区  考场上比赛开始前 写好.vimrc 配置好frc,比赛开始15min后frc配置将不能更改 注意建选手文件夹和子文件夹 写好头文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NOIp考场注意事项|笔记">
+<meta property="og:url" content="http://beautyyu.top/2018/11/06/2018-11-6-%E8%80%83%E5%9C%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%8F%8A%E8%BF%91%E6%9C%9F%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="银河美术馆-Beautyyu">
+<meta property="og:description" content="2018-11-6 NOIp2018倒计时3天. 这两天听了一些考场技巧,自己做了一些模拟赛,顺便查缺补漏一下.大概总结一下考场注意事项.  考场注意事项考前 记得带笔,纸,身份证,准考证 早点睡 熟悉一下考场的NOI Linux环境,了解一下frc的配置和非还原分区  考场上比赛开始前 写好.vimrc 配置好frc,比赛开始15min后frc配置将不能更改 注意建选手文件夹和子文件夹 写好头文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pics1.beautyyu.top/origin/iNL5MF.jpg">
+<meta property="article:published_time" content="2018-11-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-25T14:05:03.499Z">
+<meta property="article:author" content="BeautyYu言醴">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pics1.beautyyu.top/origin/iNL5MF.jpg">
+
+
+<link rel="canonical" href="http://beautyyu.top/2018/11/06/2018-11-6-%E8%80%83%E5%9C%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%8F%8A%E8%BF%91%E6%9C%9F%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>NOIp考场注意事项|笔记 | 银河美术馆-Beautyyu</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="银河美术馆-Beautyyu" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">银河美术馆-Beautyyu</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Beautyyu言醴的个人独立博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-aboutme">
+
+    <a href="/aboutme/" rel="section"><i class="fa fa-user fa-fw"></i>aboutme</a>
+
+  </li>
+        <li class="menu-item menu-item-messageboard">
+
+    <a href="/messageboard/" rel="section"><i class="fa fa-user fa-fw"></i>messageboard</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="BeautyYu言醴"
+      src="/uploads/custom-logo.jpg">
+  <p class="site-author-name" itemprop="name">BeautyYu言醴</p>
+  <div class="site-description" itemprop="description">热爱ACGN和技术的学生; 谈论音乐, 动画, 文学, 设计和自然科学</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/beautyyuyanli" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;beautyyuyanli" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:beautyyuyanli@gmail.com" title="E-Mail → mailto:beautyyuyanli@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/gpRDv2nEWyWAZug" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;gpRDv2nEWyWAZug" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.weisheng.cf/" title="http:&#x2F;&#x2F;www.weisheng.cf" rel="noopener" target="_blank">微笙计协</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://qufy.me/" title="https:&#x2F;&#x2F;qufy.me" rel="noopener" target="_blank">Queensferry</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://qwq.cafe/" title="https:&#x2F;&#x2F;qwq.cafe" rel="noopener" target="_blank">hookan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.juruoyun.top/" title="http:&#x2F;&#x2F;www.juruoyun.top" rel="noopener" target="_blank">蒟蒻云</a>
+        </li>
+    </ul>
+  </div>
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/11/06/2018-11-6-%E8%80%83%E5%9C%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%8F%8A%E8%BF%91%E6%9C%9F%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论音乐, 动画, 文学, 设计和自然科学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NOIp考场注意事项|笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-06 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-06T00:00:00+08:00">2018-11-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>2018-11-6 NOIp2018倒计时3天.</p>
+<p>这两天听了一些考场技巧,自己做了一些模拟赛,顺便查缺补漏一下.大概总结一下考场注意事项.</p>
+<hr>
+<h2 id="考场注意事项"><a href="#考场注意事项" class="headerlink" title="考场注意事项"></a>考场注意事项</h2><h3 id="考前"><a href="#考前" class="headerlink" title="考前"></a>考前</h3><ol>
+<li>记得带笔,纸,身份证,准考证</li>
+<li>早点睡</li>
+<li>熟悉一下考场的<code>NOI Linux</code>环境,了解一下<code>frc</code>的配置和非还原分区</li>
+</ol>
+<h3 id="考场上"><a href="#考场上" class="headerlink" title="考场上"></a>考场上</h3><h4 id="比赛开始前"><a href="#比赛开始前" class="headerlink" title="比赛开始前"></a>比赛开始前</h4><ol>
+<li>写好<code>.vimrc</code></li>
+<li>配置好<code>frc</code>,<strong>比赛开始15min后frc配置将不能更改</strong></li>
+<li>注意建选手文件夹和子文件夹</li>
+<li>写好头文件和两行<code>freopen</code></li>
+<li>随便敲点东西(快读啥的)找找手感?</li>
+</ol>
+<h4 id="比赛过程"><a href="#比赛过程" class="headerlink" title="比赛过程"></a>比赛过程</h4><ol>
+<li>写好文件名和文件读写</li>
+<li>注意在非还原分区做好备份</li>
+<li>使用<code>tab</code>补全时千万不要写出<code>g++ a.cpp -o a.cpp</code></li>
+<li>先读完所有题面</li>
+<li>先打暴力,反正对拍还用得上,也顺便找找状态</li>
+<li>每道题思考不超过20分钟,即使自己看起来有思路.拿分要紧</li>
+<li>写完了记得拍一下.</li>
+<li>即使<code>T1</code>写不出来心态也不能崩,参照<code>NOIp2017 T1</code>.<code>T1</code>挂了也很有机会拿200+的分</li>
+<li><strong>切勿进入<code>起火</code>的状态</strong>.也就是不能大脑发热.不能长时间处于<code>思考</code>或<code>调试</code>的状态.必要时申请上厕所.</li>
+<li><strong>该放则放</strong>,千万不能觉得”这题挂了就要凉了”这样的思路.拿分要紧</li>
+<li>对于有子任务的题尽量打数据分治.当然能写出正解就不用了.</li>
+<li>想到再补</li>
+</ol>
+<h4 id="比赛临近结束时"><a href="#比赛临近结束时" class="headerlink" title="比赛临近结束时"></a>比赛临近结束时</h4><ol>
+<li>个人对”比赛临近结束”的定义是结束前10min,也就是说结束前30min要是还有暴力分/部分分没拿到就赶紧写暴力/部分解法.</li>
+<li>检查个人文件夹,子文件夹,准考证号,题目标题.</li>
+<li>检查文件读写,记得自建<code>.in</code>文件测试一下.(我校某场场比赛挂文件的同学已经让我懒得吐槽了.</li>
+<li><strong>检查字符串常量输出</strong>.由于有过学长在考场上把<code>yes</code>写成<code>yse</code>,自己也在模拟赛中犯过这个问题,实在心有余悸.</li>
+<li>检查mod数.这玩意出错连对拍都拍不出来.</li>
+<li>想到再补</li>
+</ol>
+<hr>
+<p>个人<code>.vimrc</code>配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set nu</span><br><span class="line">set cindent</span><br><span class="line">set tabstop&#x3D;4</span><br><span class="line">set shiftwidth&#x3D;4</span><br><span class="line">syntax on</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pics1.beautyyu.top/origin/iNL5MF.jpg"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>BeautyYu言醴
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://beautyyu.top/2018/11/06/2018-11-6-%E8%80%83%E5%9C%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%E5%8F%8A%E8%BF%91%E6%9C%9F%E8%A7%84%E5%88%92%E7%AC%94%E8%AE%B0/" title="NOIp考场注意事项|笔记">http://beautyyu.top/2018/11/06/2018-11-6-考场注意事项及近期规划笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          
+
+  <div class="followme">
+    <span>欢迎关注我的其它发布渠道</span>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/gpRDv2nEWyWAZug">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/water_water_water_2077">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/10/19/2018-10-19-Luogu1484%E7%A7%8D%E6%A0%91%E9%A2%98%E8%A7%A3/" rel="prev" title="Luogu1484种树|题解">
+                  <i class="fa fa-chevron-left"></i> Luogu1484种树|题解
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/11/13/2018-11-13-NOIp2018%E6%B8%B8%E8%AE%B0/" rel="next" title="NOIp2018|游记">
+                  NOIp2018|游记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BeautyYu言醴</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      const script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '534506bf54e5122156d2',
+      clientSecret: '6c58baf4676482c85bfa5a436f9001939eac3b89',
+      repo        : 'blog-gitalk',
+      owner       : 'beautyyuyanli',
+      admin       : ['beautyyuyanli'],
+      id          : 'e85eef345db4362db2f3bef718ed7ed6',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>
