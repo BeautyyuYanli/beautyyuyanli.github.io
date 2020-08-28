@@ -29,14 +29,12 @@
 <meta property="og:site_name" content="银河美术馆-Beautyyu">
 <meta property="og:description" content="私以为没必要转二叉树 本题应为三维dp,体现的是泛化物品的背包的思想(详见&lt;背包九讲&gt;) 只是决定价值(本题体现为节省的费用)的因素不是单一的重量(体现为产树量),此外还有一个维度据上一个伐木场的距离 具体来说,一个伐木场节省的费用可以是其自己和儿子们的产树量之和和上一个伐木场的距离的成绩,这样我们就简单地设计出了状态转移策略 代码见下.蒻的英语不是很好请见谅 &#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pics1.beautyyu.top/origin/CcUwBF.jpg">
 <meta property="article:published_time" content="2018-05-16T04:12:12.000Z">
-<meta property="article:modified_time" content="2020-08-28T01:50:20.086Z">
+<meta property="article:modified_time" content="2020-08-28T12:14:05.452Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pics1.beautyyu.top/origin/CcUwBF.jpg">
 
 
 <link rel="canonical" href="http://beautyyu.top/2018/05/16/2018-5-16-ioi2005Riv/">
@@ -426,9 +424,6 @@ int d(int l,int fa,int kk)&#123;
         ans &#x3D; max(ans,f(e[l].v,fa,i) + d(e[l].nxt,fa,kk - i));
     return memd[l][fa][kk] &#x3D; ans;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="https://pics1.beautyyu.top/origin/CcUwBF.jpg"></p>
-
     </div>
 
     
@@ -630,7 +625,7 @@ NexT.utils.loadComments('#gitalk-container', () => {
     gitalk.render('gitalk-container');
   }, window.Gitalk);
 });
-</script>
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
 </html>
