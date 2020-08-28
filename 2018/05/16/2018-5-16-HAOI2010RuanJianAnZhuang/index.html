@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/C6RVgg.jpg">
 <meta property="article:published_time" content="2018-05-16T09:17:17.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:21:47.011Z">
+<meta property="article:modified_time" content="2020-08-28T01:50:14.122Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="tarjan">
@@ -151,17 +151,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -331,6 +331,15 @@
 
       <time title="创建时间：2018-05-16 17:17:17" itemprop="dateCreated datePublished" datetime="2018-05-16T17:17:17+08:00">2018-05-16</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -346,8 +355,107 @@
 <p>具体做法就是在树上做一次背包dp.引用<code>&lt;背包九讲&gt;</code>的<code>泛化物品</code>概念,物品本身可以视作一个<code>weight</code>对应<code>value</code>的函数.只要枚举为每件物品提供的<code>weight</code>后取最优即可.本题中’物品’指的就是树上的一颗子树</p>
 <p>接着考虑依赖关系环的问题.对于一个环要么全部取走,获得全部价值和,消耗全部费用和 ; 要么一个都不取.显然这里应该<code>tarjan</code>缩点.因为保证每个点的入度为1,所以<strong>一个环缩点之后一定是树上的根</strong>.最后将森林上的每个根都挂向<code>0</code>节点,形成一颗树即可</p>
 <p>代码如下.蒻的英语不好请见谅</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//by:beautyyu</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ull unsigned long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v, nxt;</span><br><span class="line">&#125;e[<span class="number">5000</span>];</span><br><span class="line"><span class="keyword">int</span> head[<span class="number">5000</span>],memf[<span class="number">5000</span>][<span class="number">1000</span>],memd[<span class="number">5000</span>][<span class="number">1000</span>];</span><br><span class="line"><span class="comment">//&#x27;memd&#x27; -- memory for function &#x27;d&#x27;,&#x27;memf&#x27; -- memory for function &#x27;f&#x27;</span></span><br><span class="line"><span class="keyword">int</span> w[<span class="number">5000</span>],v[<span class="number">5000</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">d</span><span class="params">(<span class="keyword">int</span> al,<span class="keyword">int</span> be)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> al,<span class="keyword">int</span> be)</span></span>;</span><br><span class="line"><span class="comment">//tarjan begin</span></span><br><span class="line"><span class="keyword">int</span> sta[<span class="number">5000</span>],top = <span class="number">0</span>;<span class="keyword">bool</span> insta[<span class="number">5000</span>];<span class="comment">//stack</span></span><br><span class="line"><span class="keyword">int</span> dfn[<span class="number">5000</span>],low[<span class="number">5000</span>],bl[<span class="number">5000</span>],bcnt = <span class="number">0</span>,c = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    dfn[k] = low[k] = ++ c;</span><br><span class="line">    insta[sta[++ top] = k] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[k];i;i = e[i].nxt)&#123;</span><br><span class="line">        <span class="keyword">int</span> &amp;ev = e[i].v;</span><br><span class="line">        <span class="keyword">if</span> (!dfn[ev])&#123;</span><br><span class="line">            tarjan(ev);</span><br><span class="line">            low[k] = <span class="built_in">min</span>(low[k],low[ev]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (insta[ev])</span><br><span class="line">            low[k] = <span class="built_in">min</span>(low[k],dfn[ev]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (low[k] == dfn[k])&#123;</span><br><span class="line">        ++ bcnt;</span><br><span class="line">        <span class="keyword">do</span> insta[sta[top]] = <span class="number">0</span>,bl[sta[top --]] = bcnt;</span><br><span class="line">        <span class="keyword">while</span>(sta[top + <span class="number">1</span>] != k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//tarjan end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="comment">//read gragh</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">int</span> de[<span class="number">5000</span>],be[<span class="number">5000</span>],ge[<span class="number">5000</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;de[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;be[i]);</span><br><span class="line">    <span class="keyword">int</span> al,cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;al);</span><br><span class="line">        ge[i] = al;</span><br><span class="line">        e[++ cnt] = edge&#123;i,head[al]&#125;;</span><br><span class="line">        head[al] = cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//read gragh end</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">        <span class="keyword">if</span>(!dfn[i]) tarjan(i);</span><br><span class="line">    <span class="comment">//build new tree</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">        w[bl[i]] += de[i],</span><br><span class="line">        v[bl[i]] += be[i];</span><br><span class="line">    <span class="built_in">memset</span>(head,<span class="number">0</span>,<span class="keyword">sizeof</span>(head));</span><br><span class="line">    <span class="built_in">memset</span>(e,<span class="number">0</span>,<span class="keyword">sizeof</span>(e));</span><br><span class="line">    cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> havefather[<span class="number">5000</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">        <span class="keyword">if</span> (bl[i] != bl[ge[i]])</span><br><span class="line">            e[++ cnt] = edge&#123;bl[i],head[bl[ge[i]]]&#125;,</span><br><span class="line">            head[bl[ge[i]]] = cnt,</span><br><span class="line">            havefather[bl[i]] = <span class="number">1</span>;</span><br><span class="line">    n = bcnt;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">        <span class="keyword">if</span>(!havefather[i])</span><br><span class="line">            e[++ cnt] = edge&#123;i,head[<span class="number">0</span>]&#125;,</span><br><span class="line">            head[<span class="number">0</span>] = cnt;</span><br><span class="line">    <span class="comment">//build new tree end</span></span><br><span class="line">    <span class="built_in">memset</span>(memd,<span class="number">-1</span>,<span class="keyword">sizeof</span>(memd));</span><br><span class="line">    <span class="built_in">memset</span>(memf,<span class="number">-1</span>,<span class="keyword">sizeof</span>(memf));</span><br><span class="line">    <span class="built_in">memset</span>(memf[<span class="number">0</span>],<span class="number">0</span>,<span class="keyword">sizeof</span>(memf[<span class="number">0</span>]));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; d(<span class="number">0</span>,m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">d</span><span class="params">(<span class="keyword">int</span> rt,<span class="keyword">int</span> wei)</span></span>&#123;</span><br><span class="line"><span class="comment">//most value porduced by the tree &#x27;rt&#x27; with weight&#x27;wei&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (memd[rt][wei] != <span class="number">-1</span>) <span class="keyword">return</span> memd[rt][wei];</span><br><span class="line">    <span class="keyword">if</span> (wei &lt; w[rt]) <span class="keyword">return</span> memd[rt][wei] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> memd[rt][wei] = f(head[rt],wei - w[rt]) + v[rt];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> wei)</span></span>&#123;</span><br><span class="line"><span class="comment">//most value porduced by the list begins from &#x27;i&#x27; with weight&#x27;wei&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (memf[i][wei] != <span class="number">-1</span>) <span class="keyword">return</span> memf[i][wei];</span><br><span class="line">    <span class="keyword">int</span> ev = e[i].v;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>;j &lt;= wei;++ j)</span><br><span class="line">        ans = <span class="built_in">max</span>(ans,d(ev,j) + f(e[i].nxt,wei - j));</span><br><span class="line">    <span class="keyword">return</span> memf[i][wei] = ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c++">//by:beautyyu
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#define ull unsigned long long
+using namespace std;
+struct edge
+&#123;
+    int v, nxt;
+&#125;e[5000];
+int head[5000],memf[5000][1000],memd[5000][1000];
+//&#39;memd&#39; -- memory for function &#39;d&#39;,&#39;memf&#39; -- memory for function &#39;f&#39;
+int w[5000],v[5000];
+int d(int al,int be);
+int f(int al,int be);
+//tarjan begin
+int sta[5000],top = 0;bool insta[5000];//stack
+int dfn[5000],low[5000],bl[5000],bcnt = 0,c = 0;
+void tarjan(int k)&#123;
+    dfn[k] = low[k] = ++ c;
+    insta[sta[++ top] = k] = 1;
+    for (int i = head[k];i;i = e[i].nxt)&#123;
+        int &amp;ev = e[i].v;
+        if (!dfn[ev])&#123;
+            tarjan(ev);
+            low[k] = min(low[k],low[ev]);
+        &#125;
+        else if (insta[ev])
+            low[k] = min(low[k],dfn[ev]);
+    &#125;
+    if (low[k] == dfn[k])&#123;
+        ++ bcnt;
+        do insta[sta[top]] = 0,bl[sta[top --]] = bcnt;
+        while(sta[top + 1] != k);
+    &#125;
+    return ;
+&#125;
+//tarjan end
 
+int main ()&#123;
+    int n,m;
+    //read gragh
+    cin &gt;&gt; n &gt;&gt; m;
+    int de[5000],be[5000],ge[5000];
+    for (int i = 1;i &lt;= n;++ i)
+        scanf(&quot;%d&quot;,&amp;de[i]);
+    for (int i = 1;i &lt;= n;++ i)
+        scanf(&quot;%d&quot;,&amp;be[i]);
+    int al,cnt = 0;
+    for (int i = 1;i &lt;= n;++ i)&#123;
+        scanf(&quot;%d&quot;,&amp;al);
+        ge[i] = al;
+        e[++ cnt] = edge&#123;i,head[al]&#125;;
+        head[al] = cnt;
+    &#125;
+    //read gragh end
+    for (int i = 1;i &lt;= n;++ i)
+        if(!dfn[i]) tarjan(i);
+    //build new tree
+    for (int i = 1;i &lt;= n;++ i)
+        w[bl[i]] += de[i],
+        v[bl[i]] += be[i];
+    memset(head,0,sizeof(head));
+    memset(e,0,sizeof(e));
+    cnt = 0;
+    bool havefather[5000];
+    for (int i = 1;i &lt;= n;++ i)
+        if (bl[i] != bl[ge[i]])
+            e[++ cnt] = edge&#123;bl[i],head[bl[ge[i]]]&#125;,
+            head[bl[ge[i]]] = cnt,
+            havefather[bl[i]] = 1;
+    n = bcnt;
+    for (int i = 1;i &lt;= n;++ i)
+        if(!havefather[i])
+            e[++ cnt] = edge&#123;i,head[0]&#125;,
+            head[0] = cnt;
+    //build new tree end
+    memset(memd,-1,sizeof(memd));
+    memset(memf,-1,sizeof(memf));
+    memset(memf[0],0,sizeof(memf[0]));
+    cout &lt;&lt; d(0,m);
+    return 0;
+&#125;
+int d(int rt,int wei)&#123;
+//most value porduced by the tree &#39;rt&#39; with weight&#39;wei&#39;
+    if (memd[rt][wei] != -1) return memd[rt][wei];
+    if (wei &lt; w[rt]) return memd[rt][wei] = 0;
+    return memd[rt][wei] = f(head[rt],wei - w[rt]) + v[rt];
+&#125;
+int f(int i,int wei)&#123;
+//most value porduced by the list begins from &#39;i&#39; with weight&#39;wei&#39;
+    if (memf[i][wei] != -1) return memf[i][wei];
+    int ev = e[i].v;
+    int ans = 0;
+    for (int j = 0;j &lt;= wei;++ j)
+        ans = max(ans,d(ev,j) + f(e[i].nxt,wei - j));
+    return memf[i][wei] = ans;
+&#125;</code></pre>
 <p><img src="https://pics1.beautyyu.top/origin/C6RVgg.jpg"></p>
 
     </div>

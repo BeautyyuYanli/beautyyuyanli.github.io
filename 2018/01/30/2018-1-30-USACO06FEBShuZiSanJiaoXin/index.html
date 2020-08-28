@@ -22,16 +22,16 @@
     var CONFIG = {"hostname":"beautyyu.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="1观察易得 答案实际上是一个杨辉三角形分别乘上对应数字的和 杨辉三角形直接打表即可 1234567891011121314    int yanghui[13][13] &#x3D; &amp;#123;&amp;#123;0,0,0,0,0,0,0,0,0,0,0,0,0&amp;#125;,&amp;#123;0,1,0,0,0,0,0,0,0,0,0,0,0&amp;#125;,&amp;#123;0,1,1,0,0,0,0,0,0,0,0,0,">
+  <meta name="description" content="1观察易得 答案实际上是一个杨辉三角形分别乘上对应数字的和 杨辉三角形直接打表即可     int yanghui[13][13] &#x3D; &amp;#123;&amp;#123;0,0,0,0,0,0,0,0,0,0,0,0,0&amp;#125;, &amp;#123;0,1,0,0,0,0,0,0,0,0,0,0,0&amp;#125;, &amp;#123;0,1,1,0,0,0,0,0,0,0,0,0,0&amp;#125;, &amp;#123;0,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="USACO06FEB数字三角形|题解">
 <meta property="og:url" content="http://beautyyu.top/2018/01/30/2018-1-30-USACO06FEBShuZiSanJiaoXin/index.html">
 <meta property="og:site_name" content="银河美术馆-Beautyyu">
-<meta property="og:description" content="1观察易得 答案实际上是一个杨辉三角形分别乘上对应数字的和 杨辉三角形直接打表即可 1234567891011121314    int yanghui[13][13] &#x3D; &amp;#123;&amp;#123;0,0,0,0,0,0,0,0,0,0,0,0,0&amp;#125;,&amp;#123;0,1,0,0,0,0,0,0,0,0,0,0,0&amp;#125;,&amp;#123;0,1,1,0,0,0,0,0,0,0,0,0,">
+<meta property="og:description" content="1观察易得 答案实际上是一个杨辉三角形分别乘上对应数字的和 杨辉三角形直接打表即可     int yanghui[13][13] &#x3D; &amp;#123;&amp;#123;0,0,0,0,0,0,0,0,0,0,0,0,0&amp;#125;, &amp;#123;0,1,0,0,0,0,0,0,0,0,0,0,0&amp;#125;, &amp;#123;0,1,1,0,0,0,0,0,0,0,0,0,0&amp;#125;, &amp;#123;0,">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/C62X9O.jpg">
 <meta property="article:published_time" content="2018-01-30T09:30:11.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:19:02.180Z">
+<meta property="article:modified_time" content="2020-08-28T01:46:09.017Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="搜索">
@@ -150,17 +150,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -330,6 +330,15 @@
 
       <time title="创建时间：2018-01-30 17:30:11" itemprop="dateCreated datePublished" datetime="2018-01-30T17:30:11+08:00">2018-01-30</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -344,19 +353,55 @@
         <hr>
 <h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>观察易得 答案实际上是一个杨辉三角形分别乘上对应数字的和</p>
 <h4 id="杨辉三角形"><a href="#杨辉三角形" class="headerlink" title="杨辉三角形"></a>杨辉三角形</h4><p>直接打表即可</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> yanghui[<span class="number">13</span>][<span class="number">13</span>] = &#123;&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">10</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">15</span>,<span class="number">20</span>,<span class="number">15</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">7</span>,<span class="number">21</span>,<span class="number">35</span>,<span class="number">35</span>,<span class="number">21</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">8</span>,<span class="number">28</span>,<span class="number">56</span>,<span class="number">70</span>,<span class="number">56</span>,<span class="number">28</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">36</span>,<span class="number">84</span>,<span class="number">126</span>,<span class="number">126</span>,<span class="number">84</span>,<span class="number">36</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">45</span>,<span class="number">120</span>,<span class="number">210</span>,<span class="number">252</span>,<span class="number">210</span>,<span class="number">120</span>,<span class="number">45</span>,<span class="number">10</span>,<span class="number">1</span>,<span class="number">0</span>&#125;,</span><br><span class="line">&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">11</span>,<span class="number">55</span>,<span class="number">165</span>,<span class="number">330</span>,<span class="number">462</span>,<span class="number">462</span>,<span class="number">330</span>,<span class="number">165</span>,<span class="number">55</span>,<span class="number">11</span>,<span class="number">1</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">    int yanghui[13][13] = &#123;&#123;0,0,0,0,0,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,0,0,0,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,1,0,0,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,2,1,0,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,3,3,1,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,4,6,4,1,0,0,0,0,0,0,0&#125;,
+&#123;0,1,5,10,10,5,1,0,0,0,0,0,0&#125;,
+&#123;0,1,6,15,20,15,6,1,0,0,0,0,0&#125;,
+&#123;0,1,7,21,35,35,21,7,1,0,0,0,0&#125;,
+&#123;0,1,8,28,56,70,56,28,8,1,0,0,0&#125;,
+&#123;0,1,9,36,84,126,126,84,36,9,1,0,0&#125;,
+&#123;0,1,10,45,120,210,252,210,120,45,10,1,0&#125;,
+&#123;0,1,11,55,165,330,462,462,330,165,55,11,1&#125;
+&#125;;</code></pre>
 <p>生成杨辉的代码</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">12</span>;++ i)&#123;</span><br><span class="line">        yanghui[i][<span class="number">1</span>] = yanghui[i][i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">2</span>;j &lt; i;++ j)&#123;</span><br><span class="line">            yanghui[i][j] = yanghui[i - <span class="number">1</span>][j - <span class="number">1</span>]+yanghui[i - <span class="number">1</span>][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="built_in">printf</span>(<span class="string">&quot;&#123;&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;= <span class="number">12</span>;++ i)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;&#123;&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>;j &lt;= <span class="number">11</span>;++ j)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d,&quot;</span>,yanghui[i][j]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&#125;,\n&quot;</span>,yanghui[i][<span class="number">12</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&#125;\n&quot;</span>);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">for (int i = 1;i &lt;= 12;++ i)&#123;
+        yanghui[i][1] = yanghui[i][i] = 1;
+        for (int j = 2;j &lt; i;++ j)&#123;
+            yanghui[i][j] = yanghui[i - 1][j - 1]+yanghui[i - 1][j];
+        &#125;
+    &#125;printf(&quot;&#123;&quot;);
+    for (int i = 0;i &lt;= 12;++ i)&#123;
+        printf(&quot;&#123;&quot;);
+        for (int j = 0;j &lt;= 11;++ j)
+            printf(&quot;%d,&quot;,yanghui[i][j]);
+        printf(&quot;%d&#125;,\n&quot;,yanghui[i][12]);
+    &#125;
+    printf(&quot;&#125;\n&quot;);</code></pre>
 <hr>
 <h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>然后这道题就成了求1-n的全排列<br>这里我用了<code>swap</code>实现全排列</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> handle,<span class="keyword">int</span> weight)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = handle;i &lt;= n;++ i)&#123;</span><br><span class="line">        swap(arr[i],arr[handle]);</span><br><span class="line">        dfs(handle + <span class="number">1</span>,weight + arr[handle] * yanghui[n][handle]);</span><br><span class="line">        swap(arr[i],arr[handle]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">void dfs(int handle,int weight)&#123;
+    for (int i = handle;i &lt;= n;++ i)&#123;
+        swap(arr[i],arr[handle]);
+        dfs(handle + 1,weight + arr[handle] * yanghui[n][handle]);
+        swap(arr[i],arr[handle]);
+    &#125;
+    return ;
+&#125;</code></pre>
 <hr>
 <h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p><strong>但这样不保证字典序</strong><br>通过观察可以发现 杨辉三角满足轴对称<br>例如n = 4 时<code>a b c d</code>和<code>a c b d</code>和<code>d b c a</code>和<code>d c b a</code>这样不同的排序可以得到相同的sum<br>因此我在输出时强行把它变成字典序</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (handle &gt; n &amp;&amp; weight == m)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &lt;= n / <span class="number">2</span> &amp;&amp; arr[n - i + <span class="number">1</span>] &lt; arr[i])</span><br><span class="line">                swap(arr[i],arr[n - i + <span class="number">1</span>]);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">if (handle &gt; n &amp;&amp; weight == m)&#123;
+        for (int i = 1;i &lt;= n;++ i)
+        &#123;
+            if (i &lt;= n / 2 &amp;&amp; arr[n - i + 1] &lt; arr[i])
+                swap(arr[i],arr[n - i + 1]);
+            printf(&quot;%d &quot;,arr[i]);
+        &#125;
+        exit(0);
+    &#125;</code></pre>
 <h2 id="这个方法不确保答案的正确性-但在n-lt-12的规模下还是不会出问题的"><a href="#这个方法不确保答案的正确性-但在n-lt-12的规模下还是不会出问题的" class="headerlink" title="这个方法不确保答案的正确性 但在n&lt;=12的规模下还是不会出问题的"></a><strong><em>这个方法不确保答案的正确性 但在<code>n&lt;=12</code>的规模下还是不会出问题的</em></strong></h2><hr>
 <h3 id="4"><a href="#4" class="headerlink" title="4"></a>4</h3><p>最后加上一行剪枝<code>if (weight &gt;= m) return;</code></p>
 <p><img src="https://pics1.beautyyu.top/origin/C62X9O.jpg"></p>

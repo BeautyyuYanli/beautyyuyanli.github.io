@@ -22,16 +22,16 @@
     var CONFIG = {"hostname":"beautyyu.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="是一篇拖延症晚期拖了好久才开始写的学习笔记 大概记一下关于二分和分治的感想吧 二分二分也没啥好说的(况且作为蒟蒻也只会写二分答案),基本套路就是二分答案在检查一下答案,把求值问题转化为判定性问题 值得注意的是:关于限定最大值求最小和限定最小值求最大应当有两种不同的处理 12345678910111213&#x2F;&#x2F;限定最小值求最大while (l &lt; r)&amp;#123;    mid &#x3D; l + ((">
+  <meta name="description" content="是一篇拖延症晚期拖了好久才开始写的学习笔记 大概记一下关于二分和分治的感想吧 二分二分也没啥好说的(况且作为蒟蒻也只会写二分答案),基本套路就是二分答案在检查一下答案,把求值问题转化为判定性问题 值得注意的是:关于限定最大值求最小和限定最小值求最大应当有两种不同的处理     &#x2F;&#x2F;限定最小值求最大     while (l &lt; r)&amp;#123;         mid &#x3D; l + ((r -">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二分&#x2F;分治学习笔记">
 <meta property="og:url" content="http://beautyyu.top/2018/03/10/2018-3-10-ErFenNote/index.html">
 <meta property="og:site_name" content="银河美术馆-Beautyyu">
-<meta property="og:description" content="是一篇拖延症晚期拖了好久才开始写的学习笔记 大概记一下关于二分和分治的感想吧 二分二分也没啥好说的(况且作为蒟蒻也只会写二分答案),基本套路就是二分答案在检查一下答案,把求值问题转化为判定性问题 值得注意的是:关于限定最大值求最小和限定最小值求最大应当有两种不同的处理 12345678910111213&#x2F;&#x2F;限定最小值求最大while (l &lt; r)&amp;#123;    mid &#x3D; l + ((">
+<meta property="og:description" content="是一篇拖延症晚期拖了好久才开始写的学习笔记 大概记一下关于二分和分治的感想吧 二分二分也没啥好说的(况且作为蒟蒻也只会写二分答案),基本套路就是二分答案在检查一下答案,把求值问题转化为判定性问题 值得注意的是:关于限定最大值求最小和限定最小值求最大应当有两种不同的处理     &#x2F;&#x2F;限定最小值求最大     while (l &lt; r)&amp;#123;         mid &#x3D; l + ((r -">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/C6RAC8.jpg">
 <meta property="article:published_time" content="2018-03-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:21:04.260Z">
+<meta property="article:modified_time" content="2020-08-28T01:49:58.804Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="二分">
@@ -151,17 +151,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -331,6 +331,15 @@
 
       <time title="创建时间：2018-03-10 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-10T00:00:00+08:00">2018-03-10</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -346,8 +355,19 @@
 <p>大概记一下关于二分和分治的感想吧</p>
 <h3 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h3><p>二分也没啥好说的(况且作为蒟蒻也只会写二分答案),基本套路就是二分答案在检查一下答案,把<em>求值问题转化为判定性问题</em></p>
 <p><strong>值得注意的是</strong>:关于限定最大值求最小和限定最小值求最大应当有两种不同的处理</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//限定最小值求最大</span></span><br><span class="line"><span class="keyword">while</span> (l &lt; r)&#123;</span><br><span class="line">    mid = l + ((r - l + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (!check(mid)) r = mid - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> l = mid;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> l;</span><br><span class="line"><span class="comment">//限定最大值求最小</span></span><br><span class="line"><span class="keyword">while</span> (l &lt; r)&#123;</span><br><span class="line">    mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (!check(mid)) l = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> r = mid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">    //限定最小值求最大
+    while (l &lt; r)&#123;
+        mid = l + ((r - l + 1) &gt;&gt; 1);
+        if (!check(mid)) r = mid - 1;
+        else l = mid;
+    &#125;
+    return l;
+    //限定最大值求最小
+    while (l &lt; r)&#123;
+        mid = l + ((r - l) &gt;&gt; 1);
+        if (!check(mid)) l = mid + 1;
+        else r = mid;
+    &#125;</code></pre>
 <p>两者本质的共同点在于:</p>
 <ol>
 <li>当区间长为偶时,一定要将区间平分,<strong>否则在区间长足够小的时候会陷入死循环</strong></li>

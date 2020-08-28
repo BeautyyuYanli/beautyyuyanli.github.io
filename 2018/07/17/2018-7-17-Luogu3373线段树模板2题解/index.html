@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/PKLon0.jpg">
 <meta property="article:published_time" content="2018-07-17T04:12:12.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:22:42.840Z">
+<meta property="article:modified_time" content="2020-08-28T01:51:26.778Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="线段树">
@@ -150,17 +150,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -330,6 +330,15 @@
 
       <time title="创建时间：2018-07-17 12:12:12" itemprop="dateCreated datePublished" datetime="2018-07-17T12:12:12+08:00">2018-07-17</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -354,11 +363,134 @@
 <p>出现了分数.</p>
 <p>所以应当由乘法在前</p>
 <p>更新关系为:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add1</span><span class="params">(llint pval)</span></span>&#123;</span><br><span class="line">          tag1 = (tag1 + pval) % p;</span><br><span class="line">          val = (val + length() * pval) % p;</span><br><span class="line">          <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add2</span><span class="params">(llint pval)</span></span>&#123;</span><br><span class="line">          tag2 = (tag2 * pval) % p;</span><br><span class="line">          tag1 = (tag1 * pval) % p;</span><br><span class="line">          val = (val * pval) % p;</span><br><span class="line">          <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">void add1(llint pval)&#123;
+          tag1 = (tag1 + pval) % p;
+          val = (val + length() * pval) % p;
+          return ;
+&#125;
+void add2(llint pval)&#123;
+          tag2 = (tag2 * pval) % p;
+          tag1 = (tag1 * pval) % p;
+          val = (val * pval) % p;
+          return ;
+&#125;</code></pre>
 <p>整体代码:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> llint long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">llint p;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">        node *lson,*rson;</span><br><span class="line">        llint l,r;</span><br><span class="line">        llint val,tag1,tag2;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">eq</span> <span class="params">(node *a,node *b,llint c,llint d,llint e,llint f,llint g)</span></span>&#123;</span><br><span class="line">                lson = a;rson = b;l = c;r = d;val = e;tag1 = f;tag2 = g;</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        node (llint* arr,llint ll,llint rr)&#123;</span><br><span class="line">                llint mid = ((rr - ll) &gt;&gt; <span class="number">1</span>) + ll;</span><br><span class="line">                <span class="keyword">if</span> (ll == rr)&#123;</span><br><span class="line">                        <span class="keyword">this</span>-&gt;eq(<span class="literal">NULL</span>,<span class="literal">NULL</span>,ll,rr,arr[ll],<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">                        <span class="keyword">return</span> ;</span><br><span class="line">                &#125;</span><br><span class="line">                lson = <span class="keyword">new</span> node(arr,ll,mid),rson = <span class="keyword">new</span> node(arr,mid + <span class="number">1</span>,rr);</span><br><span class="line">                <span class="keyword">this</span>-&gt;eq(lson,rson,ll,rr,lson-&gt;val + rson-&gt;val,<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">llint <span class="title">length</span><span class="params">()</span></span>&#123;</span><br><span class="line">                <span class="keyword">return</span> r - l + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">maintain</span><span class="params">()</span></span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(l == r) <span class="keyword">return</span> ;</span><br><span class="line">                val = (lson-&gt;val + rson-&gt;val) % p;</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//&quot;add&quot; means add value to a node</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">add1</span><span class="params">(llint pval)</span></span>&#123;</span><br><span class="line">                tag1 = (tag1 + pval) % p;</span><br><span class="line">                val = (val + length() * pval) % p;</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">add2</span><span class="params">(llint pval)</span></span>&#123;</span><br><span class="line">                tag2 = (tag2 * pval) % p;</span><br><span class="line">                tag1 = (tag1 * pval) % p;</span><br><span class="line">                val = (val * pval) % p;</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//&quot;down&quot; means push tags to the sons</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">down</span><span class="params">()</span></span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(lson)&#123;</span><br><span class="line">                        lson-&gt;add2(tag2);</span><br><span class="line">                        lson-&gt;add1(tag1);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(rson)&#123;</span><br><span class="line">                        rson-&gt;add2(tag2);</span><br><span class="line">                        rson-&gt;add1(tag1);</span><br><span class="line">                &#125;</span><br><span class="line">                tag1 = <span class="number">0</span>;tag2 = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">oper1</span><span class="params">(llint pl,llint pr,llint pval)</span></span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(pl &gt; r || pr &lt; l) <span class="keyword">return</span> ;</span><br><span class="line">                <span class="keyword">if</span>(pl &lt;= l &amp;&amp; pr &gt;= r)&#123;</span><br><span class="line">                        add1(pval);</span><br><span class="line">                        <span class="keyword">return</span> ;</span><br><span class="line">                &#125;</span><br><span class="line">                down();</span><br><span class="line">                lson-&gt;oper1(pl,pr,pval);</span><br><span class="line">                rson-&gt;oper1(pl,pr,pval);</span><br><span class="line">                <span class="built_in">maintain</span>();</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">oper2</span><span class="params">(llint pl,llint pr,llint pval)</span></span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(pl &gt; r || pr &lt; l) <span class="keyword">return</span> ;</span><br><span class="line">                <span class="keyword">if</span>(pl &lt;= l &amp;&amp; pr &gt;= r)&#123;</span><br><span class="line">                        add2(pval);</span><br><span class="line">                        <span class="keyword">return</span> ;</span><br><span class="line">                &#125;</span><br><span class="line">                down();</span><br><span class="line">                lson-&gt;oper2(pl,pr,pval);</span><br><span class="line">                rson-&gt;oper2(pl,pr,pval);</span><br><span class="line">                <span class="built_in">maintain</span>();</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">llint <span class="title">query</span><span class="params">(llint pl,llint pr)</span></span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(pl &gt; r || pr &lt; l) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span>(pl &lt;= l &amp;&amp; pr &gt;= r)</span><br><span class="line">                        <span class="keyword">return</span> val;</span><br><span class="line">                down();</span><br><span class="line">                <span class="keyword">return</span> (lson-&gt;query(pl,pr) + rson-&gt;query(pl,pr)) % p;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;*root;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        llint n,m,x,y,k,al,arr[<span class="number">300000</span>];</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; p;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;arr[i]);</span><br><span class="line">        root = <span class="keyword">new</span> node(arr,<span class="number">1</span>,n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= m;++ i)&#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;al);</span><br><span class="line">                <span class="keyword">if</span>(al == <span class="number">1</span>)&#123;</span><br><span class="line">                        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>,&amp;x,&amp;y,&amp;k);</span><br><span class="line">                        root-&gt;oper2(x,y,k);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(al == <span class="number">2</span>)&#123;</span><br><span class="line">                        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>,&amp;x,&amp;y,&amp;k);</span><br><span class="line">                        root-&gt;oper1(x,y,k);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(al == <span class="number">3</span>)&#123;</span><br><span class="line">                        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">                        llint ans = root-&gt;query(x,y);</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,ans);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#define llint long long
+using namespace std;
+llint p;
+struct node&#123;
+        node *lson,*rson;
+        llint l,r;
+        llint val,tag1,tag2;
+        void eq (node *a,node *b,llint c,llint d,llint e,llint f,llint g)&#123;
+                lson = a;rson = b;l = c;r = d;val = e;tag1 = f;tag2 = g;
+                return ;
+        &#125;
+        node (llint* arr,llint ll,llint rr)&#123;
+                llint mid = ((rr - ll) &gt;&gt; 1) + ll;
+                if (ll == rr)&#123;
+                        this-&gt;eq(NULL,NULL,ll,rr,arr[ll],0,1);
+                        return ;
+                &#125;
+                lson = new node(arr,ll,mid),rson = new node(arr,mid + 1,rr);
+                this-&gt;eq(lson,rson,ll,rr,lson-&gt;val + rson-&gt;val,0,1);
+        &#125;
+        llint length()&#123;
+                return r - l + 1;
+        &#125;
+        void maintain()&#123;
+                if(l == r) return ;
+                val = (lson-&gt;val + rson-&gt;val) % p;
+                return ;
+        &#125;
+        //&quot;add&quot; means add value to a node
+        void add1(llint pval)&#123;
+                tag1 = (tag1 + pval) % p;
+                val = (val + length() * pval) % p;
+                return ;
+        &#125;
+        void add2(llint pval)&#123;
+                tag2 = (tag2 * pval) % p;
+                tag1 = (tag1 * pval) % p;
+                val = (val * pval) % p;
+                return ;
+        &#125;
+        //&quot;down&quot; means push tags to the sons
+        void down()&#123;
+                if(lson)&#123;
+                        lson-&gt;add2(tag2);
+                        lson-&gt;add1(tag1);
+                &#125;
+                if(rson)&#123;
+                        rson-&gt;add2(tag2);
+                        rson-&gt;add1(tag1);
+                &#125;
+                tag1 = 0;tag2 = 1;
+                return ;
+        &#125;
+        void oper1(llint pl,llint pr,llint pval)&#123;
+                if(pl &gt; r || pr &lt; l) return ;
+                if(pl &lt;= l &amp;&amp; pr &gt;= r)&#123;
+                        add1(pval);
+                        return ;
+                &#125;
+                down();
+                lson-&gt;oper1(pl,pr,pval);
+                rson-&gt;oper1(pl,pr,pval);
+                maintain();
+                return ;
+        &#125;
+        void oper2(llint pl,llint pr,llint pval)&#123;
+                if(pl &gt; r || pr &lt; l) return ;
+                if(pl &lt;= l &amp;&amp; pr &gt;= r)&#123;
+                        add2(pval);
+                        return ;
+                &#125;
+                down();
+                lson-&gt;oper2(pl,pr,pval);
+                rson-&gt;oper2(pl,pr,pval);
+                maintain();
+                return ;
+        &#125;
+        llint query(llint pl,llint pr)&#123;
+                if(pl &gt; r || pr &lt; l) return 0;
+                if(pl &lt;= l &amp;&amp; pr &gt;= r)
+                        return val;
+                down();
+                return (lson-&gt;query(pl,pr) + rson-&gt;query(pl,pr)) % p;
+        &#125;
+&#125;*root;
+int main ()&#123;
+        llint n,m,x,y,k,al,arr[300000];
+        cin &gt;&gt; n &gt;&gt; m &gt;&gt; p;
+        for (int i = 1;i &lt;= n;++ i)
+                scanf(&quot;%lld&quot;,&amp;arr[i]);
+        root = new node(arr,1,n);
+        for (int i = 1;i &lt;= m;++ i)&#123;
+                scanf(&quot;%lld&quot;,&amp;al);
+                if(al == 1)&#123;
+                        scanf(&quot;%lld%lld%lld&quot;,&amp;x,&amp;y,&amp;k);
+                        root-&gt;oper2(x,y,k);
+                &#125;
+                if(al == 2)&#123;
+                        scanf(&quot;%lld%lld%lld&quot;,&amp;x,&amp;y,&amp;k);
+                        root-&gt;oper1(x,y,k);
+                &#125;
+                if(al == 3)&#123;
+                        scanf(&quot;%lld%lld&quot;,&amp;x,&amp;y);
+                        llint ans = root-&gt;query(x,y);
+                        printf(&quot;%lld\n&quot;,ans);
+                &#125;
+        &#125;
+        return 0;
+&#125;</code></pre>
 <p>以上</p>
 <p><img src="https://pics1.beautyyu.top/origin/PKLon0.jpg"></p>
 

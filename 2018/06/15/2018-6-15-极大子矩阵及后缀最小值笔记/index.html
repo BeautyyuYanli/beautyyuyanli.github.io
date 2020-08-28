@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/CTxotO.jpg">
 <meta property="article:published_time" content="2018-06-15T04:12:12.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:22:34.945Z">
+<meta property="article:modified_time" content="2020-08-28T01:50:32.929Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
@@ -149,17 +149,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -329,6 +329,15 @@
 
       <time title="创建时间：2018-06-15 12:12:12" itemprop="dateCreated datePublished" datetime="2018-06-15T12:12:12+08:00">2018-06-15</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -370,8 +379,7 @@
 <p>农夫约翰想要在他的正方形农场上建造一座正方形大牛棚。他讨厌在他的农场中砍树，想找一个能够让他在空旷无树的地方修建牛棚的地方。我们假定，他的农场划分成  N x N  的方格。输入数据中包括有树的方格的列表。你的任务是计算并输出，在他的农场中，不需要砍树却能够修建的最大正方形牛棚。牛棚的边必须和水平轴或者垂直轴平行。</p>
 <p>EXAMPLE</p>
 <p>考虑下面的方格，它表示农夫约翰的农场，‘.’表示没有树的方格，‘#’表示有树的方格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
+<pre><code></code></pre>
 <p>1 2 3 4 5 6 7 8</p>
 <p>1 . . . . . . . .</p>
 <p>2 . # . . . # . .</p>
@@ -381,8 +389,7 @@
 <p>6 . . # . . . . .</p>
 <p>7 . . . . . . . .</p>
 <p>8 . . . . . . . .</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
+<pre><code></code></pre>
 <p>最大的牛棚是 5 x 5 的，可以建造在方格右下角的两个位置其中一个。</p>
 </blockquote>
 <p>ZJOI2007棋盘制作</p>
@@ -393,8 +400,32 @@
 <p>不过<code>小Q</code>还没有决定是找一个正方形的棋盘还是一个矩形的棋盘（当然，不管哪种，棋盘必须都黑白相间，即相邻的格子不同色），所以他希望可以找到最大的正方形棋盘面积和最大的矩形棋盘面积，从而决定哪个更好一些。</p>
 <p>于是<code>小Q</code>找到了即将参加全国信息学竞赛的你，你能帮助他么？</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= m;++ j)&#123;</span><br><span class="line">                dp[j] = (dp[j] + <span class="number">1</span> ) *  map_[i][j];<span class="comment">//map_表示输入地图</span></span><br><span class="line">                <span class="keyword">if</span>(!dp[j])&#123;</span><br><span class="line">                        l[j] = <span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">int</span> k = j - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (dp[k] &gt;= dp[j])</span><br><span class="line">                        k = k - l[k];</span><br><span class="line">                l[j] = j - k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = m;j &gt;= <span class="number">1</span>;-- j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(!dp[j])&#123;</span><br><span class="line">                        r[j] = <span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">int</span> k = j + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (dp[k] &gt;= dp[j])</span><br><span class="line">                        k = k + r[k];</span><br><span class="line">                r[j] = k - j;</span><br><span class="line">                ans1 = <span class="built_in">max</span>(ans1,<span class="built_in">min</span>(r[j] + l[j] - <span class="number">1</span>,dp[j]));<span class="comment">//正方形</span></span><br><span class="line">                ans2 = <span class="built_in">max</span>(ans2,(r[j] + l[j] - <span class="number">1</span>) * dp[j]);<span class="comment">//矩形</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c++">        for (int i = 1;i &lt;= n;++ i)&#123;
+                for (int j = 1;j &lt;= m;++ j)&#123;
+                        dp[j] = (dp[j] + 1 ) *  map_[i][j];//map_表示输入地图
+                        if(!dp[j])&#123;
+                                l[j] = 0;
+                                continue;
+                        &#125;
+                        int k = j - 1;
+                        while (dp[k] &gt;= dp[j])
+                                k = k - l[k];
+                        l[j] = j - k;
+                &#125;
+                for (int j = m;j &gt;= 1;-- j)&#123;
+                        if(!dp[j])&#123;
+                                r[j] = 0;
+                                continue;
+                        &#125;
+                        int k = j + 1;
+                        while (dp[k] &gt;= dp[j])
+                                k = k + r[k];
+                        r[j] = k - j;
+                        ans1 = max(ans1,min(r[j] + l[j] - 1,dp[j]));//正方形
+                        ans2 = max(ans2,(r[j] + l[j] - 1) * dp[j]);//矩形
+                &#125;
 
+        &#125;</code></pre>
 <p><img src="https://pics1.beautyyu.top/origin/CTxotO.jpg"></p>
 
     </div>

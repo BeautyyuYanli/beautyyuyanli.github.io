@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/PKOs29.jpg">
 <meta property="article:published_time" content="2018-07-18T04:12:12.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:22:55.965Z">
+<meta property="article:modified_time" content="2020-08-28T01:51:34.420Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="线段树">
@@ -151,17 +151,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -331,6 +331,15 @@
 
       <time title="创建时间：2018-07-18 12:12:12" itemprop="dateCreated datePublished" datetime="2018-07-18T12:12:12+08:00">2018-07-18</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -356,8 +365,12 @@
 <h2 id="数据离散化"><a href="#数据离散化" class="headerlink" title="数据离散化"></a>数据离散化</h2><p>设原始数据arr.建立一个备份set_</p>
 <p>对set_先后进行排序,去重,将数据有序化</p>
 <p>对arr中每个元素,查找在set中的位置,完成离散</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//discrete</span></span><br><span class="line">        <span class="built_in">memcpy</span>(set_,arr,(n + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">        sort(set_ + <span class="number">1</span>,set_ + <span class="number">1</span> + n);</span><br><span class="line">        <span class="keyword">int</span> *set_end = unique(set_ + <span class="number">1</span>,set_ + <span class="number">1</span> + n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">                arr[i] = lower_bound(set_ + <span class="number">1</span>,set_end,arr[i]) - set_;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">//discrete
+        memcpy(set_,arr,(n + 1) * sizeof(int));
+        sort(set_ + 1,set_ + 1 + n);
+        int *set_end = unique(set_ + 1,set_ + 1 + n);
+        for (int i = 1;i &lt;= n;++ i)
+                arr[i] = lower_bound(set_ + 1,set_end,arr[i]) - set_;</code></pre>
 <h2 id="主席树"><a href="#主席树" class="headerlink" title="主席树"></a>主席树</h2><p>主席树是包含多个历史版本的线段树.因此每颗线段树形态完全相同</p>
 <p>当一颗线段树发生改变时,改变节点到根节点的路径全部复制一遍.查询时从第t个根节点查询得到的就是第t版本的线段树</p>
 <h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>注意到本题如果对所有区间[l,r]都增加一个树版本,共耗费时间将为O(n^2 * logn)</p>
@@ -365,8 +378,88 @@
 <p>事实上由于每颗树形态相同,整个主席树都可以由前缀和维护.版本[l,r]的树实为树[0,r] - 树[0,l - 1]</p>
 <p>总复杂度降为O(nlogn)</p>
 <p>完整代码如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> llint long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">400000</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">        node *lson,*rson;</span><br><span class="line">        <span class="keyword">int</span> l,r,val;</span><br><span class="line">        node(<span class="keyword">int</span> ql,<span class="keyword">int</span> qr)&#123;</span><br><span class="line">                <span class="comment">// build a void tree</span></span><br><span class="line">                l = ql;r = qr;</span><br><span class="line">                val = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span>(ql == qr)&#123;</span><br><span class="line">                        lson = rson = <span class="literal">NULL</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="keyword">int</span> mid = ((r - l) &gt;&gt; <span class="number">1</span>) + l;</span><br><span class="line">                        lson = <span class="keyword">new</span> node(ql,mid);</span><br><span class="line">                        rson = <span class="keyword">new</span> node(mid + <span class="number">1</span>,qr);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        node(node *ori,node *ls,node *rs)&#123;</span><br><span class="line">                lson = ls;rson = rs;</span><br><span class="line">                l = ori-&gt;l;r = ori-&gt;r;val = ori-&gt;val + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">maintain</span><span class="params">()</span></span>&#123;</span><br><span class="line">                val = lson-&gt;val + rson-&gt;val;</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">node* <span class="title">insert</span><span class="params">(<span class="keyword">int</span> ival)</span></span>&#123;</span><br><span class="line">                <span class="keyword">int</span> mid = ((r - l) &gt;&gt; <span class="number">1</span>) + l;</span><br><span class="line">                <span class="keyword">if</span> (ival == l &amp;&amp; ival == r)</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> node(<span class="keyword">this</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>);</span><br><span class="line">                <span class="keyword">if</span> (ival &lt;= mid)</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> node(<span class="keyword">this</span>,lson-&gt;insert(ival),rson);</span><br><span class="line">                <span class="keyword">else</span> </span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> node(<span class="keyword">this</span>,lson,rson-&gt;insert(ival));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;*roots[<span class="number">4000000</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(node *ql,node *qr,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(ql-&gt;l == ql-&gt;r)</span><br><span class="line">                <span class="keyword">return</span> qr-&gt;l;</span><br><span class="line">        <span class="keyword">int</span> lval = qr-&gt;lson-&gt;val - ql-&gt;lson-&gt;val;</span><br><span class="line">        <span class="keyword">if</span> (k &lt;= lval)</span><br><span class="line">                <span class="keyword">return</span> query(ql-&gt;lson,qr-&gt;lson,k);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> query(ql-&gt;rson,qr-&gt;rson,k - lval);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m,n;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">int</span> set_[<span class="number">400000</span>];</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        arr[<span class="number">0</span>] = <span class="number">-0x7fffffff</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[i]);</span><br><span class="line">        <span class="comment">//discrete</span></span><br><span class="line">        <span class="built_in">memcpy</span>(set_,arr,(n + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">        sort(set_ + <span class="number">1</span>,set_ + <span class="number">1</span> + n);</span><br><span class="line">        <span class="keyword">int</span> *set_end = unique(set_ + <span class="number">1</span>,set_ + <span class="number">1</span> + n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">                arr[i] = lower_bound(set_ + <span class="number">1</span>,set_end,arr[i]) - set_;</span><br><span class="line">        <span class="comment">//build trees</span></span><br><span class="line">        <span class="keyword">int</span> size_ = set_end - set_ - <span class="number">1</span>;</span><br><span class="line">        roots[<span class="number">0</span>] = <span class="keyword">new</span> node(<span class="number">1</span>,size_);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">                roots[i] = roots[i - <span class="number">1</span>]-&gt;insert(arr[i]);</span><br><span class="line">        <span class="comment">//query</span></span><br><span class="line">        <span class="keyword">int</span> beg,<span class="built_in">end</span>,k;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= m;++ i)&#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;beg,&amp;<span class="built_in">end</span>,&amp;k);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,set_[query(roots[beg - <span class="number">1</span>],roots[<span class="built_in">end</span>],k)]);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#define llint long long
+using namespace std;
+int arr[400000];
+struct node&#123;
+        node *lson,*rson;
+        int l,r,val;
+        node(int ql,int qr)&#123;
+                // build a void tree
+                l = ql;r = qr;
+                val = 0;
+                if(ql == qr)&#123;
+                        lson = rson = NULL;
+                &#125;
+                else&#123;
+                        int mid = ((r - l) &gt;&gt; 1) + l;
+                        lson = new node(ql,mid);
+                        rson = new node(mid + 1,qr);
+                &#125;
+        &#125;
+        node(node *ori,node *ls,node *rs)&#123;
+                lson = ls;rson = rs;
+                l = ori-&gt;l;r = ori-&gt;r;val = ori-&gt;val + 1;
+        &#125;
 
+        void maintain()&#123;
+                val = lson-&gt;val + rson-&gt;val;
+                return ;
+        &#125;
+        node* insert(int ival)&#123;
+                int mid = ((r - l) &gt;&gt; 1) + l;
+                if (ival == l &amp;&amp; ival == r)
+                        return new node(this,NULL,NULL);
+                if (ival &lt;= mid)
+                        return new node(this,lson-&gt;insert(ival),rson);
+                else 
+                        return new node(this,lson,rson-&gt;insert(ival));
+        &#125;
+
+&#125;*roots[4000000];
+int query(node *ql,node *qr,int k)&#123;
+        if(ql-&gt;l == ql-&gt;r)
+                return qr-&gt;l;
+        int lval = qr-&gt;lson-&gt;val - ql-&gt;lson-&gt;val;
+        if (k &lt;= lval)
+                return query(ql-&gt;lson,qr-&gt;lson,k);
+        else
+                return query(ql-&gt;rson,qr-&gt;rson,k - lval);
+&#125;
+int main ()&#123;
+        int m,n;
+        static int set_[400000];
+        cin &gt;&gt; n &gt;&gt; m;
+        arr[0] = -0x7fffffff;
+        for (int i = 1;i &lt;= n;++ i)
+                scanf(&quot;%d&quot;,&amp;arr[i]);
+        //discrete
+        memcpy(set_,arr,(n + 1) * sizeof(int));
+        sort(set_ + 1,set_ + 1 + n);
+        int *set_end = unique(set_ + 1,set_ + 1 + n);
+        for (int i = 1;i &lt;= n;++ i)
+                arr[i] = lower_bound(set_ + 1,set_end,arr[i]) - set_;
+        //build trees
+        int size_ = set_end - set_ - 1;
+        roots[0] = new node(1,size_);
+        for (int i = 1;i &lt;= n;++ i)
+                roots[i] = roots[i - 1]-&gt;insert(arr[i]);
+        //query
+        int beg,end,k;
+        for (int i = 1;i &lt;= m;++ i)&#123;
+                scanf(&quot;%d%d%d&quot;,&amp;beg,&amp;end,&amp;k);
+                printf(&quot;%d\n&quot;,set_[query(roots[beg - 1],roots[end],k)]);
+
+        &#125;
+        return 0;
+&#125;</code></pre>
 <p>以上.</p>
 <p><img src="https://pics1.beautyyu.top/origin/PKOs29.jpg"></p>
 

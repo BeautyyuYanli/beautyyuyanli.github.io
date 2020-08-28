@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/C6WEIx.jpg">
 <meta property="article:published_time" content="2018-01-30T09:30:11.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:18:55.296Z">
+<meta property="article:modified_time" content="2020-08-28T01:40:47.311Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="搜索">
@@ -150,17 +150,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -330,6 +330,15 @@
 
       <time title="创建时间：2018-01-30 17:30:11" itemprop="dateCreated datePublished" datetime="2018-01-30T17:30:11+08:00">2018-01-30</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -343,8 +352,53 @@
     <div class="post-body" itemprop="articleBody">
         <p>##看楼下的dalao都用了奇妙的操作</p>
 <p>菜鸡啥也不会 只能想办法剪剪枝了<br>（勉强还是ac了<br>首先 通过观察可知这题其实是在求全排列<br><strong>对于所有的排列方式 求出最小花费</strong><br>我习惯通过swap的交换来实现全排列<br>此外就是 <strong><em>当当前花费已经大于已知的最佳答案 即减去这条枝</em></strong> 这样一个简单的剪枝<br>而这个剪枝在 <strong><em>尽快找到一个较优解</em></strong> 的情况下可以剪去更多的废枝<br>所以在开始搜索前通过**<em>距离原点的远近**</em>排序 可以稍微地“尽快找最优解”（虽然这有点玄学 我解释不了 但对于这题确实有效）</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cheeseNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> x,y;</span><br><span class="line">&#125;chee[<span class="number">16</span>];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">double</span> ans = <span class="number">2100000000.0</span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">cou_dis</span><span class="params">(cheeseNode&amp; al,cheeseNode&amp; be)</span></span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="built_in">sqrt</span>((al.x - be.x)*(al.x - be.x)+(al.y - be.y)*(al.y - be.y));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> handle,<span class="keyword">double</span> dis)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (handle &gt; n)&#123;</span><br><span class="line">        ans = <span class="built_in">min</span>(ans,dis);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (dis &gt;= ans) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = handle;i &lt;= n;++ i)&#123;</span><br><span class="line">        swap(chee[i],chee[handle]);</span><br><span class="line">        dfs(handle + <span class="number">1</span>,dis + cou_dis(chee[handle],chee[handle - <span class="number">1</span>]));</span><br><span class="line">        swap(chee[i],chee[handle]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span> <span class="params">(cheeseNode al,cheeseNode be)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((al.x * al.x + al.y * al.y) &lt; (be.x * be.x + be.y * be.y));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// freopen (&quot;workbroad.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">    <span class="comment">// freopen (&quot;workbroad.out&quot;,&quot;w&quot;,stdout);</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">double</span> al,be;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf&quot;</span>,&amp;al,&amp;be);</span><br><span class="line">        chee[i] = (cheeseNode)&#123;al,be&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(chee + <span class="number">1</span>,chee + n + <span class="number">1</span>,cmp);</span><br><span class="line">    dfs(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.2lf&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">#include &lt;cstdlib&gt;
+#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;ctime&gt;
+#include &lt;cmath&gt;
+using namespace std;
+struct cheeseNode&#123;
+    double x,y;
+&#125;chee[16];
+int n;
+double ans = 2100000000.0;
+double cou_dis(cheeseNode&amp; al,cheeseNode&amp; be)&#123;
+     return sqrt((al.x - be.x)*(al.x - be.x)+(al.y - be.y)*(al.y - be.y));
+&#125;
+void dfs(int handle,double dis)&#123;
+    if (handle &gt; n)&#123;
+        ans = min(ans,dis);
+        return;
+    &#125;
+    if (dis &gt;= ans) return;
+    for (int i = handle;i &lt;= n;++ i)&#123;
+        swap(chee[i],chee[handle]);
+        dfs(handle + 1,dis + cou_dis(chee[handle],chee[handle - 1]));
+        swap(chee[i],chee[handle]);
+    &#125;
+    return ;
+&#125;
+bool cmp (cheeseNode al,cheeseNode be)&#123;
+    return ((al.x * al.x + al.y * al.y) &lt; (be.x * be.x + be.y * be.y));
+&#125;
+int main ()&#123;
+    // freopen (&quot;workbroad.in&quot;,&quot;r&quot;,stdin);
+    // freopen (&quot;workbroad.out&quot;,&quot;w&quot;,stdout);
+    cin &gt;&gt; n;
+    double al,be;
+    for (int i = 1;i &lt;= n;++ i)&#123;
+        scanf(&quot;%lf%lf&quot;,&amp;al,&amp;be);
+        chee[i] = (cheeseNode)&#123;al,be&#125;;
+    &#125;
+    sort(chee + 1,chee + n + 1,cmp);
+    dfs(1,0);
+    printf(&quot;%.2lf&quot;,ans);
+    return 0;
+&#125;</code></pre>
 <p><img src="https://pics1.beautyyu.top/origin/C6WEIx.jpg"></p>
 
     </div>

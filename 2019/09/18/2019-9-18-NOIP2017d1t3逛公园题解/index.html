@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/IMG_20190616_120418_1.jpg">
 <meta property="article:published_time" content="2019-09-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:05:03.710Z">
+<meta property="article:modified_time" content="2020-08-28T01:57:18.066Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="dp">
 <meta property="article:tag" content="图论">
@@ -151,17 +151,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -331,6 +331,15 @@
 
       <time title="创建时间：2019-09-18 00:00:00" itemprop="dateCreated datePublished" datetime="2019-09-18T00:00:00+08:00">2019-09-18</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -376,8 +385,125 @@
 <p>特判”终点在一个零环上”的情况也不难. 只要在做dijkstra的过程中发现有一条指向终点的长度为$0$的最短路, 那么这条最短路就是终点上的零环.</p>
 <p>(实话说这个情况要不是样例有我就真的忽略了)</p>
 <p>总之代码如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">LL n, m, k, p, T;</span><br><span class="line"><span class="comment">//gragh beg</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    LL v, cs;</span><br><span class="line">    edge *nxt;</span><br><span class="line">    edge (<span class="keyword">const</span> LL &amp;be, <span class="keyword">const</span> LL &amp;ge, edge *de)&#123;</span><br><span class="line">        v = be, cs = ge, nxt = de;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*G[<span class="number">200000</span>], *G_[<span class="number">200000</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del_g</span><span class="params">(edge **g, LL n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (LL i = <span class="number">1</span>;i &lt;= n;++ i)&#123;</span><br><span class="line">        <span class="keyword">for</span> (edge *j = g[i], *k;j;k = j, j = j-&gt;nxt, <span class="keyword">delete</span>(k));</span><br><span class="line">        g[i] = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//gragh end</span></span><br><span class="line"><span class="comment">//dijkstra beg</span></span><br><span class="line">LL dis[<span class="number">200000</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">200000</span>], zero_1;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">qwq</span>&#123;</span></span><br><span class="line">    LL v, dis;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> qwq &amp;al)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dis &gt; al.dis;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(LL s)</span></span>&#123;</span><br><span class="line">    <span class="built_in">priority_queue</span>&lt;qwq&gt; q;</span><br><span class="line">    q.push((qwq)&#123;<span class="number">1</span>, <span class="number">0</span>&#125;);</span><br><span class="line">    <span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">        qwq al = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span> (vis[al.v])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        dis[al.v] = al.dis;</span><br><span class="line">        vis[al.v] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (edge *i = G[al.v]; i; i = i-&gt;nxt)&#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[i-&gt;v])&#123;</span><br><span class="line">                <span class="keyword">if</span> (i-&gt;v == <span class="number">1</span> &amp;&amp; dis[al.v] + i-&gt;cs == <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="comment">//node1 on a zero circle</span></span><br><span class="line">                    zero_1 = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">return</span> ;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            q.push((qwq)&#123;i-&gt;v, al.dis + i-&gt;cs&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//dijkstra end</span></span><br><span class="line"><span class="comment">//dp</span></span><br><span class="line">LL dp[<span class="number">100010</span>][<span class="number">60</span>];</span><br><span class="line"><span class="keyword">bool</span> sta[<span class="number">100010</span>][<span class="number">60</span>];</span><br><span class="line"><span class="function">LL <span class="title">meow</span><span class="params">(LL u, LL hp)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sta[u][hp])</span><br><span class="line">    <span class="comment">//a zero circle on this road</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (dp[u][hp] != <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> dp[u][hp];</span><br><span class="line">    sta[u][hp] = <span class="number">1</span>;</span><br><span class="line">    LL al = <span class="number">0</span>, hp_;</span><br><span class="line">    <span class="keyword">for</span> (edge *i = G_[u];i;i = i-&gt;nxt)&#123;</span><br><span class="line">        hp_ = hp + dis[u] - i-&gt;cs - dis[i-&gt;v];</span><br><span class="line">        <span class="keyword">if</span> (hp_ &lt; <span class="number">0</span> || hp_ &gt; k)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        LL tmp = meow(i-&gt;v, hp_);</span><br><span class="line">        <span class="keyword">if</span> (tmp == <span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        al = (al + tmp) % p;</span><br><span class="line">    &#125;</span><br><span class="line">    sta[u][hp] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> dp[u][hp] = al;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//dp end</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--)&#123;</span><br><span class="line">        <span class="comment">//initialization</span></span><br><span class="line">        <span class="built_in">memset</span>(dis, <span class="number">0</span>, <span class="keyword">sizeof</span>(dis));</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="built_in">memset</span>(sta, <span class="number">0</span>, <span class="keyword">sizeof</span>(sta));</span><br><span class="line">        zero_1 = <span class="number">0</span>;</span><br><span class="line">        LL al, be, ge;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld%lld&quot;</span>, &amp;n, &amp;m, &amp;k, &amp;p);</span><br><span class="line">        <span class="keyword">for</span> (LL i = <span class="number">1</span>;i &lt;= m;++ i)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>, &amp;al, &amp;be, &amp;ge);</span><br><span class="line">            G[al] = <span class="keyword">new</span> edge(be, ge, G[al]);</span><br><span class="line">            G_[be] = <span class="keyword">new</span> edge(al, ge, G_[be]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//main</span></span><br><span class="line">        LL ans = <span class="number">0</span>;</span><br><span class="line">        dijkstra(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (zero_1)&#123;</span><br><span class="line">            ans = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            dp[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (LL i = <span class="number">0</span>;i &lt;= k;++ i)&#123;</span><br><span class="line">                LL tmp = meow(n, i);</span><br><span class="line">                <span class="keyword">if</span> (tmp == <span class="number">-1</span>)&#123;</span><br><span class="line">                    ans = <span class="number">-1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                ans = (ans + tmp) % p;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        <span class="comment">//initialization</span></span><br><span class="line">        del_g(G, n);del_g(G_, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">#include &lt;bits/stdc++.h&gt;
+#define LL long long
+using namespace std;
+LL n, m, k, p, T;
+//gragh beg
+struct edge&#123;
+    LL v, cs;
+    edge *nxt;
+    edge (const LL &amp;be, const LL &amp;ge, edge *de)&#123;
+        v = be, cs = ge, nxt = de;
+        return ;
+    &#125;
+&#125;*G[200000], *G_[200000];
+void del_g(edge **g, LL n)&#123;
+    for (LL i = 1;i &lt;= n;++ i)&#123;
+        for (edge *j = g[i], *k;j;k = j, j = j-&gt;nxt, delete(k));
+        g[i] = NULL;
+    &#125;
+    return ;
+&#125;
+//gragh end
+//dijkstra beg
+LL dis[200000];
+bool vis[200000], zero_1;
+struct qwq&#123;
+    LL v, dis;
+    bool operator &lt; (const qwq &amp;al)const&#123;
+        return dis &gt; al.dis;
+    &#125;
+&#125;;
+void dijkstra(LL s)&#123;
+    priority_queue&lt;qwq&gt; q;
+    q.push((qwq)&#123;1, 0&#125;);
+    while(q.size())&#123;
+        qwq al = q.top();
+        q.pop();
+        if (vis[al.v])
+            continue;
+        dis[al.v] = al.dis;
+        vis[al.v] = 1;
+        for (edge *i = G[al.v]; i; i = i-&gt;nxt)&#123;
+            if (vis[i-&gt;v])&#123;
+                if (i-&gt;v == 1 &amp;&amp; dis[al.v] + i-&gt;cs == 0)&#123;
+                    //node1 on a zero circle
+                    zero_1 = 1;
+                    return ;
+                &#125;
+                continue;
+            &#125;
+            q.push((qwq)&#123;i-&gt;v, al.dis + i-&gt;cs&#125;);
+        &#125;
+    &#125;
+    return ;
+&#125;
+//dijkstra end
+//dp
+LL dp[100010][60];
+bool sta[100010][60];
+LL meow(LL u, LL hp)&#123;
+    if (sta[u][hp])
+    //a zero circle on this road
+        return -1;
+    if (dp[u][hp] != -1)
+        return dp[u][hp];
+    sta[u][hp] = 1;
+    LL al = 0, hp_;
+    for (edge *i = G_[u];i;i = i-&gt;nxt)&#123;
+        hp_ = hp + dis[u] - i-&gt;cs - dis[i-&gt;v];
+        if (hp_ &lt; 0 || hp_ &gt; k)
+            continue;
+        LL tmp = meow(i-&gt;v, hp_);
+        if (tmp == -1)
+            return -1;
+        al = (al + tmp) % p;
+    &#125;
+    sta[u][hp] = 0;
+    return dp[u][hp] = al;
+&#125;
+//dp end
+int main ()&#123;
+    cin &gt;&gt; T;
+    while (T--)&#123;
+        //initialization
+        memset(dis, 0, sizeof(dis));
+        memset(vis, 0, sizeof(vis));
+        memset(dp, -1, sizeof(dp));
+        memset(sta, 0, sizeof(sta));
+        zero_1 = 0;
+        LL al, be, ge;
+        scanf(&quot;%lld%lld%lld%lld&quot;, &amp;n, &amp;m, &amp;k, &amp;p);
+        for (LL i = 1;i &lt;= m;++ i)&#123;
+            scanf(&quot;%lld%lld%lld&quot;, &amp;al, &amp;be, &amp;ge);
+            G[al] = new edge(be, ge, G[al]);
+            G_[be] = new edge(al, ge, G_[be]);
+        &#125;
+        //main
+        LL ans = 0;
+        dijkstra(1);
+        if (zero_1)&#123;
+            ans = -1;
+        &#125;
+        else&#123;
+            dp[1][0] = 1;
+            for (LL i = 0;i &lt;= k;++ i)&#123;
+                LL tmp = meow(n, i);
+                if (tmp == -1)&#123;
+                    ans = -1;
+                    break;
+                &#125;
+                ans = (ans + tmp) % p;
+            &#125;
+        &#125;
+        printf(&quot;%lld\n&quot;, ans);
+        //initialization
+        del_g(G, n);del_g(G_, n);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
 <p>文结.</p>
 <p><img src="https://pics1.beautyyu.top/origin/IMG_20190616_120418_1.jpg"></p>
 

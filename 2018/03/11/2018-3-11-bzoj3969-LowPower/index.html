@@ -22,16 +22,16 @@
     var CONFIG = {"hostname":"beautyyu.top","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="题意简述:  有n个机器，每个机器有2个芯片，每个芯片可以放k个电池。  每个芯片能量是k个电池的能量的最小值。  两个芯片的能量之差越小，这个机器就工作的越好。  现在有2nk个电池，已知它们的能量，我们要把它们放在n个机器上的芯片上，  使得所有机器的能量之差的最大值最小  自然,求解最大值最小问题应当用二分实现.主程序很容易就能写出来了 123456789101112131415161718">
+  <meta name="description" content="题意简述:  有n个机器，每个机器有2个芯片，每个芯片可以放k个电池。  每个芯片能量是k个电池的能量的最小值。  两个芯片的能量之差越小，这个机器就工作的越好。  现在有2nk个电池，已知它们的能量，我们要把它们放在n个机器上的芯片上，  使得所有机器的能量之差的最大值最小  自然,求解最大值最小问题应当用二分实现.主程序很容易就能写出来了     int n,k,m;     int arr[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bzoj3969 LowPower|题解">
 <meta property="og:url" content="http://beautyyu.top/2018/03/11/2018-3-11-bzoj3969-LowPower/index.html">
 <meta property="og:site_name" content="银河美术馆-Beautyyu">
-<meta property="og:description" content="题意简述:  有n个机器，每个机器有2个芯片，每个芯片可以放k个电池。  每个芯片能量是k个电池的能量的最小值。  两个芯片的能量之差越小，这个机器就工作的越好。  现在有2nk个电池，已知它们的能量，我们要把它们放在n个机器上的芯片上，  使得所有机器的能量之差的最大值最小  自然,求解最大值最小问题应当用二分实现.主程序很容易就能写出来了 123456789101112131415161718">
+<meta property="og:description" content="题意简述:  有n个机器，每个机器有2个芯片，每个芯片可以放k个电池。  每个芯片能量是k个电池的能量的最小值。  两个芯片的能量之差越小，这个机器就工作的越好。  现在有2nk个电池，已知它们的能量，我们要把它们放在n个机器上的芯片上，  使得所有机器的能量之差的最大值最小  自然,求解最大值最小问题应当用二分实现.主程序很容易就能写出来了     int n,k,m;     int arr[">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/C6WPsJ.jpg">
 <meta property="article:published_time" content="2018-03-11T04:12:12.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:21:11.713Z">
+<meta property="article:modified_time" content="2020-08-28T01:50:05.517Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="二分">
@@ -150,17 +150,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -330,6 +330,15 @@
 
       <time title="创建时间：2018-03-11 12:12:12" itemprop="dateCreated datePublished" datetime="2018-03-11T12:12:12+08:00">2018-03-11</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -346,8 +355,25 @@
 <p>有n个机器，每个机器有2个芯片，每个芯片可以放k个电池。<br>  每个芯片能量是k个电池的能量的最小值。<br>  两个芯片的能量之差越小，这个机器就工作的越好。<br>  现在有2nk个电池，已知它们的能量，我们要把它们放在n个机器上的芯片上，<br>  使得所有机器的能量之差的最大值最小</p>
 </blockquote>
 <p>自然,求解最大值最小问题应当用二分实现.主程序很容易就能写出来了</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n,k,m;</span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">1000005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n&gt;&gt;k;</span><br><span class="line">    m = ((n * k) &lt;&lt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= m;++ i)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(arr + <span class="number">1</span>,arr + <span class="number">1</span> + m);</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>,r = arr[m] - arr[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (!canit(mid))</span><br><span class="line">            l = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> r = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; l;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">    int n,k,m;
+    int arr[1000005];
+    int main ()&#123;
+        cin &gt;&gt; n&gt;&gt;k;
+        m = ((n * k) &lt;&lt; 1);
+        for (int i = 1;i &lt;= m;++ i)&#123;
+            scanf(&quot;%d&quot;,&amp;arr[i]);
+        &#125;
+        sort(arr + 1,arr + 1 + m);
+        int l = 0,r = arr[m] - arr[1];
+        while (l &lt; r)&#123;
+            int mid = l + ((r - l) &gt;&gt; 1);
+            if (!canit(mid))
+                l = mid + 1;
+            else r = mid;
+        &#125;
+        cout &lt;&lt; l;
+        return 0;
+    &#125;</code></pre>
 <p><strong>重点就在于<code>check</code>函数的实现</strong></p>
 <p><strong>能否让每一组芯片差值都小于限定值t呢?</strong></p>
 <p>此前我们要先给电池分配制定一个<code>最优策略</code>,这个策略的分配方式一定能使<strong>满足约束的机器尽量多</strong></p>
@@ -359,14 +385,29 @@
 <p><strong>那么就来分配有用电池</strong></p>
 <p>一个<code>有用电池</code>应当是一组k个电池中最小的,因此理应从小到大分配有用电池</p>
 <p>而一组芯片的能量差最小,这组芯片的两颗<code>有用电池</code>应当是相邻的(当然事先应该为电池按能量排序)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> j = <span class="number">1</span>;<span class="comment">//为第j组芯片寻找有用电池</span></span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>;<span class="comment">//记录当前所需的额外填充电池</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= <span class="number">2</span>*n*k;++ i)&#123;</span><br><span class="line">    <span class="keyword">if</span> (energy[i + <span class="number">1</span>] - energy[i] &lt;= t)<span class="comment">//假如这组电池满足约束,可以作为有用电池</span></span><br><span class="line">        ++ j,cnt += <span class="number">2</span> * (k - <span class="number">1</span>);<span class="comment">//为这组芯片分配k-1个填充电池,并为下一组芯片寻找有用电池</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        cnt --;<span class="comment">//假如这组电池不满足约束,那第i颗电池永远也没有机会成为有用电池了.但它还可以发光发热--为之前的有用电池充当填充电池(注意这些有用电池一定比第i颗电池能量小,因为它们已经按能量排序了).那么有了这位&quot;志愿者&quot;,我们就可以省下一颗额外填充电池</span></span><br><span class="line">    <span class="keyword">if</span> (j &gt;= n) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">    int j = 1;//为第j组芯片寻找有用电池
+    int cnt = 0;//记录当前所需的额外填充电池
+    for (int i = 1;i &lt;= 2*n*k;++ i)&#123;
+        if (energy[i + 1] - energy[i] &lt;= t)//假如这组电池满足约束,可以作为有用电池
+            ++ j,cnt += 2 * (k - 1);//为这组芯片分配k-1个填充电池,并为下一组芯片寻找有用电池
+        else
+            cnt --;//假如这组电池不满足约束,那第i颗电池永远也没有机会成为有用电池了.但它还可以发光发热--为之前的有用电池充当填充电池(注意这些有用电池一定比第i颗电池能量小,因为它们已经按能量排序了).那么有了这位&quot;志愿者&quot;,我们就可以省下一颗额外填充电池
+        if (j &gt;= n) return 1;
+    &#125;</code></pre>
 <p>注意:如果分配如上述那样顺利的话,这个方案就是成立的–一颗电池要么作为<code>有用电池</code>,要么作为<code>填充电池</code>,总之没有”永久废弃”的,而<strong>题目保证了有恰好2nk颗电池,如果每颗电池都被用到,那这些电池当然就会正好用完.所以这个方案就是成立的</strong></p>
 <p>那么反过来,方案不成立是什么情况?<strong>出现了”永久废弃”的电池</strong></p>
 <p>什么情况下第i颗电池连”别人的填充电池”都无法做到?<strong>如果此前的有用电池没有耗费任何一颗<code>额外填充电池</code>,那么第i颗电池也就没办法去替代节省一颗<code>额外填充电池</code>,那么它就被永久废弃了.</strong></p>
 <p>于是完整的<code>check</code>函数如下(和上面那份代码实现方式不太一样,不过函数命名的意义是相同的)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canit</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>,i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= n;++ j)&#123;</span><br><span class="line">        <span class="keyword">while</span> (cnt &gt;= <span class="number">0</span> &amp;&amp; arr[i + <span class="number">1</span>] - arr[i] &gt; t) ++i,--cnt;</span><br><span class="line">        <span class="keyword">if</span> (cnt &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//一旦没有额外填充电池,就说明出现了永久废弃电池,这种方案就不成立了</span></span><br><span class="line">        cnt += ((k - <span class="number">1</span>) &lt;&lt; <span class="number">1</span>);</span><br><span class="line">        i += <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">    bool canit(const int &amp;t)&#123;
+        int cnt = 0,i = 1;
+        for (int j = 1;j &lt;= n;++ j)&#123;
+            while (cnt &gt;= 0 &amp;&amp; arr[i + 1] - arr[i] &gt; t) ++i,--cnt;
+            if (cnt &lt; 0) return 0; //一旦没有额外填充电池,就说明出现了永久废弃电池,这种方案就不成立了
+            cnt += ((k - 1) &lt;&lt; 1);
+            i += 2;
+        &#125;
+        return 1;
+    &#125;</code></pre>
 <p><img src="https://pics1.beautyyu.top/origin/C6WPsJ.jpg"></p>
 
     </div>

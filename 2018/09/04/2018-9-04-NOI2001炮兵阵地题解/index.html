@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://pics1.beautyyu.top/origin.png">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/PwLj1J.jpg">
 <meta property="article:published_time" content="2018-09-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:24:11.375Z">
+<meta property="article:modified_time" content="2020-08-28T01:52:57.931Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="dp">
@@ -152,17 +152,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -332,6 +332,15 @@
 
       <time title="创建时间：2018-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -358,8 +367,79 @@
 <li>注意滚动数组优化,否则空间不足</li>
 </ol>
 <p>代码如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL int </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">LL map_[<span class="number">200</span>],dp[<span class="number">2</span>][<span class="number">2000</span>][<span class="number">2000</span>],p = <span class="number">0</span>;</span><br><span class="line"><span class="function">LL <span class="title">cal</span><span class="params">(LL se)</span></span>&#123;</span><br><span class="line">        LL cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (se)&#123;</span><br><span class="line">                se -= se&amp;(-se);</span><br><span class="line">                cnt ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        LL n,m;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        <span class="keyword">for</span> (LL i = <span class="number">1</span>;i &lt;= n;++ i)&#123;</span><br><span class="line">                map_[i] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (LL j = <span class="number">1</span>;j &lt;= m;++ j)&#123;</span><br><span class="line">                        <span class="keyword">char</span> al = getchar();</span><br><span class="line">                        <span class="keyword">while</span> (al != <span class="string">&#x27;P&#x27;</span> &amp;&amp; al != <span class="string">&#x27;H&#x27;</span>) al = getchar();</span><br><span class="line">                        map_[i] &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">                        <span class="keyword">if</span> (al == <span class="string">&#x27;P&#x27;</span>)</span><br><span class="line">                                map_[i] |= <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span> (LL s = map_[<span class="number">1</span>];s;s = (s - <span class="number">1</span>) &amp; map_[<span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">if</span> (((s &lt;&lt; <span class="number">1</span>) &amp; s) || ((s &lt;&lt; <span class="number">2</span>) &amp; s))</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                dp[<span class="number">0</span>][<span class="number">0</span>][s] = cal(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (LL k = <span class="number">2</span>;k &lt;= n;++ k)&#123;</span><br><span class="line">                p = !p;</span><br><span class="line">                <span class="keyword">for</span> (LL se = map_[k];se!=<span class="number">-1</span>;se = se?(se - <span class="number">1</span>) &amp; map_[k]:<span class="number">-1</span>)&#123;</span><br><span class="line">                        <span class="keyword">if</span> (((se &lt;&lt; <span class="number">1</span>) &amp; se) || ((se &lt;&lt; <span class="number">2</span>) &amp; se))</span><br><span class="line">                                <span class="keyword">continue</span>;</span><br><span class="line">                        LL cal_se = cal(se);</span><br><span class="line">                        LL tmp = map_[k - <span class="number">1</span>]&amp;(~se);</span><br><span class="line">                        <span class="keyword">for</span> (LL fa = tmp;fa!=<span class="number">-1</span>;fa = fa?(fa - <span class="number">1</span>) &amp; tmp:<span class="number">-1</span>)&#123;</span><br><span class="line">                                dp[p][fa][se] = <span class="number">0</span>;</span><br><span class="line">                                <span class="keyword">if</span> (((fa &lt;&lt; <span class="number">1</span>) &amp; fa) || ((fa &lt;&lt; <span class="number">2</span>) &amp; fa))</span><br><span class="line">                                        <span class="keyword">continue</span>;</span><br><span class="line">                                LL tmp1 = map_[k - <span class="number">2</span>]&amp;(~fa)&amp;(~se);</span><br><span class="line">                                <span class="keyword">for</span> (LL gfa = tmp1;gfa!=<span class="number">-1</span>;gfa = gfa?(gfa - <span class="number">1</span>) &amp; tmp1:<span class="number">-1</span>)&#123;</span><br><span class="line">                                        <span class="keyword">if</span> (((gfa &lt;&lt; <span class="number">1</span>) &amp; gfa) || ((gfa &lt;&lt; <span class="number">2</span>) &amp; gfa))</span><br><span class="line">                                                <span class="keyword">continue</span>;</span><br><span class="line">                                        dp[p][fa][se] = <span class="built_in">max</span>(dp[p][fa][se],dp[!p][gfa][fa]+cal_se);</span><br><span class="line">                                &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        LL ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (LL se = map_[n];se!=<span class="number">-1</span>;se = se?(se - <span class="number">1</span>) &amp; map_[n]:<span class="number">-1</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span> (((se &lt;&lt; <span class="number">1</span>) &amp; se) || ((se &lt;&lt; <span class="number">2</span>) &amp; se))</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                LL tmp = map_[n<span class="number">-1</span>]&amp;(~se);</span><br><span class="line">                <span class="keyword">for</span> (LL fa = tmp;fa != <span class="number">-1</span>;fa = fa?(fa - <span class="number">1</span>) &amp; tmp:<span class="number">-1</span>)&#123;</span><br><span class="line">                        <span class="keyword">if</span> (((fa &lt;&lt; <span class="number">1</span>) &amp; fa) || ((fa &lt;&lt; <span class="number">2</span>) &amp; fa))</span><br><span class="line">                                <span class="keyword">continue</span>;</span><br><span class="line">                        ans = <span class="built_in">max</span>(ans,dp[p][fa][se]);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;ctime&gt;
+#define LL int 
+using namespace std;
+LL map_[200],dp[2][2000][2000],p = 0;
+LL cal(LL se)&#123;
+        LL cnt = 0;
+        while (se)&#123;
+                se -= se&amp;(-se);
+                cnt ++;
+        &#125;
+        return cnt;
+&#125;
+int main()&#123;
+        LL n,m;
+        cin &gt;&gt; n &gt;&gt; m;
+        for (LL i = 1;i &lt;= n;++ i)&#123;
+                map_[i] = 0;
+                for (LL j = 1;j &lt;= m;++ j)&#123;
+                        char al = getchar();
+                        while (al != &#39;P&#39; &amp;&amp; al != &#39;H&#39;) al = getchar();
+                        map_[i] &lt;&lt;= 1;
+                        if (al == &#39;P&#39;)
+                                map_[i] |= 1;
+                &#125;
+        &#125;
+        memset(dp,0,sizeof(dp));
+        for (LL s = map_[1];s;s = (s - 1) &amp; map_[1])&#123;
+                if (((s &lt;&lt; 1) &amp; s) || ((s &lt;&lt; 2) &amp; s))
+                        continue;
+                dp[0][0][s] = cal(s);
+        &#125;
+        for (LL k = 2;k &lt;= n;++ k)&#123;
+                p = !p;
+                for (LL se = map_[k];se!=-1;se = se?(se - 1) &amp; map_[k]:-1)&#123;
+                        if (((se &lt;&lt; 1) &amp; se) || ((se &lt;&lt; 2) &amp; se))
+                                continue;
+                        LL cal_se = cal(se);
+                        LL tmp = map_[k - 1]&amp;(~se);
+                        for (LL fa = tmp;fa!=-1;fa = fa?(fa - 1) &amp; tmp:-1)&#123;
+                                dp[p][fa][se] = 0;
+                                if (((fa &lt;&lt; 1) &amp; fa) || ((fa &lt;&lt; 2) &amp; fa))
+                                        continue;
+                                LL tmp1 = map_[k - 2]&amp;(~fa)&amp;(~se);
+                                for (LL gfa = tmp1;gfa!=-1;gfa = gfa?(gfa - 1) &amp; tmp1:-1)&#123;
+                                        if (((gfa &lt;&lt; 1) &amp; gfa) || ((gfa &lt;&lt; 2) &amp; gfa))
+                                                continue;
+                                        dp[p][fa][se] = max(dp[p][fa][se],dp[!p][gfa][fa]+cal_se);
+                                &#125;
+                        &#125;
+                &#125;
+        &#125;
+        LL ans = 0;
+        for (LL se = map_[n];se!=-1;se = se?(se - 1) &amp; map_[n]:-1)&#123;
+                if (((se &lt;&lt; 1) &amp; se) || ((se &lt;&lt; 2) &amp; se))
+                        continue;
+                LL tmp = map_[n-1]&amp;(~se);
+                for (LL fa = tmp;fa != -1;fa = fa?(fa - 1) &amp; tmp:-1)&#123;
+                        if (((fa &lt;&lt; 1) &amp; fa) || ((fa &lt;&lt; 2) &amp; fa))
+                                continue;
+                        ans = max(ans,dp[p][fa][se]);
+                &#125;
+        &#125;
+        cout &lt;&lt; ans;
 
+        return 0;
+&#125;</code></pre>
 <p>文结</p>
 <p><img src="https://pics1.beautyyu.top/origin/PwLj1J.jpg"></p>
 

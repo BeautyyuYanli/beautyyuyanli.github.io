@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/PKOjIS.jpg">
 <meta property="article:published_time" content="2018-07-18T13:21:21.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:22:49.097Z">
+<meta property="article:modified_time" content="2020-08-28T01:51:29.847Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="线段树">
@@ -151,17 +151,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -331,6 +331,15 @@
 
       <time title="创建时间：2018-07-18 21:21:21" itemprop="dateCreated datePublished" datetime="2018-07-18T21:21:21+08:00">2018-07-18</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -362,8 +371,107 @@
 </ol>
 <p>所以当笔者写完后发现<strong>根本不需要主席树</strong>……..</p>
 <p>笔者代码如下(注意数据命名与题面不符):</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> llint long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> set_[<span class="number">200010</span>],cnt[<span class="number">200010</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">        node *lson,*rson;</span><br><span class="line">        <span class="keyword">int</span> val,sum_;</span><br><span class="line">        node(<span class="keyword">int</span> ql,<span class="keyword">int</span> qr,<span class="keyword">bool</span> full)&#123;</span><br><span class="line">                <span class="comment">// build a void tree</span></span><br><span class="line">                <span class="keyword">if</span>(ql == qr)&#123;</span><br><span class="line">                        lson = rson = <span class="literal">NULL</span>;</span><br><span class="line">                        val = full * cnt[ql];sum_ = val * set_[ql];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="keyword">int</span> mid = ((qr - ql) &gt;&gt; <span class="number">1</span>) + ql;</span><br><span class="line">                        lson = <span class="keyword">new</span> node(ql,mid,full);</span><br><span class="line">                        rson = <span class="keyword">new</span> node(mid + <span class="number">1</span>,qr,full);</span><br><span class="line">                        val = full * (lson-&gt;val + rson-&gt;val);</span><br><span class="line">                        sum_ = full * (lson-&gt;sum_ + rson-&gt;sum_);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        node(node *ori,node *ls,node *rs,<span class="keyword">int</span> ival)&#123;</span><br><span class="line">                lson = ls;rson = rs;</span><br><span class="line">                val = ori-&gt;val + <span class="number">1</span>;sum_ = ori-&gt;sum_ + set_[ival];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function">node* <span class="title">insert</span><span class="params">(<span class="keyword">int</span> ival,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">                <span class="keyword">int</span> mid = ((r - l) &gt;&gt; <span class="number">1</span>) + l;</span><br><span class="line">                <span class="keyword">if</span> (ival == l &amp;&amp; ival == r)</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> node(<span class="keyword">this</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>,ival);</span><br><span class="line">                <span class="keyword">if</span> (ival &lt;= mid)</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> node(<span class="keyword">this</span>,lson-&gt;insert(ival,l,mid),rson,ival);</span><br><span class="line">                <span class="keyword">else</span> </span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> node(<span class="keyword">this</span>,lson,rson-&gt;insert(ival,mid + <span class="number">1</span>,r),ival);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;*full,*suf[<span class="number">200010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(node *op,<span class="keyword">int</span> k,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = ((r - l) &gt;&gt; <span class="number">1</span>) + l;</span><br><span class="line">        <span class="keyword">if</span> (l == r)</span><br><span class="line">                <span class="keyword">return</span> k * set_[l];</span><br><span class="line">        <span class="keyword">if</span> (k &lt;= op-&gt;lson-&gt;val)</span><br><span class="line">                <span class="keyword">return</span> query(op-&gt;lson,k,l,mid);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> op-&gt;lson-&gt;sum_ + query(op-&gt;rson,k - op-&gt;lson-&gt;val,mid + <span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query2</span><span class="params">(node *op,node *ff,<span class="keyword">int</span> k,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = ((r - l) &gt;&gt; <span class="number">1</span>) + l;</span><br><span class="line">        <span class="keyword">if</span> (l == r)</span><br><span class="line">                <span class="keyword">return</span> k * set_[l];</span><br><span class="line">        <span class="keyword">if</span> (k &lt;= ff-&gt;lson-&gt;val - op-&gt;lson-&gt;val)</span><br><span class="line">                <span class="keyword">return</span> query2(op-&gt;lson,ff-&gt;lson,k,l,mid);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> ff-&gt;lson-&gt;sum_ - op-&gt;lson-&gt;sum_ + query2(op-&gt;rson,ff-&gt;rson,k -(ff-&gt;lson-&gt;val -  op-&gt;lson-&gt;val),mid + <span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">xxx</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> score,money;</span><br><span class="line">        <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> xxx &amp;be)<span class="keyword">const</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> score &lt; be.score;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;data[<span class="number">200010</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//      freopen(&quot;wb.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">        <span class="comment">//readin</span></span><br><span class="line">        <span class="keyword">int</span> n,k,p;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt; k &gt;&gt; n &gt;&gt; p;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)&#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;data[i].score,&amp;data[i].money);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(data + <span class="number">1</span>,data + <span class="number">1</span> + n);</span><br><span class="line">        <span class="comment">//discrete</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">                set_[i] = data[i].money;</span><br><span class="line">        sort(set_ + <span class="number">1</span>,set_ + <span class="number">1</span> + n);</span><br><span class="line">        <span class="keyword">int</span> size_ = unique(set_ + <span class="number">1</span>,set_ + <span class="number">1</span> + n) - set_ - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">                data[i].money = lower_bound(set_ + <span class="number">1</span>,set_ + size_ + <span class="number">1</span>,data[i].money) - set_,</span><br><span class="line">                cnt[data[i].money] ++;</span><br><span class="line">        <span class="comment">//build trees</span></span><br><span class="line">        suf[n + <span class="number">1</span>] = <span class="keyword">new</span> node (<span class="number">1</span>,size_,<span class="number">0</span>);</span><br><span class="line">        full = <span class="keyword">new</span> node (<span class="number">1</span>,size_,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n;i &gt; n - (k &gt;&gt; <span class="number">1</span>);-- i)</span><br><span class="line">                suf[i] = suf[i + <span class="number">1</span>]-&gt;insert(data[i].money,<span class="number">1</span>,size_);</span><br><span class="line">        <span class="comment">//query</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - (k &gt;&gt; <span class="number">1</span>);i &gt; (k &gt;&gt; <span class="number">1</span>);-- i)&#123;</span><br><span class="line">                suf[i] = suf[i + <span class="number">1</span>]-&gt;insert(data[i].money,<span class="number">1</span>,size_);</span><br><span class="line">                <span class="keyword">if</span>(query2(suf[i],full,k &gt;&gt; <span class="number">1</span>,<span class="number">1</span>,size_) + query(suf[i + <span class="number">1</span>],k &gt;&gt; <span class="number">1</span>,<span class="number">1</span>,size_) + set_[data[i].money] &lt;= p)&#123;</span><br><span class="line">                        <span class="built_in">cout</span> &lt;&lt; data[i].score;</span><br><span class="line">                        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+#define llint long long
+using namespace std;
+int set_[200010],cnt[200010];
+struct node&#123;
+        node *lson,*rson;
+        int val,sum_;
+        node(int ql,int qr,bool full)&#123;
+                // build a void tree
+                if(ql == qr)&#123;
+                        lson = rson = NULL;
+                        val = full * cnt[ql];sum_ = val * set_[ql];
+                &#125;
+                else&#123;
+                        int mid = ((qr - ql) &gt;&gt; 1) + ql;
+                        lson = new node(ql,mid,full);
+                        rson = new node(mid + 1,qr,full);
+                        val = full * (lson-&gt;val + rson-&gt;val);
+                        sum_ = full * (lson-&gt;sum_ + rson-&gt;sum_);
+                &#125;
+        &#125;
+        node(node *ori,node *ls,node *rs,int ival)&#123;
+                lson = ls;rson = rs;
+                val = ori-&gt;val + 1;sum_ = ori-&gt;sum_ + set_[ival];
+        &#125;
+        node* insert(int ival,int l,int r)&#123;
+                int mid = ((r - l) &gt;&gt; 1) + l;
+                if (ival == l &amp;&amp; ival == r)
+                        return new node(this,NULL,NULL,ival);
+                if (ival &lt;= mid)
+                        return new node(this,lson-&gt;insert(ival,l,mid),rson,ival);
+                else 
+                        return new node(this,lson,rson-&gt;insert(ival,mid + 1,r),ival);
+        &#125;
 
+
+&#125;*full,*suf[200010];
+int query(node *op,int k,int l,int r)&#123;
+        int mid = ((r - l) &gt;&gt; 1) + l;
+        if (l == r)
+                return k * set_[l];
+        if (k &lt;= op-&gt;lson-&gt;val)
+                return query(op-&gt;lson,k,l,mid);
+        else 
+                return op-&gt;lson-&gt;sum_ + query(op-&gt;rson,k - op-&gt;lson-&gt;val,mid + 1,r);
+&#125;
+int query2(node *op,node *ff,int k,int l,int r)&#123;
+        int mid = ((r - l) &gt;&gt; 1) + l;
+        if (l == r)
+                return k * set_[l];
+        if (k &lt;= ff-&gt;lson-&gt;val - op-&gt;lson-&gt;val)
+                return query2(op-&gt;lson,ff-&gt;lson,k,l,mid);
+        else 
+                return ff-&gt;lson-&gt;sum_ - op-&gt;lson-&gt;sum_ + query2(op-&gt;rson,ff-&gt;rson,k -(ff-&gt;lson-&gt;val -  op-&gt;lson-&gt;val),mid + 1,r);
+&#125;
+
+struct xxx&#123;
+        int score,money;
+        bool operator &lt; (const xxx &amp;be)const&#123;
+                return score &lt; be.score;
+        &#125;
+&#125;data[200010];
+int main ()&#123;
+//      freopen(&quot;wb.in&quot;,&quot;r&quot;,stdin);
+        //readin
+        int n,k,p;
+        cin&gt;&gt; k &gt;&gt; n &gt;&gt; p;
+        for (int i = 1;i &lt;= n;++ i)&#123;
+                scanf(&quot;%d%d&quot;,&amp;data[i].score,&amp;data[i].money);
+        &#125;
+        sort(data + 1,data + 1 + n);
+        //discrete
+        for (int i = 1;i &lt;= n;++ i)
+                set_[i] = data[i].money;
+        sort(set_ + 1,set_ + 1 + n);
+        int size_ = unique(set_ + 1,set_ + 1 + n) - set_ - 1;
+        for (int i = 1;i &lt;= n;++ i)
+                data[i].money = lower_bound(set_ + 1,set_ + size_ + 1,data[i].money) - set_,
+                cnt[data[i].money] ++;
+        //build trees
+        suf[n + 1] = new node (1,size_,0);
+        full = new node (1,size_,1);
+        for (int i = n;i &gt; n - (k &gt;&gt; 1);-- i)
+                suf[i] = suf[i + 1]-&gt;insert(data[i].money,1,size_);
+        //query
+        for (int i = n - (k &gt;&gt; 1);i &gt; (k &gt;&gt; 1);-- i)&#123;
+                suf[i] = suf[i + 1]-&gt;insert(data[i].money,1,size_);
+                if(query2(suf[i],full,k &gt;&gt; 1,1,size_) + query(suf[i + 1],k &gt;&gt; 1,1,size_) + set_[data[i].money] &lt;= p)&#123;
+                        cout &lt;&lt; data[i].score;
+                        return 0;
+                &#125;
+        &#125;
+        cout &lt;&lt; -1 ;
+        return 0;
+&#125;</code></pre>
 <p>以上.</p>
 <p><img src="https://pics1.beautyyu.top/origin/PKOjIS.jpg"></p>
 

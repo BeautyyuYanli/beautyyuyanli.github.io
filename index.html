@@ -145,17 +145,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -325,6 +325,15 @@
 
       <time title="创建时间：2020-05-31 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-31T00:00:00+08:00">2020-05-31</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%88%9B%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">创作</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -447,6 +456,15 @@
 
       <time title="创建时间：2019-11-16 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-16T00:00:00+08:00">2019-11-16</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -461,11 +479,19 @@
           <blockquote>
 <p>本文采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议进行许可</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">if</span> (dfn[v])&#123;</span><br><span class="line">        low[u] = <span class="built_in">min</span>(low[u], dfn[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        Tarjan(v);</span><br><span class="line">        low[u] = <span class="built_in">min</span>(low[u], low[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">void Tarjan(int u)&#123;
+    //...
+    if (dfn[v])&#123;
+        low[u] = min(low[u], dfn[v]);
+    &#125;
+    else&#123;
+        Tarjan(v);
+        low[u] = min(low[u], low[v]);
+    &#125;
+    //...
+&#125;</code></pre>
 <p>前两天, 学弟hjk问了我这么一个问题:为什么在Tarjan中第4行代码不能写成这样</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">low[u] = <span class="built_in">min</span>(low[u], low[v]);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">        low[u] = min(low[u], low[v]);</code></pre>
 <p>看着他求知的面庞, 我不禁想起了曾经young的自己, 同样向自己提出过这个问题..</p>
 <p>于是我打算写篇文章来讲讲这个</p>
 <hr>
@@ -555,6 +581,15 @@
 
       <time title="创建时间：2019-09-18 00:00:00" itemprop="dateCreated datePublished" datetime="2019-09-18T00:00:00+08:00">2019-09-18</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -600,8 +635,125 @@
 <p>特判”终点在一个零环上”的情况也不难. 只要在做dijkstra的过程中发现有一条指向终点的长度为$0$的最短路, 那么这条最短路就是终点上的零环.</p>
 <p>(实话说这个情况要不是样例有我就真的忽略了)</p>
 <p>总之代码如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">LL n, m, k, p, T;</span><br><span class="line"><span class="comment">//gragh beg</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    LL v, cs;</span><br><span class="line">    edge *nxt;</span><br><span class="line">    edge (<span class="keyword">const</span> LL &amp;be, <span class="keyword">const</span> LL &amp;ge, edge *de)&#123;</span><br><span class="line">        v = be, cs = ge, nxt = de;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;*G[<span class="number">200000</span>], *G_[<span class="number">200000</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del_g</span><span class="params">(edge **g, LL n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (LL i = <span class="number">1</span>;i &lt;= n;++ i)&#123;</span><br><span class="line">        <span class="keyword">for</span> (edge *j = g[i], *k;j;k = j, j = j-&gt;nxt, <span class="keyword">delete</span>(k));</span><br><span class="line">        g[i] = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//gragh end</span></span><br><span class="line"><span class="comment">//dijkstra beg</span></span><br><span class="line">LL dis[<span class="number">200000</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">200000</span>], zero_1;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">qwq</span>&#123;</span></span><br><span class="line">    LL v, dis;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> qwq &amp;al)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dis &gt; al.dis;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(LL s)</span></span>&#123;</span><br><span class="line">    <span class="built_in">priority_queue</span>&lt;qwq&gt; q;</span><br><span class="line">    q.push((qwq)&#123;<span class="number">1</span>, <span class="number">0</span>&#125;);</span><br><span class="line">    <span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">        qwq al = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span> (vis[al.v])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        dis[al.v] = al.dis;</span><br><span class="line">        vis[al.v] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (edge *i = G[al.v]; i; i = i-&gt;nxt)&#123;</span><br><span class="line">            <span class="keyword">if</span> (vis[i-&gt;v])&#123;</span><br><span class="line">                <span class="keyword">if</span> (i-&gt;v == <span class="number">1</span> &amp;&amp; dis[al.v] + i-&gt;cs == <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="comment">//node1 on a zero circle</span></span><br><span class="line">                    zero_1 = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">return</span> ;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            q.push((qwq)&#123;i-&gt;v, al.dis + i-&gt;cs&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//dijkstra end</span></span><br><span class="line"><span class="comment">//dp</span></span><br><span class="line">LL dp[<span class="number">100010</span>][<span class="number">60</span>];</span><br><span class="line"><span class="keyword">bool</span> sta[<span class="number">100010</span>][<span class="number">60</span>];</span><br><span class="line"><span class="function">LL <span class="title">meow</span><span class="params">(LL u, LL hp)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sta[u][hp])</span><br><span class="line">    <span class="comment">//a zero circle on this road</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (dp[u][hp] != <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> dp[u][hp];</span><br><span class="line">    sta[u][hp] = <span class="number">1</span>;</span><br><span class="line">    LL al = <span class="number">0</span>, hp_;</span><br><span class="line">    <span class="keyword">for</span> (edge *i = G_[u];i;i = i-&gt;nxt)&#123;</span><br><span class="line">        hp_ = hp + dis[u] - i-&gt;cs - dis[i-&gt;v];</span><br><span class="line">        <span class="keyword">if</span> (hp_ &lt; <span class="number">0</span> || hp_ &gt; k)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        LL tmp = meow(i-&gt;v, hp_);</span><br><span class="line">        <span class="keyword">if</span> (tmp == <span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        al = (al + tmp) % p;</span><br><span class="line">    &#125;</span><br><span class="line">    sta[u][hp] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> dp[u][hp] = al;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//dp end</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--)&#123;</span><br><span class="line">        <span class="comment">//initialization</span></span><br><span class="line">        <span class="built_in">memset</span>(dis, <span class="number">0</span>, <span class="keyword">sizeof</span>(dis));</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="built_in">memset</span>(sta, <span class="number">0</span>, <span class="keyword">sizeof</span>(sta));</span><br><span class="line">        zero_1 = <span class="number">0</span>;</span><br><span class="line">        LL al, be, ge;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld%lld&quot;</span>, &amp;n, &amp;m, &amp;k, &amp;p);</span><br><span class="line">        <span class="keyword">for</span> (LL i = <span class="number">1</span>;i &lt;= m;++ i)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>, &amp;al, &amp;be, &amp;ge);</span><br><span class="line">            G[al] = <span class="keyword">new</span> edge(be, ge, G[al]);</span><br><span class="line">            G_[be] = <span class="keyword">new</span> edge(al, ge, G_[be]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//main</span></span><br><span class="line">        LL ans = <span class="number">0</span>;</span><br><span class="line">        dijkstra(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (zero_1)&#123;</span><br><span class="line">            ans = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            dp[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (LL i = <span class="number">0</span>;i &lt;= k;++ i)&#123;</span><br><span class="line">                LL tmp = meow(n, i);</span><br><span class="line">                <span class="keyword">if</span> (tmp == <span class="number">-1</span>)&#123;</span><br><span class="line">                    ans = <span class="number">-1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                ans = (ans + tmp) % p;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        <span class="comment">//initialization</span></span><br><span class="line">        del_g(G, n);del_g(G_, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">#include &lt;bits/stdc++.h&gt;
+#define LL long long
+using namespace std;
+LL n, m, k, p, T;
+//gragh beg
+struct edge&#123;
+    LL v, cs;
+    edge *nxt;
+    edge (const LL &amp;be, const LL &amp;ge, edge *de)&#123;
+        v = be, cs = ge, nxt = de;
+        return ;
+    &#125;
+&#125;*G[200000], *G_[200000];
+void del_g(edge **g, LL n)&#123;
+    for (LL i = 1;i &lt;= n;++ i)&#123;
+        for (edge *j = g[i], *k;j;k = j, j = j-&gt;nxt, delete(k));
+        g[i] = NULL;
+    &#125;
+    return ;
+&#125;
+//gragh end
+//dijkstra beg
+LL dis[200000];
+bool vis[200000], zero_1;
+struct qwq&#123;
+    LL v, dis;
+    bool operator &lt; (const qwq &amp;al)const&#123;
+        return dis &gt; al.dis;
+    &#125;
+&#125;;
+void dijkstra(LL s)&#123;
+    priority_queue&lt;qwq&gt; q;
+    q.push((qwq)&#123;1, 0&#125;);
+    while(q.size())&#123;
+        qwq al = q.top();
+        q.pop();
+        if (vis[al.v])
+            continue;
+        dis[al.v] = al.dis;
+        vis[al.v] = 1;
+        for (edge *i = G[al.v]; i; i = i-&gt;nxt)&#123;
+            if (vis[i-&gt;v])&#123;
+                if (i-&gt;v == 1 &amp;&amp; dis[al.v] + i-&gt;cs == 0)&#123;
+                    //node1 on a zero circle
+                    zero_1 = 1;
+                    return ;
+                &#125;
+                continue;
+            &#125;
+            q.push((qwq)&#123;i-&gt;v, al.dis + i-&gt;cs&#125;);
+        &#125;
+    &#125;
+    return ;
+&#125;
+//dijkstra end
+//dp
+LL dp[100010][60];
+bool sta[100010][60];
+LL meow(LL u, LL hp)&#123;
+    if (sta[u][hp])
+    //a zero circle on this road
+        return -1;
+    if (dp[u][hp] != -1)
+        return dp[u][hp];
+    sta[u][hp] = 1;
+    LL al = 0, hp_;
+    for (edge *i = G_[u];i;i = i-&gt;nxt)&#123;
+        hp_ = hp + dis[u] - i-&gt;cs - dis[i-&gt;v];
+        if (hp_ &lt; 0 || hp_ &gt; k)
+            continue;
+        LL tmp = meow(i-&gt;v, hp_);
+        if (tmp == -1)
+            return -1;
+        al = (al + tmp) % p;
+    &#125;
+    sta[u][hp] = 0;
+    return dp[u][hp] = al;
+&#125;
+//dp end
+int main ()&#123;
+    cin &gt;&gt; T;
+    while (T--)&#123;
+        //initialization
+        memset(dis, 0, sizeof(dis));
+        memset(vis, 0, sizeof(vis));
+        memset(dp, -1, sizeof(dp));
+        memset(sta, 0, sizeof(sta));
+        zero_1 = 0;
+        LL al, be, ge;
+        scanf(&quot;%lld%lld%lld%lld&quot;, &amp;n, &amp;m, &amp;k, &amp;p);
+        for (LL i = 1;i &lt;= m;++ i)&#123;
+            scanf(&quot;%lld%lld%lld&quot;, &amp;al, &amp;be, &amp;ge);
+            G[al] = new edge(be, ge, G[al]);
+            G_[be] = new edge(al, ge, G_[be]);
+        &#125;
+        //main
+        LL ans = 0;
+        dijkstra(1);
+        if (zero_1)&#123;
+            ans = -1;
+        &#125;
+        else&#123;
+            dp[1][0] = 1;
+            for (LL i = 0;i &lt;= k;++ i)&#123;
+                LL tmp = meow(n, i);
+                if (tmp == -1)&#123;
+                    ans = -1;
+                    break;
+                &#125;
+                ans = (ans + tmp) % p;
+            &#125;
+        &#125;
+        printf(&quot;%lld\n&quot;, ans);
+        //initialization
+        del_g(G, n);del_g(G_, n);
+    &#125;
+    return 0;
+&#125;
+</code></pre>
 <p>文结.</p>
 <p><img src="https://pics1.beautyyu.top/origin/IMG_20190616_120418_1.jpg"></p>
 
@@ -654,6 +806,15 @@
       <span class="post-meta-item-text">发表于</span>
 
       <time title="创建时间：2019-09-11 00:00:00" itemprop="dateCreated datePublished" datetime="2019-09-11T00:00:00+08:00">2019-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+        </span>
     </span>
 
   
@@ -765,6 +926,15 @@
       <span class="post-meta-item-text">发表于</span>
 
       <time title="创建时间：2019-05-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-28T00:00:00+08:00">2019-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+        </span>
     </span>
 
   
@@ -880,6 +1050,15 @@
 
       <time title="创建时间：2019-04-08 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-08T00:00:00+08:00">2019-04-08</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -978,6 +1157,15 @@
       <span class="post-meta-item-text">发表于</span>
 
       <time title="创建时间：2019-03-15 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-15T00:00:00+08:00">2019-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%88%9B%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">创作</span></a>
+        </span>
     </span>
 
   
@@ -1173,6 +1361,15 @@
 
       <time title="创建时间：2019-02-16 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-16T00:00:00+08:00">2019-02-16</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%88%9B%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">创作</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -1227,7 +1424,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2019/02/09/2019-2-9-%E7%99%BD%E6%97%A5%E6%A2%A619-2%E7%99%BD%E6%97%A5%E6%A2%A6/">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/12/31/2018-12-31-2018%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/custom-logo.jpg">
@@ -1244,7 +1441,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/02/09/2019-2-9-%E7%99%BD%E6%97%A5%E6%A2%A619-2%E7%99%BD%E6%97%A5%E6%A2%A6/" class="post-title-link" itemprop="url">白日梦19-2|白日梦</a>
+            <a href="/2018/12/31/2018-12-31-2018%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">2018年末总结</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1255,7 +1452,16 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-02-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-09T00:00:00+08:00">2019-02-09</time>
+      <time title="创建时间：2018-12-31 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-31T00:00:00+08:00">2018-12-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+        </span>
     </span>
 
   
@@ -1268,23 +1474,39 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>三. 我觉得生物命题人比孟德尔高到不知道哪里去了。</p>
+          <p>新年快乐。</p>
 <hr>
-<p>四. 我看见高大的钢筋伫立在灰蒙蒙的白雾中，或许只是烟尘吧</p>
-<p>裸露的灰白的水泥与钢筋相交错，混合形成几何式的结构体。 一模一样的高楼骨架整整齐齐地排列在道路一边，如同复制一样。道路另一边则是不一样但又差不多的另一套复制体。 </p>
-<p>我只无意地坐在中间的信号塔顶端鸟瞰。这种信号塔以及类似的电塔，四舍五入的话和埃菲尔长的也差不多。 </p>
-<p>唯一颜色不同的是一块大红展板，上书“xx建筑局祝大家新年快乐”，已经蒙上了一层灰尘。站在萧条的道路中央显得孤独。</p>
-<p> “还未开场就已失败” </p>
-<p>稍有尝试的人都明白，这种卫星城里的高楼，能否完工也只是不定数。</p>
+<p>最近介入了身边的一些纠纷，也面临自己工作上的一些麻烦。于是不禁开始思考这些棘手的问题。</p>
+<p>年初有一段时间里，和一些朋友一度不合，大多数涉及到了工作上的冲突。但是冷静下来之后，很快就会找到原因：从自己身上，从对方身上。渐渐就明白了，其实一场冲突从来不是一个人的事情，而是双方的错误共同导致的。</p>
+<p>所谓朋友，并不只是聊天吃饭发自拍而已。朋友意味着能在需要时帮助对方，对对方缺点的包容，以及能在对方损害自己时表示让步。工作上的冲突追究原因的话，和双方的性格缺陷往往脱不了干系。为了同一个目的导致双方分歧可双方都彼此没有恶意，那么坚持己见并不算好的选择。坚持己见不能达到自己的所有目的，但是适当的让步可以。</p>
+<p>那么这就可以化简为简单的选择题：自己目前所承受的损失和双方之间的关系以及其未来可能的好处，哪个更重要些？</p>
+<p>双方关系重要于一定量的损失，这个答案就是朋友二字所代表的含义了。</p>
+<p>那么，新的一年里希望有人愿意原谅我的错误，希望自己能够愿意原谅其他人。</p>
 <hr>
-<p>五. 钟表的指针划过零点。可惜并不像文学作品里描述的那样静悄悄 </p>
-<p>除夕夜就是这样子，不知道是精力过剩的年轻人还是什么样的人物喜欢在零点之后放烟花 </p>
-<p>我不讨厌烟花，如果它没那么吵的话。所谓可远观而不可亵玩，我大抵就是这样的想法。</p>
-<p>我喜欢“打上花火”或者“夜行少女”里边描述的烟花 那种烟花华丽而浪漫，是和烟尘与硝烟味无关的 </p>
-<p>要命的是，这些家伙放烟花是陆陆续续的，也就是从零点到一点到两点再到更晚，总之不让人安眠.虽然我也没打算在此之前睡就是了</p>
+<p>说到朋友和工作的话，那也说说社团吧</p>
+<p>我原先以为志趣相投的人聚在一起就算得上社团了。可实际上确实是这样的吗。所谓的“少数派”就是这样的一个团体。但是和社团比起来，它似乎少了些什么。</p>
+<p>社团是一个有独立主格的实体。这意味着它并不基于某些人际关系网。因此对社团的感情和对某些人的感情是独立的两样事物。</p>
+<p>对社团的感情，这是一样玄妙的东西。可能是一种类宗教性质的情感，包括信仰与热爱两部分。对它不知名的着迷，深陷其中的信仰，以及为之工作的热情。这就是比简单的人际小群体多出来的东西。</p>
+<p>而自从换届之后，突然间就意识到了一点：和普通社员比起来，社干多承担了一份责任。高一时的萌新只要玩的开心就行了，天大的事情有学长学姐顶着。突然间自己就变成了这个角色。为了社团和小高一的，自己不得不担起这份责任：而这份责任要求自己牺牲很多。担起责任的动力，就是上述的情感。</p>
+<p>那么，新的一年，希望微笙有一天能成为有台有面的大社团，希望漫研重新振作起来。</p>
 <hr>
-<p>九. 突然想起.晚自习读虞美人时总会条件反射地抬头.转念一想这个班级并没有人这么叫我.</p>
-<p><img src="https://pics1.beautyyu.top/origin/klQsJK.jpg"></p>
+<p>再谈谈学习。</p>
+<p>要说过去一年里的学习的话，不得不说是一塌糊涂。</p>
+<p>上半年里想着要好好学习文化课，先把竞赛放一放。当时为了期中考甚至放弃了去济南公费旅游。这一放就是一整个学期过去了。结果是文化课和竞赛双爆炸。</p>
+<p>接着从期末考后开始，就重新地投入了竞赛课程。我想我大概是热爱算法的。渐渐地产生了大的野心，希望能成为厉害的选手，希望能和名校的选手同台竞技。</p>
+<p>但是NOIp2018成为了一场可怕的灾难。我完全没有预料到会产生这样的局面。11月11日，耻辱退役。</p>
+<p>我不知道这次失败会困扰我多久。或许再过一两个月就会忘记吧，又或许会长久地记住它。</p>
+<p>但是更多的后悔实在无法改变什么。那么，此后的每一天，我都需要告诫自己，我已经是个文化课选手了。</p>
+<p>另一方面，我也已经做好了最坏的心理准备。很有可能我需要裸高考了。</p>
+<p>希望自己能找到面对文化课的热情。希望能像dalao一样积极面对文化课。</p>
+<hr>
+<p>人实在是健忘的生物。</p>
+<p>过去一年的事情，再早一些的事情，有些已经记不起来了，有些渐渐在记忆里模糊了，有些或许是自己不愿意记住。</p>
+<p>有时候会感到很悲哀，明明是那么重要的人那么重要的事情，为什么会忘记呢怎么可以忘记呢。</p>
+<p>不过所幸，连同这份悲哀也很容易被忘记，这倒好。</p>
+<hr>
+<p>那么，新的一年，希望成为被人需要的人，成为更优秀的人。</p>
+<p><img src="https://pics1.beautyyu.top/origin/klQnMQ.jpg"></p>
 
       
     </div>

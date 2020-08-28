@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/PwL1yR.jpg">
 <meta property="article:published_time" content="2018-09-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:24:19.755Z">
+<meta property="article:modified_time" content="2020-08-28T01:53:03.087Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="高精度">
@@ -150,17 +150,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -330,6 +330,15 @@
 
       <time title="创建时间：2018-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -353,8 +362,99 @@
 <p>不得不说高精度运算是很坑的算法,建议除了<code>构造函数</code>和重载<code>赋值符</code>之外所有成员函数都应该用<code>const</code>修饰</p>
 <p>以及亿进制下的输出也是一个很麻烦的事情…</p>
 <p>代码如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">big_int</span>&#123;</span></span><br><span class="line">        LL data[<span class="number">25000</span>],len;</span><br><span class="line">        big_int(<span class="keyword">char</span> *al)&#123;</span><br><span class="line">                LL al_len = <span class="built_in">strlen</span>(al),base = <span class="number">1</span>;</span><br><span class="line">                data[len = <span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (LL p = al_len - <span class="number">1</span>;p &gt;= <span class="number">0</span>;p --)&#123;</span><br><span class="line">                        <span class="keyword">if</span> (base &gt;= <span class="number">100000000</span>)</span><br><span class="line">                                ++ len,data[len] = <span class="number">0</span>,base = <span class="number">1</span>;</span><br><span class="line">                        data[len] += (al[p] - <span class="string">&#x27;0&#x27;</span>) * base;</span><br><span class="line">                        base *= <span class="number">10</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                len ++;</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span><span class="keyword">const</span></span>&#123;</span><br><span class="line">                LL len = <span class="keyword">this</span>-&gt;len;</span><br><span class="line">                <span class="keyword">if</span> (!len) &#123;</span><br><span class="line">                        <span class="built_in">cout</span> &lt;&lt;<span class="string">&quot;0\n&quot;</span>;</span><br><span class="line">                        <span class="keyword">return</span> ;</span><br><span class="line">                &#125;</span><br><span class="line">                len --;</span><br><span class="line">                LL b = <span class="number">10000000</span>;</span><br><span class="line">                <span class="keyword">while</span>((data[len] / b) == <span class="number">0</span>)</span><br><span class="line">                        b /= <span class="number">10</span>;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,data[len]);</span><br><span class="line">                <span class="built_in">string</span> out = <span class="string">&quot;&quot;</span>;</span><br><span class="line">                <span class="keyword">for</span> (LL i = len - <span class="number">1</span>;i &gt;= <span class="number">0</span>;-- i)&#123;</span><br><span class="line">                        LL b = <span class="number">10000000</span>,d = data[i];</span><br><span class="line">                        <span class="keyword">while</span>(b)&#123;</span><br><span class="line">                                out += d / b + <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                                d %= b;</span><br><span class="line">                                b /= <span class="number">10</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; out &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> big_int &amp;al)<span class="keyword">const</span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (len != al.len)</span><br><span class="line">                        <span class="keyword">return</span> len &lt; al.len;</span><br><span class="line">                <span class="keyword">for</span> (LL i = len - <span class="number">1</span>;i &gt;= <span class="number">0</span>;-- i)</span><br><span class="line">                        <span class="keyword">if</span> (data[i] != al.data[i])</span><br><span class="line">                                <span class="keyword">return</span> data[i] &lt; al.data[i];</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        big_int <span class="keyword">operator</span> -= (big_int &amp;al)&#123;</span><br><span class="line">                <span class="keyword">for</span> (LL i = <span class="number">0</span>;i &lt; al.len;++ i)</span><br><span class="line">                        data[i] -= al.data[i];</span><br><span class="line">                <span class="keyword">for</span> (LL i = <span class="number">0</span>;i &lt; len;++ i)</span><br><span class="line">                        <span class="keyword">if</span> (data[i] &lt; <span class="number">0</span>)</span><br><span class="line">                                data[i] += <span class="number">100000000</span>,</span><br><span class="line">                                data[i + <span class="number">1</span>] -= <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (data[-- len] == <span class="number">0</span> &amp;&amp; len &gt; <span class="number">0</span>);</span><br><span class="line">                len ++; </span><br><span class="line">                <span class="keyword">if</span> (len == <span class="number">1</span> &amp;&amp; data[<span class="number">0</span>] == <span class="number">0</span>)</span><br><span class="line">                        len = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">LL <span class="title">low_gcd</span><span class="params">(LL a,LL b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> b?low_gcd(b,a % b):a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> alpha[<span class="number">20000</span>],beta[<span class="number">20000</span>];</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s%s&quot;</span>,alpha,beta);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strlen</span>(alpha) &lt;= <span class="number">18</span> &amp;&amp; <span class="built_in">strlen</span>(beta) &lt;= <span class="number">18</span>)&#123;</span><br><span class="line">                LL al,be;</span><br><span class="line">                <span class="built_in">sscanf</span>(alpha,<span class="string">&quot;%lld&quot;</span>,&amp;al);</span><br><span class="line">                <span class="built_in">sscanf</span>(beta ,<span class="string">&quot;%lld&quot;</span>,&amp;be);</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; low_gcd(al,be);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">                big_int al = big_int(alpha),be = big_int(beta);</span><br><span class="line">                <span class="keyword">while</span> (al &lt; be || be &lt; al)&#123;</span><br><span class="line">                        <span class="keyword">if</span> (be &lt; al)</span><br><span class="line">                                al -= be;</span><br><span class="line">                        <span class="keyword">else</span></span><br><span class="line">                                be -= al;</span><br><span class="line">                &#125;</span><br><span class="line">                al.<span class="built_in">print</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;ctime&gt;
+#define LL long long
+using namespace std;
+struct big_int&#123;
+        LL data[25000],len;
+        big_int(char *al)&#123;
+                LL al_len = strlen(al),base = 1;
+                data[len = 0] = 0;
+                for (LL p = al_len - 1;p &gt;= 0;p --)&#123;
+                        if (base &gt;= 100000000)
+                                ++ len,data[len] = 0,base = 1;
+                        data[len] += (al[p] - &#39;0&#39;) * base;
+                        base *= 10;
+                &#125;
+                len ++;
+                return ;
+        &#125;
+        void print()const&#123;
+                LL len = this-&gt;len;
+                if (!len) &#123;
+                        cout &lt;&lt;&quot;0\n&quot;;
+                        return ;
+                &#125;
+                len --;
+                LL b = 10000000;
+                while((data[len] / b) == 0)
+                        b /= 10;
+                printf(&quot;%lld&quot;,data[len]);
+                string out = &quot;&quot;;
+                for (LL i = len - 1;i &gt;= 0;-- i)&#123;
+                        LL b = 10000000,d = data[i];
+                        while(b)&#123;
+                                out += d / b + &#39;0&#39;;
+                                d %= b;
+                                b /= 10;
+                        &#125;
+                &#125;
+                cout &lt;&lt; out &lt;&lt; endl;
+                return ;
+        &#125;
+        bool operator &lt; (const big_int &amp;al)const&#123;
+                if (len != al.len)
+                        return len &lt; al.len;
+                for (LL i = len - 1;i &gt;= 0;-- i)
+                        if (data[i] != al.data[i])
+                                return data[i] &lt; al.data[i];
+                return 0;
+        &#125;
+        big_int operator -= (big_int &amp;al)&#123;
+                for (LL i = 0;i &lt; al.len;++ i)
+                        data[i] -= al.data[i];
+                for (LL i = 0;i &lt; len;++ i)
+                        if (data[i] &lt; 0)
+                                data[i] += 100000000,
+                                data[i + 1] -= 1;
+                while (data[-- len] == 0 &amp;&amp; len &gt; 0);
+                len ++; 
+                if (len == 1 &amp;&amp; data[0] == 0)
+                        len = 0;
+                return *this;
+        &#125;
+&#125;;
+LL low_gcd(LL a,LL b)&#123;
+        return b?low_gcd(b,a % b):a;
+&#125;
+int main()&#123;
+        char alpha[20000],beta[20000];
+        scanf(&quot;%s%s&quot;,alpha,beta);
+        if (strlen(alpha) &lt;= 18 &amp;&amp; strlen(beta) &lt;= 18)&#123;
+                LL al,be;
+                sscanf(alpha,&quot;%lld&quot;,&amp;al);
+                sscanf(beta ,&quot;%lld&quot;,&amp;be);
+                cout &lt;&lt; low_gcd(al,be);
+        &#125;
+        else&#123;
+                big_int al = big_int(alpha),be = big_int(beta);
+                while (al &lt; be || be &lt; al)&#123;
+                        if (be &lt; al)
+                                al -= be;
+                        else
+                                be -= al;
+                &#125;
+                al.print();
+        &#125;
+        return 0;
+&#125;</code></pre>
 <p>文结</p>
 <p><img src="https://pics1.beautyyu.top/origin/PwL1yR.jpg"></p>
 

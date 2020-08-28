@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/F0Kkp6.jpg">
 <meta property="og:image" content="https://pics1.beautyyu.top/origin/PwLfpQ.jpg">
 <meta property="article:published_time" content="2018-12-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-25T14:05:03.499Z">
+<meta property="article:modified_time" content="2020-08-28T01:57:03.877Z">
 <meta property="article:author" content="BeautyYu言醴">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="贪心">
@@ -151,17 +151,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -331,6 +331,15 @@
 
       <time title="创建时间：2018-12-17 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-17T00:00:00+08:00">2018-12-17</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -361,8 +370,45 @@
 </blockquote>
 <p>原不等式两边同时消去$c_{i-2}+b_{i-1}+b_{i}$<br>$$<br>max(\sum_{j=1}^{i-1}a_j+b_{i-1}+b_i,\sum_{j=1}^ia_j+b_i)&lt;max(\sum_{j=1}^{i-2}a_j+a_i+b_i+b_{i-1},\sum_{j=1}^{i}a_j+b_{i-1})<br>$$<br>两边同时减去$\sum_{j=1}^ia_j$<br>$$<br>max(-a_i+b_{i-1}+b_i,b_i)&lt;max(-a_{i-1}+b_i+b_{i-1},b_{i-1})<br>$$<br>两边同时减去$(b_i+b_{i-1})$<br>$$<br>max(-a_i,-b_{i-1})&lt;max(-a_{i-1},-b_i)<br>$$<br>去负号<br>$$<br>min(a_i,b_{i-1})&gt;min(a_{i-1},b_i)<br>$$<br>至此,我们得到了一个形式较为简单的,只与相邻两项有关的不等式.根据这个不等式进行排序即可.</p>
 <p>完整代码如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">LL n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pwp</span>&#123;</span></span><br><span class="line">        LL a,b;</span><br><span class="line">        <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> pwp &amp;qwq)<span class="keyword">const</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">min</span>(qwq.a,b) &gt; <span class="built_in">min</span>(a,qwq.b);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;arr[<span class="number">40000</span>];</span><br><span class="line"><span class="comment">//Both overloading operator function and defining a compare function are correct</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> pwp &amp;al,<span class="keyword">const</span> pwp &amp;be)</span></span>&#123;</span><br><span class="line">	<span class="comment">//&quot;al&quot; is short for &quot;alpha&quot;,&quot;be&quot; is short for &quot;beta&quot;</span></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">min</span>(be.a,al.b) &gt; <span class="built_in">min</span>(al.a,be.b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        LL T;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">        arr[<span class="number">0</span>] = (pwp)&#123;<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">while</span>(T --)&#123;</span><br><span class="line">                LL ans = <span class="number">0</span>,sum_ = <span class="number">0</span>;</span><br><span class="line">                <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">                <span class="keyword">for</span> (LL i = <span class="number">1</span>;i &lt;= n;++ i)</span><br><span class="line">                        <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>,&amp;arr[i].a,&amp;arr[i].b);</span><br><span class="line">                sort(arr + <span class="number">1</span>,arr + <span class="number">1</span> + n);</span><br><span class="line">                <span class="keyword">for</span> (LL i = <span class="number">1</span>;i &lt;= n;++ i)&#123;</span><br><span class="line">                        sum_ += arr[i].a;</span><br><span class="line">                        ans = <span class="built_in">max</span>(ans,sum_) + arr[i].b; </span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,ans);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#define LL long long
+using namespace std;
+LL n;
+struct pwp&#123;
+        LL a,b;
+        bool operator &lt; (const pwp &amp;qwq)const&#123;
+                return min(qwq.a,b) &gt; min(a,qwq.b);
+        &#125;
+&#125;arr[40000];
+//Both overloading operator function and defining a compare function are correct
+bool cmp(const pwp &amp;al,const pwp &amp;be)&#123;
+    //&quot;al&quot; is short for &quot;alpha&quot;,&quot;be&quot; is short for &quot;beta&quot;
+    return min(be.a,al.b) &gt; min(al.a,be.b);
+&#125;
+int main ()&#123;
+        LL T;
+        cin &gt;&gt; T;
+        arr[0] = (pwp)&#123;0,0&#125;;
+        while(T --)&#123;
+                LL ans = 0,sum_ = 0;
+                cin &gt;&gt; n;
+                for (LL i = 1;i &lt;= n;++ i)
+                        scanf(&quot;%lld%lld&quot;,&amp;arr[i].a,&amp;arr[i].b);
+                sort(arr + 1,arr + 1 + n);
+                for (LL i = 1;i &lt;= n;++ i)&#123;
+                        sum_ += arr[i].a;
+                        ans = max(ans,sum_) + arr[i].b; 
+                &#125;
+                printf(&quot;%lld\n&quot;,ans);
+        &#125;
+        return 0;
+&#125;</code></pre>
 <hr>
 <p>考虑另一点:原式为什么<strong>不是</strong>$f_1\leq f_2$?</p>
 <blockquote>
