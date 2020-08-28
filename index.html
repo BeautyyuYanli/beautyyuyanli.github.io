@@ -525,23 +525,23 @@
 <p>再看看缩点问题: 它实质上就是求边双. 一个边双可以缩成一个点, 缩完点之后的图形中每一条边都是割边.</p>
 <p>于是要研究缩点和割点的区别, 就是研究点双和边双的区别. 当燃啦, 从定义上看两者就不一样.</p>
 <h2 id="那我能不能整个图形-它是个边双而不是点双？"><a href="#那我能不能整个图形-它是个边双而不是点双？" class="headerlink" title="那我能不能整个图形 它是个边双而不是点双？"></a>那我能不能整个图形 它是个边双而不是点双？</h2><p>这个图形不难构造, 它长这个样子</p>
-<p><img src="https://pics1.beautyyu.top/pppp1.jpg"></p>
+<p><img src="https://pics1.beautyyu.top/origin/pppp1.jpg"></p>
 <p>嗯 这个图中${1,2,3,4}$和${4,5,6,7}$这两个分量, 它们就是个普通的环, 所以既是点双, 又是边双.</p>
 <p>如果两个分量由一个点$5$连接, 通过这个点 ${1,2,3,4,5,6,7}$连接成了一个大的边双, 但是它并不是个点双, 因为这个连接点$5$本身就成了那个割点.</p>
 <p>更普通地说, 如果两个边双之间<strong>有至少一个</strong>点连接两者, 那么就可以合并成一个大的边双; 如果两个点双之间<strong>有至少两个</strong>点连接两者, 那么就可一合并成一个大的点双. 但如果<strong>有且只有一个</strong>点连接两个点双, 情况就会变成: 两者形成了一个大的边双, 但这个边双并不是点双.</p>
 <p>我不清楚这个图有没有名字, 总之我管它叫<em>糖葫芦图</em></p>
-<p><img src="https://pics1.beautyyu.top/314oFYDWjRL._SY355_.jpg"></p>
+<p><img src="https://pics1.beautyyu.top/origin/314oFYDWjRL._SY355_.jpg"></p>
 <p>啊放错图了. 应该是这个</p>
-<p><img src="https://pics1.beautyyu.top/sdgsefd.jpg"></p>
+<p><img src="https://pics1.beautyyu.top/origin/sdgsefd.jpg"></p>
 <h2 id="言归正传"><a href="#言归正传" class="headerlink" title="言归正传"></a>言归正传</h2><p>为什么用$low[v]$更新$low[u]$的写法能过缩点不能过割点? 还是看这张图</p>
-<p><img src="https://pics1.beautyyu.top/pppp1.jpg"></p>
+<p><img src="https://pics1.beautyyu.top/origin/pppp1.jpg"></p>
 <p>设$1$是出发点</p>
 <p>如果依照$dfn[v]$来更新$low[u]$, 那么这张图跑一遍Tarjan会得到$low[4]=1,low[7]=dfn[4]$, 也就是说该算法会得到”$1$和$4$在一个连通分量中, $4$和$7$在一个连通分量中”. 不论我们所求是边双还是点双, 这种说法都是没错的.</p>
 <p>但如果如果依照$low[v]$来更新$low[u]$, 那么这张图跑一遍Tarjan会得到$low[7]=low[4]=1$, 也就是说该算法会得到”$1$和$4$和$7$在一个连通分量中”, 但事实上它们三个在同一个边双中, 却不是在同一个点双中, 所以求缩点时这种算法是正确的, 求割点时就是错误的.</p>
 <hr>
 <p>综上所述, 之所以这种写法在割点问题和缩点问题中的表现不同, 原因就在于点双和边双的传递性不同.</p>
 <p>文结于CSP-J/S2019day1.</p>
-<p><img src="https://pics1.beautyyu.top/25b5b9f8118a2b1f1ccdbbbbff30ceb2.jpg"></p>
+<p><img src="https://pics1.beautyyu.top/origin/25b5b9f8118a2b1f1ccdbbbbff30ceb2.jpg"></p>
 
       
     </div>
@@ -1162,12 +1162,12 @@ int main ()&#123;
     MathJax.texReset();
     MathJax.typeset();
   }
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
     
 
   
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>
