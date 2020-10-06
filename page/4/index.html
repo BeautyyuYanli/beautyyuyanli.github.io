@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -273,6 +273,9 @@
         <li class="links-of-blogroll-item">
           <a href="http://www.juruoyun.top/" title="http:&#x2F;&#x2F;www.juruoyun.top" rel="noopener" target="_blank">蒟蒻云</a>
         </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.lenva.tech/" title="https:&#x2F;&#x2F;blog.lenva.tech" rel="noopener" target="_blank">过期薯条</a>
+        </li>
     </ul>
   </div>
 
@@ -301,166 +304,6 @@
       
 
       
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/10/16/2018-10-16-%E5%8D%9A%E5%BC%88%E8%AE%BA,SG%E5%87%BD%E6%95%B0%E5%92%8CNim%E6%B8%B8%E6%88%8F%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
-      <meta itemprop="name" content="BeautyYu言醴">
-      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="银河美术馆-Beautyyu">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/16/2018-10-16-%E5%8D%9A%E5%BC%88%E8%AE%BA,SG%E5%87%BD%E6%95%B0%E5%92%8CNim%E6%B8%B8%E6%88%8F%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">博弈论,SG函数和Nim游戏|笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-10-16 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-16T00:00:00+08:00">2018-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><p>并不是NOIp常考的内容,不过还是稍微学了下.</p>
-<hr>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>我们定义几个概念</p>
-<ul>
-<li><code>N状态(next position)</code>表示一个状态先手必胜</li>
-<li><code>P状态(previous position)</code>表示一个状态先手必败</li>
-</ul>
-<p>根据博弈规则,我们容易发现几个规律</p>
-<ul>
-<li>一个状态不是P就是N</li>
-<li>游戏结束时的状态为P</li>
-<li>N状态有一个后继状态为P,这样先手只要转移到这个状态就能使对手必败</li>
-<li>P状态所有后继状态都是N,先手无论如何转移对手都必胜</li>
-</ul>
-<p>接着我们定义一个特殊的函数<code>SG函数</code></p>
-<p>这个函数是一个<strong>从<code>游戏状态集</code>到<code>非负整数集</code>的映射</strong></p>
-<p>它的定义利用一个特殊运算$mex$.$mex(s)$表示<strong>不属于非负整数集s的最小非负整数</strong></p>
-<p>例如$mex({0,1,2,3})=4$,$mex({0,1,3,4})=2$</p>
-<p>$SG$函数通过递归定义:</p>
-<ul>
-<li>若状态$x$是P状态,$SG(x)=0$</li>
-<li>若状态$x$是N状态,设$x$的所有后继状态为$y_1,y_2,y_3\dots y_n$,则$SG(x)=mex({SG(y_1),SG(y_2),SG(y_3)\dots SG(y_n)})$</li>
-</ul>
-<p><em>那么,$SG$函数的意义何在?</em></p>
-<h2 id="Nim游戏"><a href="#Nim游戏" class="headerlink" title="Nim游戏"></a>Nim游戏</h2><p><code>Nim游戏</code>是指这样一个游戏</p>
-<blockquote>
-<p>给一个有$n$颗石子的石堆,两人轮流取若干颗石子,最后取完所有石子的人获胜</p>
-</blockquote>
-<p>这是一个极简单的一维<code>Nim游戏</code></p>
-<p>很明显,$n=0$时先手必败,否则先手必胜</p>
-<p>接下来我们从上述几个概念的角度理解这个游戏.</p>
-<ul>
-<li>状态:<strong>一维<code>Nim游戏</code>的状态可以用一个非负整数表示</strong>,即石子数量</li>
-<li>N和P:设状态为$x$,则$x=0$时为P状态,否则就是N状态</li>
-<li>SG:设状态$y$是当前状态$x$的后继状态,显然$y$可以是任何小于$x$的非负整数.根据$SG$函数的定义,<strong>我们发现$SG(x)=x$</strong></li>
-</ul>
-<p>因此,笔者认为$SG$函数缘于<code>Nim</code>游戏</p>
-<p><em>如何计算复杂状态的$SG$值呢?</em></p>
-<h2 id="SG-函数的运算"><a href="#SG-函数的运算" class="headerlink" title="$SG$函数的运算"></a>$SG$函数的运算</h2><blockquote>
-<p>给若$n$个有$A_i$颗石子的石堆,两人轮流取若干颗石子,最后取完所有石子的人获胜</p>
-</blockquote>
-<p>这是一个多维的<code>Nim游戏</code></p>
-<ul>
-<li>状态:游戏状态可以用一个非负整数集$s={x_1,x_2\dots x_n}$来表示.</li>
-<li>N和P:$s={0,0\dots 0}$是一个P状态</li>
-</ul>
-<p><em>其它状态的$SG$怎么求呢?</em></p>
-<p>接下来定义<code>Nim</code>游戏中$SG$函数的运算规则:</p>
-<h3 id="Bouton’s-Theorem"><a href="#Bouton’s-Theorem" class="headerlink" title="Bouton’s Theorem"></a>Bouton’s Theorem</h3><p>首先我们给出结论:</p>
-<p>对于一个状态$s$,$SG(s)=x_1\ xor\ x_2\ xor… xor\ x_n$</p>
-<p>接下来我们归纳证明这个结论的正确性:</p>
-<p>根据游戏规则,设状态$s_1={x_1,x_2,\dots ,x_n}$有一个后继状态$s_2={x_1-m,x_2,\dots x_n}$</p>
-<p>$SG(s_2)$</p>
-<p>$=(x_1-m)xor\ x_2\ xor\dots xor\ x_n$</p>
-<p>$=(x_1-m)xor\ x_2\ xor\dots xor\ x_n\ xor\ x_1\ xor\ x_1$</p>
-<p>$=(x_1-m)xor\ SG(s_1)xor\ x_1$</p>
-<h4 id="1-SG-s-1-0-s-1-是P状态"><a href="#1-SG-s-1-0-s-1-是P状态" class="headerlink" title="1.$SG(s_1)=0,s_1$是P状态"></a>1.$SG(s_1)=0,s_1$是P状态</h4><p>因为$(x_1-m)\neq x_1$,所以$SG(s_2)\neq SG(s_1)\neq 0$,$s_2$是N状态</p>
-<p>同理得$s_1$的其它所有后继状态都是N状态.满足博弈规则</p>
-<h4 id="2-SG-s-1-neq-0-s-1-是N状态"><a href="#2-SG-s-1-neq-0-s-1-是N状态" class="headerlink" title="2.$SG(s_1)\neq 0,s_1$ 是N状态"></a>2.$SG(s_1)\neq 0,s_1$ 是N状态</h4><p>根据博弈规则,$s_1$一定有个后继状态$SG(s_i)=0$,也就是一定存在$x_j$满足:</p>
-<p>$SG(s_i)=(x_j-m)xor\ SG(s_1)xor\ x_j=0$</p>
-<p>即:</p>
-<p>$x_j-m=SG(s_1)xor\ x_j$</p>
-<p>因为一定存在$x_j$,其二进制最高位和$SG(s_1)$的二进制最高位相同(否则无法得到$SG(s_1)$最高位上的$1$)</p>
-<p>所以$SG(s_1)xor\ x_j$的这个位置上一定为$0$,则一定$x_j&gt;SG(s_1)xor\ x_j$,因此一定存在$m$满足上式</p>
-<p>由此我们简单证明了<code>Bouton&#39;s Theorem</code>:在<code>Nim</code>游戏中,$SG(s)=x_1\ xor\ x_2\ xor… xor\ x_n$</p>
-<h2 id="推广至一般博弈游戏"><a href="#推广至一般博弈游戏" class="headerlink" title="推广至一般博弈游戏"></a>推广至一般博弈游戏</h2><p><strong>$SG$函数就是一维<code>Nim游戏</code></strong></p>
-<p>根据$SG$函数的定义$SG(x)=mex({SG(y_1),SG(y_2),\dots ,SG(y_n)})$,我们得到$SG$函数的性质:</p>
-<p><strong>若$SG(y)&lt;SG(x)$,那么状态$x$一定可以转移到状态$y$</strong></p>
-<p>这和一维<code>Nim游戏</code>完全相同</p>
-<p>如果对于更复杂的游戏,我们计算出每个状态的$SG$值,那么我们就把这个游戏变成了一个一维<code>Nim</code></p>
-<p>而N/P状态规律就是:$SG(x)=0$时状态$x$为P,否则状态为N</p>
-<p><em>那么对于复杂游戏,$SG$函数又有什么运算规则呢?</em></p>
-<h3 id="Sprague-Grundy-Therem"><a href="#Sprague-Grundy-Therem" class="headerlink" title="Sprague-Grundy Therem"></a>Sprague-Grundy Therem</h3><p>若复杂状态$s$可以看作若干个互不干涉的简单状态$x_1,x_2\dots x_n$的合成,那么:</p>
-<p>$SG(s)=SG(x_1)xorSG(x_2)xor\dots xorSG(x_n)$</p>
-<p>这实际上是对<code>Bouton&#39;s Theorem</code>的推广</p>
-<ul>
-<li>对于<code>Nim游戏</code>:$SG(s)=x_1\ xor\ x_2\ xor… xor\ x_n$</li>
-<li>对于一维<code>Nim</code>游戏:$SG(x)=x$</li>
-</ul>
-<p>类比<code>Bouton&#39;s Theorem</code>,我们可以用同样的方式证明<code>Sprague-Grundy Therem</code></p>
-<h2 id="综上所述"><a href="#综上所述" class="headerlink" title="综上所述"></a>综上所述</h2><p>求解博弈论问题的一般步骤是</p>
-<ol>
-<li>将复杂的博弈问题分解成一个个独立的简单博弈问题</li>
-<li>通过定义递归求得简单状态的$SG$函数</li>
-<li>通过<code>Sprague-Grundy Therem</code>将其合并成复杂状态的$SG$函数</li>
-</ol>
-<p>$SG$函数源于<code>Nim</code>又高于<code>Nim</code>,它是利用<code>Nim</code>游戏的性质构造出来的函数,目的是把一般博弈问题都当成<code>Nim</code>求解</p>
-<p>文结.</p>
-<p>文章参考<a target="_blank" rel="noopener" href="http://www.cnblogs.com/Mathics/p/3948482.html">Estimator的博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -1023,6 +866,184 @@ int main()&#123;
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/09/04/2018-9-04-SDOI2009_SuperGCD%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/09/04/2018-9-04-SDOI2009_SuperGCD%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">SDOI2009_SuperGCD|题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一道恶心人的毒瘤题:高精度gcd</p>
+<p>注意到,<strong>在高精度运算中取模是通过重复相减实现的</strong></p>
+<p>所以对于高精度gcd,<strong>辗转相除法和更相减损术是一样的</strong></p>
+<p>那档燃是写<strong>更相减损术</strong>啦</p>
+<p>这毒瘤题还卡常,所以就搞了几个小把戏:</p>
+<ol>
+<li>把高精度减法直接重载为<code>-=</code></li>
+<li>采取亿进制(事实上甚至可以写成万亿进制)</li>
+</ol>
+<p>不得不说高精度运算是很坑的算法,建议除了<code>构造函数</code>和重载<code>赋值符</code>之外所有成员函数都应该用<code>const</code>修饰</p>
+<p>以及亿进制下的输出也是一个很麻烦的事情…</p>
+<p>代码如下</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;ctime&gt;
+#define LL long long
+using namespace std;
+struct big_int&#123;
+        LL data[25000],len;
+        big_int(char *al)&#123;
+                LL al_len &#x3D; strlen(al),base &#x3D; 1;
+                data[len &#x3D; 0] &#x3D; 0;
+                for (LL p &#x3D; al_len - 1;p &gt;&#x3D; 0;p --)&#123;
+                        if (base &gt;&#x3D; 100000000)
+                                ++ len,data[len] &#x3D; 0,base &#x3D; 1;
+                        data[len] +&#x3D; (al[p] - &#39;0&#39;) * base;
+                        base *&#x3D; 10;
+                &#125;
+                len ++;
+                return ;
+        &#125;
+        void print()const&#123;
+                LL len &#x3D; this-&gt;len;
+                if (!len) &#123;
+                        cout &lt;&lt;&quot;0\n&quot;;
+                        return ;
+                &#125;
+                len --;
+                LL b &#x3D; 10000000;
+                while((data[len] &#x2F; b) &#x3D;&#x3D; 0)
+                        b &#x2F;&#x3D; 10;
+                printf(&quot;%lld&quot;,data[len]);
+                string out &#x3D; &quot;&quot;;
+                for (LL i &#x3D; len - 1;i &gt;&#x3D; 0;-- i)&#123;
+                        LL b &#x3D; 10000000,d &#x3D; data[i];
+                        while(b)&#123;
+                                out +&#x3D; d &#x2F; b + &#39;0&#39;;
+                                d %&#x3D; b;
+                                b &#x2F;&#x3D; 10;
+                        &#125;
+                &#125;
+                cout &lt;&lt; out &lt;&lt; endl;
+                return ;
+        &#125;
+        bool operator &lt; (const big_int &amp;al)const&#123;
+                if (len !&#x3D; al.len)
+                        return len &lt; al.len;
+                for (LL i &#x3D; len - 1;i &gt;&#x3D; 0;-- i)
+                        if (data[i] !&#x3D; al.data[i])
+                                return data[i] &lt; al.data[i];
+                return 0;
+        &#125;
+        big_int operator -&#x3D; (big_int &amp;al)&#123;
+                for (LL i &#x3D; 0;i &lt; al.len;++ i)
+                        data[i] -&#x3D; al.data[i];
+                for (LL i &#x3D; 0;i &lt; len;++ i)
+                        if (data[i] &lt; 0)
+                                data[i] +&#x3D; 100000000,
+                                data[i + 1] -&#x3D; 1;
+                while (data[-- len] &#x3D;&#x3D; 0 &amp;&amp; len &gt; 0);
+                len ++; 
+                if (len &#x3D;&#x3D; 1 &amp;&amp; data[0] &#x3D;&#x3D; 0)
+                        len &#x3D; 0;
+                return *this;
+        &#125;
+&#125;;
+LL low_gcd(LL a,LL b)&#123;
+        return b?low_gcd(b,a % b):a;
+&#125;
+int main()&#123;
+        char alpha[20000],beta[20000];
+        scanf(&quot;%s%s&quot;,alpha,beta);
+        if (strlen(alpha) &lt;&#x3D; 18 &amp;&amp; strlen(beta) &lt;&#x3D; 18)&#123;
+                LL al,be;
+                sscanf(alpha,&quot;%lld&quot;,&amp;al);
+                sscanf(beta ,&quot;%lld&quot;,&amp;be);
+                cout &lt;&lt; low_gcd(al,be);
+        &#125;
+        else&#123;
+                big_int al &#x3D; big_int(alpha),be &#x3D; big_int(beta);
+                while (al &lt; be || be &lt; al)&#123;
+                        if (be &lt; al)
+                                al -&#x3D; be;
+                        else
+                                be -&#x3D; al;
+                &#125;
+                al.print();
+        &#125;
+        return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>文结</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1156,12 +1177,12 @@ int main()&#123;
     MathJax.texReset();
     MathJax.typeset();
   }
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
     
 
   
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

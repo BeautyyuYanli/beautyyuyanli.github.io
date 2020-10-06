@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -273,6 +273,9 @@
         <li class="links-of-blogroll-item">
           <a href="http://www.juruoyun.top/" title="http:&#x2F;&#x2F;www.juruoyun.top" rel="noopener" target="_blank">蒟蒻云</a>
         </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.lenva.tech/" title="https:&#x2F;&#x2F;blog.lenva.tech" rel="noopener" target="_blank">过期薯条</a>
+        </li>
     </ul>
   </div>
 
@@ -301,137 +304,6 @@
       
 
       
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/03/11/2018-3-11-bzoj3969-LowPower/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
-      <meta itemprop="name" content="BeautyYu言醴">
-      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="银河美术馆-Beautyyu">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/11/2018-3-11-bzoj3969-LowPower/" class="post-title-link" itemprop="url">bzoj3969 LowPower|题解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-03-11 12:12:12" itemprop="dateCreated datePublished" datetime="2018-03-11T12:12:12+08:00">2018-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>题意简述:</p>
-<blockquote>
-<p>有n个机器，每个机器有2个芯片，每个芯片可以放k个电池。<br>  每个芯片能量是k个电池的能量的最小值。<br>  两个芯片的能量之差越小，这个机器就工作的越好。<br>  现在有2nk个电池，已知它们的能量，我们要把它们放在n个机器上的芯片上，<br>  使得所有机器的能量之差的最大值最小</p>
-</blockquote>
-<p>自然,求解最大值最小问题应当用二分实现.主程序很容易就能写出来了</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int n,k,m;
-int arr[1000005];
-int main ()&#123;
-    cin &gt;&gt; n&gt;&gt;k;
-    m &#x3D; ((n * k) &lt;&lt; 1);
-    for (int i &#x3D; 1;i &lt;&#x3D; m;++ i)&#123;
-        scanf(&quot;%d&quot;,&amp;arr[i]);
-    &#125;
-    sort(arr + 1,arr + 1 + m);
-    int l &#x3D; 0,r &#x3D; arr[m] - arr[1];
-    while (l &lt; r)&#123;
-        int mid &#x3D; l + ((r - l) &gt;&gt; 1);
-        if (!canit(mid))
-            l &#x3D; mid + 1;
-        else r &#x3D; mid;
-    &#125;
-    cout &lt;&lt; l;
-    return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>重点就在于<code>check</code>函数的实现</strong></p>
-<p><strong>能否让每一组芯片差值都小于限定值t呢?</strong></p>
-<p>此前我们要先给电池分配制定一个<code>最优策略</code>,这个策略的分配方式一定能使<strong>满足约束的机器尽量多</strong></p>
-<p>而进一步观察还可以发现:对于一颗芯片的k颗电池,只有最小的那颗电池可以决定一个方案的优度,我们称之为<code>有效电池</code>,而剩下的k-1颗电池只不过是用于”凑数”的而已,我们称之为<code>填充电池</code>.不同的两颗芯片交换<code>填充电池</code>(假如它们比<code>有用电池</code>大的话),对结果是没有影响的</p>
-<p>那么问题可以解释为:</p>
-<blockquote>
-<p>一个满足约束t的有用电池分配方案,是否有足够的填充电池使这个方案实现??</p>
-</blockquote>
-<p><strong>那么就来分配有用电池</strong></p>
-<p>一个<code>有用电池</code>应当是一组k个电池中最小的,因此理应从小到大分配有用电池</p>
-<p>而一组芯片的能量差最小,这组芯片的两颗<code>有用电池</code>应当是相邻的(当然事先应该为电池按能量排序)</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int j &#x3D; 1;&#x2F;&#x2F;为第j组芯片寻找有用电池
-int cnt &#x3D; 0;&#x2F;&#x2F;记录当前所需的额外填充电池
-for (int i &#x3D; 1;i &lt;&#x3D; 2*n*k;++ i)&#123;
-    if (energy[i + 1] - energy[i] &lt;&#x3D; t)&#x2F;&#x2F;假如这组电池满足约束,可以作为有用电池
-        ++ j,cnt +&#x3D; 2 * (k - 1);&#x2F;&#x2F;为这组芯片分配k-1个填充电池,并为下一组芯片寻找有用电池
-    else
-        cnt --;&#x2F;&#x2F;假如这组电池不满足约束,那第i颗电池永远也没有机会成为有用电池了.但它还可以发光发热--为之前的有用电池充当填充电池(注意这些有用电池一定比第i颗电池能量小,因为它们已经按能量排序了).那么有了这位&quot;志愿者&quot;,我们就可以省下一颗额外填充电池
-    if (j &gt;&#x3D; n) return 1;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>注意:如果分配如上述那样顺利的话,这个方案就是成立的–一颗电池要么作为<code>有用电池</code>,要么作为<code>填充电池</code>,总之没有”永久废弃”的,而<strong>题目保证了有恰好2nk颗电池,如果每颗电池都被用到,那这些电池当然就会正好用完.所以这个方案就是成立的</strong></p>
-<p>那么反过来,方案不成立是什么情况?<strong>出现了”永久废弃”的电池</strong></p>
-<p>什么情况下第i颗电池连”别人的填充电池”都无法做到?<strong>如果此前的有用电池没有耗费任何一颗<code>额外填充电池</code>,那么第i颗电池也就没办法去替代节省一颗<code>额外填充电池</code>,那么它就被永久废弃了.</strong></p>
-<p>于是完整的<code>check</code>函数如下(和上面那份代码实现方式不太一样,不过函数命名的意义是相同的)</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">bool canit(const int &amp;t)&#123;
-    int cnt &#x3D; 0,i &#x3D; 1;
-    for (int j &#x3D; 1;j &lt;&#x3D; n;++ j)&#123;
-        while (cnt &gt;&#x3D; 0 &amp;&amp; arr[i + 1] - arr[i] &gt; t) ++i,--cnt;
-        if (cnt &lt; 0) return 0; &#x2F;&#x2F;一旦没有额外填充电池,就说明出现了永久废弃电池,这种方案就不成立了
-        cnt +&#x3D; ((k - 1) &lt;&lt; 1);
-        i +&#x3D; 2;
-    &#125;
-    return 1;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -966,6 +838,125 @@ int main ()&#123;
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/01/30/2018-1-30-luogu1433ChiNaiLao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/30/2018-1-30-luogu1433ChiNaiLao/" class="post-title-link" itemprop="url">luogu1433吃奶酪|题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-30 17:30:11" itemprop="dateCreated datePublished" datetime="2018-01-30T17:30:11+08:00">2018-01-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>##看楼下的dalao都用了奇妙的操作</p>
+<p>菜鸡啥也不会 只能想办法剪剪枝了<br>（勉强还是ac了<br>首先 通过观察可知这题其实是在求全排列<br><strong>对于所有的排列方式 求出最小花费</strong><br>我习惯通过swap的交换来实现全排列<br>此外就是 <strong><em>当当前花费已经大于已知的最佳答案 即减去这条枝</em></strong> 这样一个简单的剪枝<br>而这个剪枝在 <strong><em>尽快找到一个较优解</em></strong> 的情况下可以剪去更多的废枝<br>所以在开始搜索前通过**<em>距离原点的远近**</em>排序 可以稍微地“尽快找最优解”（虽然这有点玄学 我解释不了 但对于这题确实有效）</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;cstdlib&gt;
+#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;ctime&gt;
+#include &lt;cmath&gt;
+using namespace std;
+struct cheeseNode&#123;
+    double x,y;
+&#125;chee[16];
+int n;
+double ans &#x3D; 2100000000.0;
+double cou_dis(cheeseNode&amp; al,cheeseNode&amp; be)&#123;
+     return sqrt((al.x - be.x)*(al.x - be.x)+(al.y - be.y)*(al.y - be.y));
+&#125;
+void dfs(int handle,double dis)&#123;
+    if (handle &gt; n)&#123;
+        ans &#x3D; min(ans,dis);
+        return;
+    &#125;
+    if (dis &gt;&#x3D; ans) return;
+    for (int i &#x3D; handle;i &lt;&#x3D; n;++ i)&#123;
+        swap(chee[i],chee[handle]);
+        dfs(handle + 1,dis + cou_dis(chee[handle],chee[handle - 1]));
+        swap(chee[i],chee[handle]);
+    &#125;
+    return ;
+&#125;
+bool cmp (cheeseNode al,cheeseNode be)&#123;
+    return ((al.x * al.x + al.y * al.y) &lt; (be.x * be.x + be.y * be.y));
+&#125;
+int main ()&#123;
+    &#x2F;&#x2F; freopen (&quot;workbroad.in&quot;,&quot;r&quot;,stdin);
+    &#x2F;&#x2F; freopen (&quot;workbroad.out&quot;,&quot;w&quot;,stdout);
+    cin &gt;&gt; n;
+    double al,be;
+    for (int i &#x3D; 1;i &lt;&#x3D; n;++ i)&#123;
+        scanf(&quot;%lf%lf&quot;,&amp;al,&amp;be);
+        chee[i] &#x3D; (cheeseNode)&#123;al,be&#125;;
+    &#125;
+    sort(chee + 1,chee + n + 1,cmp);
+    dfs(1,0);
+    printf(&quot;%.2lf&quot;,ans);
+    return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1099,12 +1090,12 @@ int main ()&#123;
     MathJax.texReset();
     MathJax.typeset();
   }
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
     
 
   
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

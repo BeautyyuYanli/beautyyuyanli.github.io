@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -273,6 +273,9 @@
         <li class="links-of-blogroll-item">
           <a href="http://www.juruoyun.top/" title="http:&#x2F;&#x2F;www.juruoyun.top" rel="noopener" target="_blank">蒟蒻云</a>
         </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.lenva.tech/" title="https:&#x2F;&#x2F;blog.lenva.tech" rel="noopener" target="_blank">过期薯条</a>
+        </li>
     </ul>
   </div>
 
@@ -301,125 +304,6 @@
       
 
       
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/01/30/2018-1-30-luogu1433ChiNaiLao/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
-      <meta itemprop="name" content="BeautyYu言醴">
-      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="银河美术馆-Beautyyu">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/30/2018-1-30-luogu1433ChiNaiLao/" class="post-title-link" itemprop="url">luogu1433吃奶酪|题解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-01-30 17:30:11" itemprop="dateCreated datePublished" datetime="2018-01-30T17:30:11+08:00">2018-01-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>##看楼下的dalao都用了奇妙的操作</p>
-<p>菜鸡啥也不会 只能想办法剪剪枝了<br>（勉强还是ac了<br>首先 通过观察可知这题其实是在求全排列<br><strong>对于所有的排列方式 求出最小花费</strong><br>我习惯通过swap的交换来实现全排列<br>此外就是 <strong><em>当当前花费已经大于已知的最佳答案 即减去这条枝</em></strong> 这样一个简单的剪枝<br>而这个剪枝在 <strong><em>尽快找到一个较优解</em></strong> 的情况下可以剪去更多的废枝<br>所以在开始搜索前通过**<em>距离原点的远近**</em>排序 可以稍微地“尽快找最优解”（虽然这有点玄学 我解释不了 但对于这题确实有效）</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;cstdlib&gt;
-#include &lt;cstdio&gt;
-#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#include &lt;string&gt;
-#include &lt;cstring&gt;
-#include &lt;ctime&gt;
-#include &lt;cmath&gt;
-using namespace std;
-struct cheeseNode&#123;
-    double x,y;
-&#125;chee[16];
-int n;
-double ans &#x3D; 2100000000.0;
-double cou_dis(cheeseNode&amp; al,cheeseNode&amp; be)&#123;
-     return sqrt((al.x - be.x)*(al.x - be.x)+(al.y - be.y)*(al.y - be.y));
-&#125;
-void dfs(int handle,double dis)&#123;
-    if (handle &gt; n)&#123;
-        ans &#x3D; min(ans,dis);
-        return;
-    &#125;
-    if (dis &gt;&#x3D; ans) return;
-    for (int i &#x3D; handle;i &lt;&#x3D; n;++ i)&#123;
-        swap(chee[i],chee[handle]);
-        dfs(handle + 1,dis + cou_dis(chee[handle],chee[handle - 1]));
-        swap(chee[i],chee[handle]);
-    &#125;
-    return ;
-&#125;
-bool cmp (cheeseNode al,cheeseNode be)&#123;
-    return ((al.x * al.x + al.y * al.y) &lt; (be.x * be.x + be.y * be.y));
-&#125;
-int main ()&#123;
-    &#x2F;&#x2F; freopen (&quot;workbroad.in&quot;,&quot;r&quot;,stdin);
-    &#x2F;&#x2F; freopen (&quot;workbroad.out&quot;,&quot;w&quot;,stdout);
-    cin &gt;&gt; n;
-    double al,be;
-    for (int i &#x3D; 1;i &lt;&#x3D; n;++ i)&#123;
-        scanf(&quot;%lf%lf&quot;,&amp;al,&amp;be);
-        chee[i] &#x3D; (cheeseNode)&#123;al,be&#125;;
-    &#125;
-    sort(chee + 1,chee + n + 1,cmp);
-    dfs(1,0);
-    printf(&quot;%.2lf&quot;,ans);
-    return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -733,12 +617,12 @@ int main ()&#123;
     MathJax.texReset();
     MathJax.typeset();
   }
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script>
 
     
 
   
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":275,"height":700},"mobile":{"show":false},"log":false,"tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>
