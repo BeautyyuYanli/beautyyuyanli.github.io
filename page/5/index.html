@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -304,6 +304,184 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/09/04/2018-9-04-SDOI2009_SuperGCD%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/09/04/2018-9-04-SDOI2009_SuperGCD%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">SDOI2009_SuperGCD|题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一道恶心人的毒瘤题:高精度gcd</p>
+<p>注意到,<strong>在高精度运算中取模是通过重复相减实现的</strong></p>
+<p>所以对于高精度gcd,<strong>辗转相除法和更相减损术是一样的</strong></p>
+<p>那档燃是写<strong>更相减损术</strong>啦</p>
+<p>这毒瘤题还卡常,所以就搞了几个小把戏:</p>
+<ol>
+<li>把高精度减法直接重载为<code>-=</code></li>
+<li>采取亿进制(事实上甚至可以写成万亿进制)</li>
+</ol>
+<p>不得不说高精度运算是很坑的算法,建议除了<code>构造函数</code>和重载<code>赋值符</code>之外所有成员函数都应该用<code>const</code>修饰</p>
+<p>以及亿进制下的输出也是一个很麻烦的事情…</p>
+<p>代码如下</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;ctime&gt;
+#define LL long long
+using namespace std;
+struct big_int&#123;
+        LL data[25000],len;
+        big_int(char *al)&#123;
+                LL al_len &#x3D; strlen(al),base &#x3D; 1;
+                data[len &#x3D; 0] &#x3D; 0;
+                for (LL p &#x3D; al_len - 1;p &gt;&#x3D; 0;p --)&#123;
+                        if (base &gt;&#x3D; 100000000)
+                                ++ len,data[len] &#x3D; 0,base &#x3D; 1;
+                        data[len] +&#x3D; (al[p] - &#39;0&#39;) * base;
+                        base *&#x3D; 10;
+                &#125;
+                len ++;
+                return ;
+        &#125;
+        void print()const&#123;
+                LL len &#x3D; this-&gt;len;
+                if (!len) &#123;
+                        cout &lt;&lt;&quot;0\n&quot;;
+                        return ;
+                &#125;
+                len --;
+                LL b &#x3D; 10000000;
+                while((data[len] &#x2F; b) &#x3D;&#x3D; 0)
+                        b &#x2F;&#x3D; 10;
+                printf(&quot;%lld&quot;,data[len]);
+                string out &#x3D; &quot;&quot;;
+                for (LL i &#x3D; len - 1;i &gt;&#x3D; 0;-- i)&#123;
+                        LL b &#x3D; 10000000,d &#x3D; data[i];
+                        while(b)&#123;
+                                out +&#x3D; d &#x2F; b + &#39;0&#39;;
+                                d %&#x3D; b;
+                                b &#x2F;&#x3D; 10;
+                        &#125;
+                &#125;
+                cout &lt;&lt; out &lt;&lt; endl;
+                return ;
+        &#125;
+        bool operator &lt; (const big_int &amp;al)const&#123;
+                if (len !&#x3D; al.len)
+                        return len &lt; al.len;
+                for (LL i &#x3D; len - 1;i &gt;&#x3D; 0;-- i)
+                        if (data[i] !&#x3D; al.data[i])
+                                return data[i] &lt; al.data[i];
+                return 0;
+        &#125;
+        big_int operator -&#x3D; (big_int &amp;al)&#123;
+                for (LL i &#x3D; 0;i &lt; al.len;++ i)
+                        data[i] -&#x3D; al.data[i];
+                for (LL i &#x3D; 0;i &lt; len;++ i)
+                        if (data[i] &lt; 0)
+                                data[i] +&#x3D; 100000000,
+                                data[i + 1] -&#x3D; 1;
+                while (data[-- len] &#x3D;&#x3D; 0 &amp;&amp; len &gt; 0);
+                len ++; 
+                if (len &#x3D;&#x3D; 1 &amp;&amp; data[0] &#x3D;&#x3D; 0)
+                        len &#x3D; 0;
+                return *this;
+        &#125;
+&#125;;
+LL low_gcd(LL a,LL b)&#123;
+        return b?low_gcd(b,a % b):a;
+&#125;
+int main()&#123;
+        char alpha[20000],beta[20000];
+        scanf(&quot;%s%s&quot;,alpha,beta);
+        if (strlen(alpha) &lt;&#x3D; 18 &amp;&amp; strlen(beta) &lt;&#x3D; 18)&#123;
+                LL al,be;
+                sscanf(alpha,&quot;%lld&quot;,&amp;al);
+                sscanf(beta ,&quot;%lld&quot;,&amp;be);
+                cout &lt;&lt; low_gcd(al,be);
+        &#125;
+        else&#123;
+                big_int al &#x3D; big_int(alpha),be &#x3D; big_int(beta);
+                while (al &lt; be || be &lt; al)&#123;
+                        if (be &lt; al)
+                                al -&#x3D; be;
+                        else
+                                be -&#x3D; al;
+                &#125;
+                al.print();
+        &#125;
+        return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>文结</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -863,178 +1041,6 @@ int main ()&#123;
         cout &lt;&lt; ans;
         return 0;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>以上.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/07/19/2018-7-19-Luogu1080%E5%9B%BD%E7%8E%8B%E6%B8%B8%E6%88%8F%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
-      <meta itemprop="name" content="BeautyYu言醴">
-      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="银河美术馆-Beautyyu">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/07/19/2018-7-19-Luogu1080%E5%9B%BD%E7%8E%8B%E6%B8%B8%E6%88%8F%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">Luogu1080国王游戏|题解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-07-19 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-19T00:00:00+08:00">2018-07-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>恰逢 $H$ 国国庆，国王邀请 $n$ 位大臣来玩一个有奖游戏。首先，他让每个大臣在左、右手上面分别写下一个整数，国王自己也在左、右手上各写一个整数。然后，让这 $n$ 位大臣排成一排，国王站在队伍的最前面。排好队后，所有的大臣都会获得国王奖赏的若干金币，每位大臣获得的金币数分别是：排在该大臣前面的所有人的左手上的数的乘积除以他自己右手上的数，然后向下取整得到的结果。</p>
-<p>国王不希望某一个大臣获得特别多的奖赏，所以他想请你帮他重新安排一下队伍的顺序，使得获得奖赏最多的大臣，所获奖赏尽可能的少。注意，国王的位置始终在队伍的最前面。</p>
-</blockquote>
-<p>又是一道主程序十分钟高精度一小时的题..</p>
-<p>题意转化为</p>
-<blockquote>
-<p>每位大臣获得的金币数分别是：该大臣及前面的所有人的左手上的数的乘积除以他自己左右手上的数之和</p>
-</blockquote>
-<p>显然满足贪心:被除数确定时,需要让除数尽量大</p>
-<p>依左右手上数之和排序即可</p>
-<p>完整代码:</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;string&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#define llint long long
-using namespace std;
-struct bigint &#123;
-        llint str[3000],len_;
-        bigint operator &#x3D; (llint al)&#123;
-                len_ &#x3D; 0;
-                memset(str,0,sizeof(str));
-                while (al)&#123;
-                        str[len_++] &#x3D; al % 10000;
-                        al &#x2F;&#x3D; 10000;
-                &#125;
-                return *this;
-        &#125;
-        bigint operator *&#x3D; (llint al)&#123;
-                str[0] *&#x3D; al;
-                for (int i &#x3D; 1;i &lt;&#x3D; len_ ;i ++ )&#123;
-                        str[i] &#x3D; (str[i] * al) + str[i - 1] &#x2F; 10000;
-                        str[i - 1] %&#x3D; 10000;
-                &#125;
-                len_ +&#x3D; (str[len_] &gt; 0);
-                return *this;
-        &#125;
-        bigint operator &#x2F; (llint al)&#123;
-                bigint ans;
-                llint handle &#x3D; 0;
-                for (int i &#x3D; len_ - 1;i &gt;&#x3D; 0;-- i)&#123;
-                        handle &#x3D; handle * 10000 + str[i];
-                        ans.str[i] &#x3D; handle &#x2F; al;
-                        handle %&#x3D; al;
-                &#125;
-                ans.len_ &#x3D; len_;
-                while(!ans.str[ans.len_ - 1])
-                        ans.len_ --;
-                return ans;
-        &#125;
-        bool operator &lt; (const bigint &amp;al)const&#123;
-                if (len_ !&#x3D; al.len_) return len_ &lt; al.len_;
-                for (int i &#x3D; len_ - 1;i &gt;&#x3D; 0;--i)
-                        if (str[i] !&#x3D; al.str[i]) return str[i] &lt; al.str[i];
-                return 0;
-        &#125;
-        void print()&#123;
-                if (!len_) &#123;
-                        printf(&quot;0\n&quot;);
-                        return ;
-                &#125;
-                printf(&quot;%lld&quot;,str[len_ - 1]);
-                for (int i &#x3D; len_ - 2;i &gt;&#x3D; 0;--i)&#123;
-                        if (str[i] &lt; 1000) putchar(&#39;0&#39;);
-                        if (str[i] &lt; 100) putchar(&#39;0&#39;);
-                        if (str[i] &lt; 10) putchar(&#39;0&#39;);
-                        printf(&quot;%lld&quot;,str[i]);
-                &#125;
-                printf(&quot;\n&quot;);
-        &#125;
-&#125;;
-
-struct  xxx&#123;
-        llint a,b;
-        bool operator &lt; (const xxx &amp;be)const&#123;
-                if (a * b !&#x3D; be.a * be.b)
-                        return a * b &lt; be.a * be.b;
-                return a &lt; be.a;
-        &#125;
-&#125;arr[20000];
-
-int main ()&#123;
-        llint n;
-        cin &gt;&gt; n;
-        for (int i &#x3D; 0;i &lt;&#x3D; n;++ i)
-                scanf(&quot;%lld%lld&quot;,&amp;arr[i].a,&amp;arr[i].b);
-        bigint mul,ans;
-        mul &#x3D; arr[0].a,ans &#x3D; (llint)0;
-        sort(arr + 1,arr + 1 + n);
-        for (int i &#x3D; 1;i &lt;&#x3D; n;++ i)
-                mul *&#x3D; arr[i].a,
-                ans &#x3D; max(ans,mul &#x2F; (arr[i].a * arr[i].b));
-        ans.print();
-        return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>以上.</p>
 

@@ -113,6 +113,35 @@
   </entry>
   
   <entry>
+    <title>致初学OIer-你想知道的9个问题</title>
+    <link href="http://beautyyu.top/2019/09/11/2019-9-11-%E8%87%B4%E5%88%9D%E5%AD%A6OIer%E4%BD%A0%E6%83%B3%E7%9F%A5%E9%81%93%E7%9A%849%E4%B8%AA%E9%97%AE%E9%A2%98/"/>
+    <id>http://beautyyu.top/2019/09/11/2019-9-11-%E8%87%B4%E5%88%9D%E5%AD%A6OIer%E4%BD%A0%E6%83%B3%E7%9F%A5%E9%81%93%E7%9A%849%E4%B8%AA%E9%97%AE%E9%A2%98/</id>
+    <published>2019-09-10T16:00:00.000Z</published>
+    <updated>2020-10-06T13:57:25.659Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="致初学OIer"><a href="#致初学OIer" class="headerlink" title="致初学OIer:"></a>致初学OIer:</h1><h2 id="你想知道的9个问题"><a href="#你想知道的9个问题" class="headerlink" title="你想知道的9个问题"></a>你想知道的9个问题</h2><p><em>Beautyyu 执笔</em></p><p>不同于数理化生这些科目, 大部分人可能都是第一次接触”信竞”这个科目. 你对这个科目可能一无所知. 不过没关系, 笔者这里将解答你的疑问.</p><h3 id="1-什么是编程"><a href="#1-什么是编程" class="headerlink" title="1. 什么是编程?"></a>1. 什么是编程?</h3><p>我们的计算机上运行这各式各样的程序, 这些程序承担着各种功能. 正如字面意思, “编程”就是”编写程序”</p><p>我们将对计算机下达一个”指令清单”, 称作<code>源代码</code>. 不过计算机并不能直接”读懂”这些<code>源代码</code>, 因为<code>源代码</code>是依照人类的逻辑编写的. 计算机只能读懂”010101001001…”这样的<code>机器码</code>. 这些<code>机器码</code>就是俗称的”程序”</p><p>所以我们需要一位”翻译官”将<code>源代码</code>翻译成<code>机器码</code>. 这个过程称作<code>编译</code>, 翻译官是一个叫做<code>编译器</code>的程序.</p><p>嗯? 你问第一个<code>编译器</code>是怎么造出来的? 自己查资料去吧.</p><h3 id="2-什么是编程语言"><a href="#2-什么是编程语言" class="headerlink" title="2. 什么是编程语言?"></a>2. 什么是编程语言?</h3><p>正如人与人之间使用”语言”进行沟通一样, 人和机器之间使用<code>编程语言</code>进行沟通. 常见的编程语言有<code>c</code>, <code>c++</code>, <code>pascal</code>等等.</p><p>人类使用<code>编程语言</code>编写<code>源代码</code>. 上文提到, 人和机器之间有一位翻译官<code>编译器</code>. 而各种语言都有其对应的编译器.</p><p>不过和人不同, <code>编译器</code>并不是很聪明. 因此, 你所编写的<code>源代码</code>一定要严格地符合该语言的语法. 否则编译器就会告诉你”编译失败”</p><p>当然, 上文所说的语言特指”古典高级语言”, 我们将要学习的<code>c++</code>就属于此类. 至于更多五花八门的<strong>现代语言</strong>, 则不能一概而论了.</p><h3 id="3-什么是算法"><a href="#3-什么是算法" class="headerlink" title="3. 什么是算法?"></a>3. 什么是算法?</h3><p>当我们面对一个问题时, 我们会观察问题, 解剖问题, 然后思考如何解决问题.</p><p><code>算法</code>就是”一个问题的解决方案”. <code>算法设计</code>的过程就是”思考解决方案”的过程.</p><h3 id="4-算法和编程什么关系"><a href="#4-算法和编程什么关系" class="headerlink" title="4. 算法和编程什么关系?"></a>4. 算法和编程什么关系?</h3><p><code>算法</code>是抽象的, 是一种思想. 而<code>程序</code>则是具象的, 是”操作计算机的过程”</p><p>我们将思想化为现实的过程, 就是把<code>算法</code>写进<code>程序</code>的过程.</p><p><code>算法</code>是灵魂, <code>程序</code>则是供其使用的工具</p><h3 id="5-什么是信竞"><a href="#5-什么是信竞" class="headerlink" title="5. 什么是信竞?"></a>5. 什么是信竞?</h3><p>信息学奥林匹克(<strong>O</strong>lympiad in <strong>I</strong>nformatics), 简称<code>OI</code>. 这是一个面向中学生的<code>算法设计比赛</code>. 参加比赛的中学生则称为**<code>OIer</code>**. </p><p>类似的还有一个算法设计比赛叫<code>ACM-ICPC</code>, 只不过面向的对象是大学生.</p><h3 id="6-解决算法问题需要什么工具"><a href="#6-解决算法问题需要什么工具" class="headerlink" title="6. 解决算法问题需要什么工具?"></a>6. 解决算法问题需要什么工具?</h3><p><code>测评系统</code>: 测评系统即俗称”题库”. 我们在这里查看题库中的算法问题, 设计出源代码后再提交到这里进行验证. 我校有自建的测评系统<a href="https://192.168.6.233/">https://192.168.6.233</a></p><p><code>编辑器</code>: 理论上Windows系统自带的”写字板”就是最简单的编辑器, 用它来编写源代码也是没有问题的. 不过, 一个优秀的编辑器可以使编写源代码的过程更有效率.</p><p><code>编译器</code>: 在第一个问题中已经介绍过了.</p><p><code>IDE</code>: 全称<strong>integrated development environment</strong>, 简单来说就是将<code>编辑器</code>, <code>编译器</code>等工具集合成一体的综合编程软件. 你可以使用<code>IDE</code>内部的<code>编辑器</code>编写源代码, 然后一个快捷键就可以编译运行你的程序. 初学者常用的<code>IDE</code>是<code>Dev-C++</code></p><h3 id="7-解决算法问题的流程是什么样的"><a href="#7-解决算法问题的流程是什么样的" class="headerlink" title="7. 解决算法问题的流程是什么样的?"></a>7. 解决算法问题的流程是什么样的?</h3><ol><li><p>读题: 从测评系统上查看题目. 题目主要包含三个部分”题面”, “输入数据”, “输出数据”</p></li><li><p>读<code>输入数据</code>: <code>输入数据</code>即题目的”已知条件”</p></li><li><p>读<code>输出数据</code>: <code>输出数据</code>即需要你根据”已知条件”推导出的问题的”解”</p></li><li><p>设计<code>算法</code>: 确认题目的已知条件和要求的解后, 就可以开始思考问题的解决方案, 形成一个完整的思路</p></li><li><p>设计<code>代码</code>: 根据已形成的思路, 编写相应的代码</p></li><li><p>进行<code>调试</code>: 编译运行你的代码, 观察程序运行是否符合你的预期. 如果不符合预期, 寻找问题所在. 问题一般出现在两个方面, 即算法错误(思路错误)和代码错误(手抖写错). 优秀的OIer应当尽量避免后者</p></li><li><p>提交<code>测评</code>: 编写完成源代码后, 将源代码提交至<code>测评系统</code>进行验证. 测评系统将会为你的程序提供多组输入数据, 然后检查程序产生的输出数据是否与标准答案相符. 如果全部相符, 测评系统就认为你的程序”通过了测试(Accept)”</p></li><li><p>如果程序没有通过测试, 回到第6步</p></li><li><p>如果多次没有通过测试, 可以考虑回到第1步</p></li></ol><h3 id="8-信竞的学习过程是什么样的"><a href="#8-信竞的学习过程是什么样的" class="headerlink" title="8. 信竞的学习过程是什么样的?"></a>8. 信竞的学习过程是什么样的?</h3><p>首先我们需要学习<code>c++语法基础</code>, 这部分内容将教会大家如何写代码. 但语法基础的学习是十分枯燥的, 大约需要耗时2个月. 大部分新生都无法撑过这两个月而选择放弃.</p><p>这之后我们将学习<code>算法和数据结构设计</code>, 这部分内容将教大家如何设计算法. 真正有趣的内容从此时才开始. 我们将会学习怎样使用不同的算法解决不同类型的问题, 怎样结合多个算法解决复杂的综合问题, 以及, 怎样设计或改造出新的算法更优雅更有效率地解决问题.</p><p>希望大家都能挺过前两个月, 真正领略到算法的魅力所在.</p><h3 id="9-相关的专业有哪些"><a href="#9-相关的专业有哪些" class="headerlink" title="9. 相关的专业有哪些?"></a>9. 相关的专业有哪些?</h3><p>与编程直接相关的专业主要有<code>计算机科学</code>和<code>软件工程</code>这两个. 前者侧重于算法设计, 注重算法效率. 后者侧重于软件制作, 注重于综合实用性. 至于所谓的<code>物联网</code>, <code>大数据</code>, <code>人工智能</code>等等都是由这两个专业进一步发展而来.</p><p>另外, <code>游戏设计</code>, <code>微电子</code>等等工科专业也和编程有紧密联系.</p><p>几乎<strong>所有</strong>的<strong>现代</strong>理科专业都需要借助编程工具</p><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>希望大家都能在算法设计中享受乐趣</p><p>最后安利我校计算机社团<code>微笙无上计算机协会</code>. 笔者现年高三, 是协会的主要创始人之一, 第二届会长. 欢迎各位加入<code>微笙计协</code>. 协会纳新群893053706 官网<a href="https://www.weisheng.cf/">www.weisheng.cf</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;致初学OIer&quot;&gt;&lt;a href=&quot;#致初学OIer&quot; class=&quot;headerlink&quot; title=&quot;致初学OIer:&quot;&gt;&lt;/a&gt;致初学OIer:&lt;/h1&gt;&lt;h2 id=&quot;你想知道的9个问题&quot;&gt;&lt;a href=&quot;#你想知道的9个问题&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="其他" scheme="http://beautyyu.top/categories/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="杂文" scheme="http://beautyyu.top/tags/%E6%9D%82%E6%96%87/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2019社团节活动记录|日记</title>
     <link href="http://beautyyu.top/2019/05/28/2019-5-28-2019%E7%A4%BE%E5%9B%A2%E8%8A%82%E6%B4%BB%E5%8A%A8%E8%AE%B0%E5%BD%95%E6%97%A5%E8%AE%B0/"/>
     <id>http://beautyyu.top/2019/05/28/2019-5-28-2019%E7%A4%BE%E5%9B%A2%E8%8A%82%E6%B4%BB%E5%8A%A8%E8%AE%B0%E5%BD%95%E6%97%A5%E8%AE%B0/</id>
