@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -304,6 +304,134 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2021/02/03/2021-2-03%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8E%E6%95%B0%E5%80%BC%E7%9A%84dp%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95%20Codeforces1475G%20Strange%20Beauty%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/03/2021-2-03%E4%B8%80%E7%A7%8D%E5%9F%BA%E4%BA%8E%E6%95%B0%E5%80%BC%E7%9A%84dp%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95%20Codeforces1475G%20Strange%20Beauty%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">一种基于数值的dp遍历方法 Codeforces1475G Strange Beauty|题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-03 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-03T00:00:00+08:00">2021-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一种基于数值的dp遍历方法-Codeforces1475G-Strange-Beauty-题解"><a href="#一种基于数值的dp遍历方法-Codeforces1475G-Strange-Beauty-题解" class="headerlink" title="一种基于数值的dp遍历方法 Codeforces1475G Strange Beauty|题解"></a>一种基于数值的dp遍历方法 Codeforces1475G Strange Beauty|题解</h1><p>原题: <a target="_blank" rel="noopener" href="http://codeforces.com/problemset/problem/1475/G">1475G - Strange Beauty</a></p>
+<p>显然, 读题后我们可以发现: 对于一个<code>beauty array</code>, 将其从小到大排序后, 每一个元素(除第一个)必然能被其前一个元素整除.</p>
+<p>将其抽象为图: 对于一条链, 每一个结点(除第一个)都能被其上一个结点整除.</p>
+<p>于是, 我们可以轻易得到这样一个树形dp的思路:</p>
+<blockquote>
+<p>新增一个值为1的虚拟点作为根结点, 形成一颗有根树. 将数组a从小到大排序后依次插入树中. 对于一个准备加入树的结点, 其可选择的父结点即树中所有可以将其整除的结点. 对于所有可选择的父结点, 找出距离根结点最远的一个, 将新结点挂载为其子结点.</p>
+<p>完成所有插入操作后, 选择从根到叶最长的一条链, 这条链即最后留下的<code>beauty array</code></p>
+</blockquote>
+<p>这个思路显然是正确的, 但在这道题中行不通. 因为这道题的数据规模是$2\times 10^5$, 而这种做法的最坏复杂度可达到$n^2$</p>
+<p>如何处理这个规模的问题? 注意到数据范围中的不寻常之处: 数据大小也为$2\times 10^5$, 而非通常的$10^9$. 这启发我们应当使用一种基于数值的方法进行优化.</p>
+<p>注意到, 插入操作是dp中寻找最优子结构的过程. dp的另一种做法是根据子结构更新”父结构”, 也即:</p>
+<p>将”对于一个新结点, 寻找可将新结点整除的父结点” 改为”对于已在树上的一个结点, 寻找能被其整除, 挂载到其下的子结点”</p>
+<p>这个过程即, 遍历该结点的所有倍数. 类似于埃氏筛, 这个过程的复杂度是$N/1+N/2+…+N/N$, 约为$NlogN$, 满足本题的需求.</p>
+<p>于是, 我们得到了官方题解所使用的方法:</p>
+<blockquote>
+<p>Let’s calculate for each number $x$ how many times it occurs in the array $a$. Let’s denote this number as $cnt[x]$.</p>
+<p>Let’s use the dynamic programming method. Let $dp(x)$ be equal to the maximum number of numbers not greater than $x$ such that for each pair of them one of the conditions above is satisfied. More formally, if $dp(x)=k$, then there exists numbers $b_1,b_2,…,b_k (b_i\leq x)$ from the array $a$ such that for all $1 \leq i, j \leq k$ one of the conditions above is satisfied.</p>
+<p>Then to calculate $dp(x)$ you can use the following formula:</p>
+<p>$dp(x) = cnt(x) + \max \limits_{y = 1,\ x\ mod\ y = 0}^{x-1} dp(y)$</p>
+<p>Note that to calculate $dp(x)$ you need to go through the list of divisors of $x$. For this, we use the sieve of Eratosthenes.</p>
+</blockquote>
+<p>一种基于该方法的实现:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdlib></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token expression">LL <span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+LL T<span class="token punctuation">;</span>
+LL n<span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">300000</span><span class="token punctuation">]</span><span class="token punctuation">,</span> cnt<span class="token punctuation">[</span><span class="token number">300000</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span><span class="token number">300000</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    cin <span class="token operator">>></span> T<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>T<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%lld"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>LL i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">200000</span><span class="token punctuation">;</span> <span class="token operator">++</span> i<span class="token punctuation">)</span>
+            cnt<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>LL i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span> i<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%lld"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            cnt<span class="token punctuation">[</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>LL i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">200000</span><span class="token punctuation">;</span> <span class="token operator">++</span> i<span class="token punctuation">)</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> cnt<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token function">sort</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> arr <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">+</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        LL m <span class="token operator">=</span> <span class="token function">unique</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> arr <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">+</span> n<span class="token punctuation">)</span> <span class="token operator">-</span> arr <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>LL k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>k <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> <span class="token operator">++</span> k<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            LL i <span class="token operator">=</span> arr<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>LL j <span class="token operator">=</span> i <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> <span class="token number">200000</span><span class="token punctuation">;</span> j <span class="token operator">+=</span> i<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> cnt<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld\n"</span><span class="token punctuation">,</span> n <span class="token operator">-</span> <span class="token operator">*</span><span class="token function">max_element</span><span class="token punctuation">(</span>dp <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> dp <span class="token operator">+</span> <span class="token number">200001</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -891,129 +1019,6 @@ int main ()&#123;
 <p>几乎<strong>所有</strong>的<strong>现代</strong>理科专业都需要借助编程工具</p>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>希望大家都能在算法设计中享受乐趣</p>
 <p>最后安利我校计算机社团<code>微笙无上计算机协会</code>. 笔者现年高三, 是协会的主要创始人之一, 第二届会长. 欢迎各位加入<code>微笙计协</code>. 协会纳新群893053706 官网<a target="_blank" rel="noopener" href="https://www.weisheng.cf/">www.weisheng.cf</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2019/05/28/2019-5-28-2019%E7%A4%BE%E5%9B%A2%E8%8A%82%E6%B4%BB%E5%8A%A8%E8%AE%B0%E5%BD%95%E6%97%A5%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
-      <meta itemprop="name" content="BeautyYu言醴">
-      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="银河美术馆-Beautyyu">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/28/2019-5-28-2019%E7%A4%BE%E5%9B%A2%E8%8A%82%E6%B4%BB%E5%8A%A8%E8%AE%B0%E5%BD%95%E6%97%A5%E8%AE%B0/" class="post-title-link" itemprop="url">2019社团节活动记录|日记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-05-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-28T00:00:00+08:00">2019-05-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>2019年<code>百花齐放社团节</code>于<code>五月26日</code>举办, 也就是两天前的事情了. 今天整理好了账目, 终于腾出时间来写一片活动记录</p>
-<hr>
-<h2 id="前期筹备"><a href="#前期筹备" class="headerlink" title="前期筹备"></a>前期筹备</h2><p>今年的社团节原定于<code>五月17日</code>举办, 所以实际上从三月底就开始筹备活动了, 第一次社团节筹备会议在<code>三月24日</code>召开. 当时正好又还在<code>第二届1699知识竞赛</code>活动期间, 所以显得特别繁忙. 某周日下午手头上稍微闲下来的时候摸了第一稿的活动策划案. 当时定下来的几个活动项目其实并没有完全落入正式活动中, 比方说<code>知乎日报爬虫``官网重构</code>以及<code>微笙计协校园网址导航</code>就变成了独立项目, 而原来打算做的<code>微笙美术馆</code>则是直接鸽了. 至于宣传日程安排更是完全没有起到任何用处(所以说人类的本质就是鸽子啊.)</p>
-<p>不过尽管这些项目没有进入正式活动, 但是作为独立项目还是各有用处, 尤其是<code>网址导航</code>应该很快就会正式发布了. 另外, 这些分配给高一的项目也当作是他们的练手项目了. 事实上把社团节的筹备群命名为<code>中央局</code>, 就是打算把社团交给这些人接手了hhh. 现在他们能够独立维护协会的项目, 也能使用<code>git</code>和<code>github</code>, 对于传代来说当然是好事了.</p>
-<p>这些项目上线后都经由我或修改或美化或上线, 这活挺多还挺累的.说起来现在协会的所有有在维护的项目的维护者都包括我, 这样看来我还挺卑微的. 嘛, 一个三人的管理团队里唯一的程序兼美工兼文案就是这样的. (这样看来明年的程序美工有点堪忧啊</p>
-<p>不过, 美工也还不至于过于落魄. <em>ZeHui</em>做的海报确实达到了我预想的要求. 至于<em>王咏馨</em>的书签设计稿(后来成了概念图)则超出了我的预期的好. 这也很不错了.</p>
-<p>还有个宣传视频, 出于偷懒的目的, 自己一个人就用<code>facerig</code>加上变声器自己录好了, 折腾了一个周六晚上(性感会长在线出道啦</p>
-<hr>
-<h2 id="活动前一周"><a href="#活动前一周" class="headerlink" title="活动前一周"></a>活动前一周</h2><p>这周开始就陆陆续续开始准备活动现场的工作了. 最后选定放在社团节现场的项目是收藏的<code>压扁小鸟</code>, <em>Ivan</em>的<code>2048</code>, <em>ZeHui</em>的<code>算命诗人</code>, 以及我自己原先为了电脑制作活动做的<code>和时九一起记单词</code>(感谢<em>忆棠</em>的立绘!). 另外<code>网址导航</code>也经过修改后正式进行内测.</p>
-<p>期间和同桌去科协玩了玩激光打印, 他给整了两块协会的木牌. 本来打算作为活动的奖品送出去结果因为数量不足放弃了.</p>
-<p>订购纪念品的事情拖延了些, 前一周清点了购买U盘的人数, 这周才刚到货. U盘原来希望的是金士顿的金属条, 不过却有限制数量和图案. 无奈换了一个款式, 价钱就发生了变动. 然后微信收款的事情也是挺波折的, 一开始放我自己的二维码却因为没有绑定银行卡没法收款, 后来换了雁琳的二维码. 但是只有一开始定会服的, 所以价格也有错…</p>
-<p>周三的时候突然想起六月要开换届大会了. 但是新的社干团队还没选定诶. 第二天(就是周四)课间操就去机房把会长钦定了.</p>
-<p>周三下午社联紧急通知到办公室开会, 关于傅老的<code>新想法</code>. 协会的位置调换到了<code>校史长廊</code>的另一侧. 我原本以为没有太大区别来着. 晚上又一看发现位置又换到了<code>莆中南路</code>, <em>wdy</em>说是要放在主线上. 这倒也是好事.</p>
-<p>周四晚上在空间看见了<code>一带一路</code>的宣传ppt, 这时候就大概知道了这就是<code>新想法</code>(我可以说实在很像福一的做法吗.) <em>Median</em>告诉我当晚他们班的两个副主席都不在晚自习, 估摸着这个ppt是当晚连夜做好的. 真是辛苦了啊.</p>
-<p>周五中午带着<em>Leon</em>和<em>Zyyans</em>去参加社团节筹备会议. 当时说到了周天大概率下雨就很慌. 中午回去和<em>羊林</em>研究了下排插防水措施… 最后捣鼓出了一个塑料袋+胶带+板凳挂住的奇异方案.</p>
-<hr>
-<h2 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h2><p>周六也就是社团节的前一天了. 早上去学校的时候看到门口的汽车上都放了张传单, 就是门口的清场通知. 一大早先去地下室看了下电源, 试了试自己的两座排插—完全不够用! 当时就有点慌, 这个线长比我想象的还要长得多, 两座排插甚至只能接到地下室门口.</p>
-<p>早上考生物和政治的会考模拟卷. 真实地考了个寂寞. 因为已经完全被社团节装满了脑子了没有智商用来考试了. 第四 五节课的时候和<em>lyz</em>借口拍班级的明信片宣传照跑出教室, 到了科协的活动室颓了一会儿(一会儿?). 给<em>lyz</em>安利了<code>A Dark Room</code>, 他表示体验很好哈哈哈哈.</p>
-<p>下午一觉醒来本来也没什么心情读书了. 看到学生会已经把签名板支好就兴冲冲地买了只马克笔打算写字, 然而被<em>陈正彧</em>回绝了hhh. 一到教室就又被<em>lyz</em>拉到科协活动室. 连上了自己机子上的代理, 浏览了一下午<code>wikipad</code>. 惊奇地发现居然还有人发明过莆田话的罗马音系统?!</p>
-<p>本来按照社联的安排我应该<code>4:00PM</code>去活动室领取物资来着, 但是由于在科协颓废的缘故拖到<code>4:30PM</code>才下去..真是有点尴尬(不过为什么药药也在??). 去的时候已经是最后一个社团了. 因为没带糖果袋子所以就用了剩下的大白兔包装袋hhh</p>
-<p>在回机房的路上就把海报架好了, 虽然单独立在路边有点奇怪emmm引起了一些路人围观. 回去之后先在QQ上和<em>lzy</em>说了声要搬电脑下去, 然后就拉了人下去搬桌椅. 8套桌椅一开始申请的时候以为有些多, 但是后来在现场上发现恰好够用. 接着就回去搜刮所有能用的排插. 好消息是排插的最高功率都是<code>2500W</code>, 对于这些小型机来说完全够用(我本来还以为需要布两条线来着). 因为<em>yl</em>中午说<em>lzy</em>的抽屉里有一堆排插, 就全搜刮出来了. 后来又从602机房/504机房/503办公室搜刮了四五个排插(事实上有两个是不能用的!), 但是下楼布线的时候还是不够用. 最后<em>Median</em>回家又带了一条过来, 总算是勉强可以连上了. <em>Zyyans</em>告知明天还可以再带一条来, 那么应该是没什么意外的了.</p>
-<p>然而最严峻的问题出在这之后—地下室的电源 不! 能! 用! 当时就懵逼了. 带着<em>Leon</em>和<em>wjp</em>在地下室把插口一个个试过去, 结果能用的居然只有西侧出口的一个排插(事实上正是去年用过的那个). 我当场就找了<em>陈子懿</em>反应了情形.</p>
-<p>由于<em>陈子懿</em>在社联群里说帐篷放到<code>操场上的主席台</code>上边, 就带着人过去打算搬帐篷. 到位置了找了一圈没看见, <em>陈子懿</em>表示去下边找找(下边??). 这时候<em>阳阳</em>也带着一个摄协的人来了. 出于不知为何的迷惑原因 我们居然跑到主席台下边的<code>应急物资供应室</code>找帐篷??(说起来帐篷确实是应急物资没错嘛.) 最后是<em>陈子懿</em>和<em>药药</em>和<em>黄佳源</em>到了, 向<em>吴德跃</em>确认之后发现实际上在 <code>体育馆里的主席台</code>emmm. 看到体育馆里边的科协安排了一排体感游戏体验位, <em>Zyyans</em>表示很显然是恰饭项目hhhh</p>
-<p>接着就回家恰饭去了. <em>陈子懿</em>表示可以考虑从<code>15/16班</code>牵电线下去. 这好麻烦的啊喂. 她又给我了个校工的电话, 然而校工表示那条线路早就撤掉了(喵喵喵???). 这就没办法了, 只能研究一下从<code>15班</code>怎么接线了. 顺便通知了下<code>音乐社</code>的<em>忆林</em>(他们看起来完全不慌电路诶.)</p>
-<p>晚上去机房的时候<em>Zyyans</em>已经带上了他的显卡和VR设备. 然而<em>Leon</em>楼上楼下来回拆了包括<code>二号机房旧机</code>, <code>二号机房标准机</code>和<code>FTP服务器</code>都没法装上(甚至试图直接裸露地在我的专辑纸盒子里). 最后他表示放弃并且加入了布线的行列hhh</p>
-<p>另一头我带着<em>ZeHui</em>在<em>xqs</em>班级里(也就是<code>15班</code>啦)尝试布线. 我先把插座全连上了从上边投放下去, <em>xqs</em>在下边应接(那个窗户外边还有个伸出去的窗台! 一直撞着排插来着). 从上面投放居然比从地下室接的长度更短诶. 确认没有问题之后我就挑了个合适的位置把排插断开, 收了起来. <em>xqs</em>继续裁剪他的数独试题, 而<em>ZeHui</em>则是和我一起给楼上部分的排插交接处做防水. 所谓防水实际上就是用塑料袋包上两层再用胶带封口, 能起多大用处就不知道了.</p>
-<p><em>ZeHui</em>回去之后只剩下我和<em>Zyyans</em>两个人了. 我向<em>吴德跃</em>询问过后又去体育馆整了一顶帐篷, 打算安装的时候把<em>洛葵</em>拦下来帮忙, 后来又走来了检查场地的<em>主席</em>和<em>傅老</em>一行人. 尽管在他们的帮助下也没有把这个帐篷支开emmm. <em>傅老</em>表示为啥有两顶帐篷之后向<em>主席</em>在旁边说了些什么(看来好像是惹了麻烦啊…).</p>
-<p>最后我和<em>Zyyans</em>又给地面上的线路做了防水措施, 和上边的线路相比也就是再挂在板凳支脚处免得触到地面的水罢了. 讲道理即使这样防水性能也不太好恭维…(为什么没早点买那种超长接线啊啊啊啊). 这之后回机房<em>lzy</em>给我发了福建气象局发布的<strong>IV级预警</strong>, 那是大暴雨了. 他让我把场地换到地下室西侧出口里边. 讲道理为什么这好雨会在这时候下啊啊啊啊.</p>
-<p><em>Zyyans</em>走后在机房稍事休息之后打算回家了. 哪知路上喧闹着窜出了一群人, 后来知道是社联和学生会的(他们从哪冒出来的???). 一窝蜂的人全聚到校门口, 一声大呼*<em>“校长好!”**, 我这才定睛一看惊觉</em>辉森<em>已经回来了, 正在门口和</em>傅老<em>聊着天. 这机会来得正好, 我向</em>傅老<em>阐明了协会面临的防水困难以及更换场地的请求. <em>傅老</em>说自行和原先那处的社团交换场地即可, 这就好办了. 出门后一群人聚到了签名板前边签名. 定睛一看也有不少熟人, 例如</em>怡宁*, <em>赖梦楠</em> 都在. 尤其是还有<em>黄睿</em>和<em>赵阿黑</em>一行人(虽然这几个真实就是在这儿玩的.) 向<em>吴德跃</em>询问得知那个场地上的社团是<code>魔方社</code>之后, 当即就联系上<em>俞许晟</em>把交换场地的事情解决了. 这倒好. </p>
-<p>在人群中先是签了个<code>微笙无上计算机协会 Beautyyu言醴</code>, 人散了之后又加上了<code>❤药药</code>. 这时<em>赵黑黑</em>一行惊呼*”你居然也有马克笔?!”<em>, 也围了上去签了名字(准确来说是某种奇特图腾??). 正要各自回家时, 哪知</em>辉森<em>竟不知从何处冒的出来! 他用了我的马克笔签了名!!(我在考虑应当收藏纪念还是高价拍卖了.) 他挑了个不起眼的地方(<code>少数派</code>签名的下边??喵喵喵??)签了个超酷的名字. 还表示</em>“这样就不会被人认出来了”<em>. 旁边围着的一群人纷纷录像留念. 后来又问起</em>“这么晚还不回家的吗”<em>, <em>赵黑黑</em>失言曰</em>“我们都是社会人”*, 我们纷纷表示只有他一个社会人哈哈哈哈.</p>
-<p>散伙之后我整了罐<code>RIO Light</code>一口灌下. 讲道理今天一整天的奔波已经导致我缺水严重了. <em>陈子懿</em>在我关于辉森签名的说说下回复”轮流播报”. 看起来是晚了一步.</p>
-<p>最后再写了张备忘录, 置顶标红的一条是<code>向妈祖祈一个晴天</code></p>
-<hr>
-<h2 id="周天"><a href="#周天" class="headerlink" title="周天"></a>周天</h2><p>早上就是现场活动了. 讲道理, 紧张固然是紧张的, 但是却没有<code>百团大战</code>时的心理压力. 也是, 尽管社团节规模和对象群体都远大于百团大战, 但是毕竟百团关乎社团延续, 社团节只是向外界展示的一个平台而已. 另一个很重要的点当然也是有了协会里其他人的帮手和协助策划, 比起百团大战时候的<strong>孤独</strong>体验要好得多.</p>
-<p>早上七点到学校, 先到机房招呼人 把四台电脑搬下去. 不久后<em>zyyans</em>扛着那台大机箱来了. 接着<em>小沛</em>也到了. 我们就先把线路布置到地下室靠操场的出口上. 昨晚想到说下雨的时候用班级的巨大垃圾袋罩住电脑, 于是也就安排上了. <em>羊林</em>的音箱和<em>司机</em>的无线网卡也陆续到位. 羊林的音箱用来放些助兴的音乐. 倒是无线网卡后来也并没有派上用场.</p>
-<p>七点半开了个简会, 交代了下待会儿在现场的注意事项.</p>
-<p>但是<em>Zyyans</em>打算用来玩VR的大机子出了些偏差, 因为全机房都找不到条<code>HDMI</code>线, 接不上显示器. 这时候已经八点了, 校门已经打开. <em>步骥</em>说数独的桌子夹在电脑中间根本就没人玩, 于是就搬到对面去了. 当时因为显示器没有线导致非常烦躁, 语气也就不太好, 对<em>Median</em>说话带了气. 不过幸好后来他们整来了一条<code>DVI</code>的线发现也能用上. 接着就开始调试安装VR设备, 折腾了有一会儿才把设备装上(后来还给碰倒了支架俩次 <em>Zyyans</em>就拿交代把地上的线给粘牢了). 对面数独也算是有条不紊地走上正轨了. 于是我们占用的路段成了最用挤的一处地方emmmm.</p>
-<p>大约十点多, 协会的活动已经完全步入正轨, 我也就没什么需要担心的事情了. <em>wjp</em>在摊位上带了一会儿就跑路了, 不过后来是<em>王咏馨</em>过来坐镇了. 于是我也就偷偷溜到漫研那里划水了.</p>
-<p>中间又出了点偏差, 就是”一带一路”的珠子不够用了. 珠子用完之后我们就开始发糖果. 但是糖果不久也发完了, 这就很尴尬了. 巧了我在外边晃悠的时候碰上了<em>庄骁</em>, 他说足球社发完之后去数据中心那里又整了一些. 于是我也就又整了一些. 后来<em>薛淼</em>在群里说用完珠子的社团可以去再领, 不过我们这里已经够用了.</p>
-<p>这之后十一点半我去漫研那里拍了个合照(还碰上了我妈.). 十二点学校清场, 我们也就开始整理场地. 当时已经有些下雨的迹象了, 我们就先把设备搬到地下室里边. 我安排了些人把电脑搬回去, 自己则在外边整理帐篷和桌椅啥的. 这时候广播突然让全体成员过去, 结果是要跳兔子舞emmmm.</p>
-<p>等全部善后工作都结束之后, 大家回到机房吹空调. <em>Zyyans</em>摊着发了一条说说”明年一定要把活动全部给高一负责”. 本来打算带着大家和漫研一起出去吃, 结果一个个最后都决定点外卖在机房解决emmmm(所以说和微笙比起来漫研全是虚假的死宅啊.). 第一次下载了Arknight.</p>
-<p>中午(其实是下午了)和大家一起去万达吃饭. 本来是约在麦当劳碰头顺便来点甜点. 结果我和<em>药药</em>误以为在这里解决午饭点了正餐?! 药药最后是等大家(<em>仓鼠</em>)挑餐厅时饿的先吃了一份, 我则带回学校当成午饭吃. 最后大家在大丰收吃了丰盛的午餐, 拍了好多好多照片! 然后又在精品店逛了逛, 就都回去了.</p>
-<p>傍晚的时候终于下了一场雨,毛毛细雨的那种. 晚上撑过第一节晚自习, 但是第二节课往桌上一趴就再也起不来了. 直到下课钟声响才醒来.</p>
-<p>回机房的路上看到<em>药药</em>和<em>死鱼</em>在我们班级门口谈COS部继任人的事情. 突然间就有了建立联合部门的构想.</p>
-<hr>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>十分感谢在社团节及其筹备期间帮助过我和协会的各位主席/其他社团的朋友. 感谢高一的各位学弟学妹, 协会放在你们手上也算放得下心了. 感谢<em>忆棠</em>辛苦绘制的立绘. 感谢现场前来捧场的朋友们. 最重要的还有感谢妈祖给的晴天.</p>
-<p>社团节是我在任期间负责的最后一次实质性活动了. 我还记得去年在漫延的时候<em>老大</em>一下瘫倒在靠椅上大呼**”退休啦!!”**. 现在我也真正体会到了这种感觉. 确实, 只有做过社团活动才会体会到退休时的那种轻松. 退休意味着对社团承担的责任终于可以放下, 交给自己的后继者. 就像一条航船, 它不属于船长, 但船长需要依靠对它的爱承担责任和繁杂的工作. 当掌舵人交由别人的时候, 才可以躺倒在舰桥上悠闲地欣赏海面的风景.</p>
-<p>(还有个明显的变化, 就是社团节之后对社团事务就懒了很多哈哈哈哈)</p>
-<p>最近在推进一场交易, 希望能在最后的任期里利用自己的资源为协会再做些贡献.</p>
-<p>其实这篇文章成文已经在社团节之后一周了. 但是当时的情况还是记忆犹新, 许多细节依然能记得清楚. 毕竟是最后一次活动, 我不希望它从我的记忆里悄无声息地消逝, 于是记录了这篇文章.</p>
-<p>言有穷而意无终. 文章只能止于此处了.</p>
-<p>(2019-6-02: 收到了<em>森染</em>的退休贺卡! 耶!)</p>
 
       
     </div>

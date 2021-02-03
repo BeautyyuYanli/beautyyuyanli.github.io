@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -304,6 +304,148 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/12/17/2018-12-17-Luogu2123%E7%9A%87%E5%90%8E%E6%B8%B8%E6%88%8F%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/17/2018-12-17-Luogu2123%E7%9A%87%E5%90%8E%E6%B8%B8%E6%88%8F%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">Luogu2123皇后游戏|题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-12-17 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-17T00:00:00+08:00">2018-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>我们设第 i 位大臣左手上的正整数为 ai，右手上的正整数为 bi，则第 i 位大臣获得的奖金数目为 ci可以表达为：</p>
+<p><img src="https://pics1.beautyyu.top/origin/F0Kkp6.jpg"></p>
+<p>吝啬的皇后并不希望太多的奖金被发给大臣，所以她想请你来重新安排一下队伍的顺序，使得获得奖金最多的大臣，所获奖金数目尽可能的少。</p>
+<p>注意：重新安排队伍并不意味着一定要打乱顺序，我们允许不改变任何一位大臣的位置。</p>
+</blockquote>
+<p>应<em>悠娴</em>之邀写的一篇题解</p>
+<p>显然我们发现,数列$c$是一个递增数列,”获得奖金最多的大臣”实际上就是最后一位大臣.</p>
+<p>设$a_0=b_0=0$,则第$i(i\geq 1)$位大臣获得奖金$f_1$<br>$$<br>=max(c_{i-1},\sum_{j=1}^i a_j)+b_i<br>$$</p>
+<p>$$<br>=max(max(c_{i-2},\sum_{j=1}^{i-1}a_j)+b_{i-1},\sum_{j=1}^{i}a_j)+b_i<br>$$</p>
+<blockquote>
+<p>$\sum_{i=m}^{n}a_i$意为数列$a$中从第$m$项到第$n$项的累和</p>
+</blockquote>
+<p>若我们交换第$i$和$i-1$两位大臣的位置,则当前后面这位大臣(即原先第$i-1$位)所获奖金$f_2$<br>$$<br>=max(max(c_{i-2},\sum_{j=1}^{i-2}a_j+a_i)+b_i,\sum_{j=1}^i a_j)+b_{i-1}<br>$$<br>假定<em>交换两人之前</em>的排列方式是<strong>更优的</strong>,也就是说<br>$$<br>f_1&lt;f_2<br>$$<br>展开得<br>$$<br>max(max(c_{i-2},\sum_{j=1}^{i-1}a_j)+b_{i-1},\sum_{j=1}^{i}a_j)+b_i&lt;max(max(c_{i-2},\sum_{j=1}^{i-2}a_j+a_i)+b_i,\sum_{j=1}^i a_j)+b_{i-1}<br>$$<br>再展开得<br>$$<br>max(c_{i-2}+b_{i-1}+b_{i},\sum_{j=1}^{i-1}a_j+b_{i-1}+b_i,\sum_{j=1}^ia_j+b_i)&lt;max(c_{i-2}+b_i+b_{i-1},\sum_{j=1}^{i-2}a_j+a_i+b_i+b_{i-1},\sum_{j=1}^{i}a_j+b_{i-1})<br>$$</p>
+<blockquote>
+<p>容易证明,$max(a,b)&lt;max(a,c)$等价于$b&lt;c$</p>
+</blockquote>
+<p>原不等式两边同时消去$c_{i-2}+b_{i-1}+b_{i}$<br>$$<br>max(\sum_{j=1}^{i-1}a_j+b_{i-1}+b_i,\sum_{j=1}^ia_j+b_i)&lt;max(\sum_{j=1}^{i-2}a_j+a_i+b_i+b_{i-1},\sum_{j=1}^{i}a_j+b_{i-1})<br>$$<br>两边同时减去$\sum_{j=1}^ia_j$<br>$$<br>max(-a_i+b_{i-1}+b_i,b_i)&lt;max(-a_{i-1}+b_i+b_{i-1},b_{i-1})<br>$$<br>两边同时减去$(b_i+b_{i-1})$<br>$$<br>max(-a_i,-b_{i-1})&lt;max(-a_{i-1},-b_i)<br>$$<br>去负号<br>$$<br>min(a_i,b_{i-1})&gt;min(a_{i-1},b_i)<br>$$<br>至此,我们得到了一个形式较为简单的,只与相邻两项有关的不等式.根据这个不等式进行排序即可.</p>
+<p>完整代码如下:</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#define LL long long
+using namespace std;
+LL n;
+struct pwp&#123;
+        LL a,b;
+        bool operator &lt; (const pwp &amp;qwq)const&#123;
+                return min(qwq.a,b) &gt; min(a,qwq.b);
+        &#125;
+&#125;arr[40000];
+&#x2F;&#x2F;Both overloading operator function and defining a compare function are correct
+bool cmp(const pwp &amp;al,const pwp &amp;be)&#123;
+    &#x2F;&#x2F;&quot;al&quot; is short for &quot;alpha&quot;,&quot;be&quot; is short for &quot;beta&quot;
+    return min(be.a,al.b) &gt; min(al.a,be.b);
+&#125;
+int main ()&#123;
+        LL T;
+        cin &gt;&gt; T;
+        arr[0] &#x3D; (pwp)&#123;0,0&#125;;
+        while(T --)&#123;
+                LL ans &#x3D; 0,sum_ &#x3D; 0;
+                cin &gt;&gt; n;
+                for (LL i &#x3D; 1;i &lt;&#x3D; n;++ i)
+                        scanf(&quot;%lld%lld&quot;,&amp;arr[i].a,&amp;arr[i].b);
+                sort(arr + 1,arr + 1 + n);
+                for (LL i &#x3D; 1;i &lt;&#x3D; n;++ i)&#123;
+                        sum_ +&#x3D; arr[i].a;
+                        ans &#x3D; max(ans,sum_) + arr[i].b; 
+                &#125;
+                printf(&quot;%lld\n&quot;,ans);
+        &#125;
+        return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<p>考虑另一点:原式为什么<strong>不是</strong>$f_1\leq f_2$?</p>
+<blockquote>
+<ol>
+<li>比较函数<code>cmp</code>或<code>&lt;</code>定义的是<code>严格小于</code>,不能用<code>小于等于</code>去定义它们</li>
+<li>$max(a,b)\leq max(a,c)$不等价于$b\leq c$</li>
+</ol>
+</blockquote>
+<hr>
+<p>求解这类”求某方案,使某值最大/小”的贪心问题可以考虑假定一个最佳方案,然后对该方案进行略微改动,列不等式,观察不等式得到贪心策略.</p>
+<p>这种方法称为”微调法”(似乎?),在很多贪心问题上都很实用.</p>
+<p>文结.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -797,152 +939,6 @@ int main()&#123;
         cout &lt;&lt; ans;
         return 0;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>文结.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/10/16/2018-10-16-Luogu2575%E9%AB%98%E6%89%8B%E8%BF%87%E6%8B%9B%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
-      <meta itemprop="name" content="BeautyYu言醴">
-      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="银河美术馆-Beautyyu">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/16/2018-10-16-Luogu2575%E9%AB%98%E6%89%8B%E8%BF%87%E6%8B%9B%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">Luogu2575高手过招|题解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-10-16 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-16T00:00:00+08:00">2018-10-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Luogu2575高手过招-题解"><a href="#Luogu2575高手过招-题解" class="headerlink" title="Luogu2575高手过招|题解"></a>Luogu2575高手过招|题解</h1><blockquote>
-<p>AKN玩游戏玩累了，于是他开始和同伴下棋了，玩的是跳棋！对手是wwx！这两位上古神遇在一起下棋，使得棋局变得玄幻莫测，高手过招，必有一赢，他们都将用最佳策略下棋，现在给你一个n*20的棋盘，以及棋盘上有若干个棋子，问谁赢？akn先手！</p>
-<p>游戏规则是这样的：</p>
-<p>对于一个棋子，能将它向右移动一格，如果右边有棋子，则向右跳到第一个空格，如果右边没有空格，则不能移动这个棋子，如果所有棋子都不能移动，那么将输掉这场比赛。</p>
-</blockquote>
-<p>显然每行游戏状态相互独立,可以分解为子问题.</p>
-<p>每个子问题规模$20$,考虑压缩状态.</p>
-<p>问题在于如何求得子问题的$SG$函数</p>
-<h3 id="阶梯Nim"><a href="#阶梯Nim" class="headerlink" title="阶梯Nim"></a>阶梯Nim</h3><blockquote>
-<p>一个阶梯有n阶，每一阶上面都可以存放个数不限的硬币。现在我们用n元组(x1,x2,…,xn) 来代表第 i (1 ≤ i ≤<br>n)个硬币存放在第xi个阶梯上面。阶梯博弈中的一次移动可以把任意正整数个的硬币从某一阶移动到下面的一阶，也即是从第 j 阶移动到第j -<br>1阶。当硬币到达地面（第0阶）时，这个硬币就不可再移动了。双方轮流落子，直到有一方不能再落子。</p>
-</blockquote>
-<p>在<code>阶梯Nim</code>中我们遵循以下策略:</p>
-<ul>
-<li>若对手将奇数阶的硬币移到偶数阶,我们不作为</li>
-<li>若对手将偶数阶的硬币移到奇数阶,我们将相同的这些硬币移至下一级偶数阶</li>
-</ul>
-<p>由于所有硬币最后都会到达第$0$阶,所以根据以上策略,<strong>移至偶数阶的硬币相当于被拿走了</strong></p>
-<p>也就是问题变为对奇数阶的<code>Nim游戏</code></p>
-<hr>
-<p>而这个问题可以归结为<code>阶梯Nim</code>:将两个空位之间的间隙视为一级阶梯即可</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;cmath&gt;
-#include &lt;string&gt;
-#include &lt;algorithm&gt;
-#include &lt;set&gt;
-#define LL long long
-using namespace std;
-LL T,n,sg_mem[2000000];
-const LL N &#x3D; 20;
-LL sg(LL status)&#123;
-        LL ans &#x3D; 0,cnt &#x3D; 0,j &#x3D; 0;
-        while(status)&#123;
-                if (status &amp; 1)&#123;
-                        ++ cnt;
-                        status &gt;&gt;&#x3D; 1;
-                        continue;
-                &#125;
-                if (j % 2)
-                        ans ^&#x3D; cnt;
-                cnt &#x3D; 0;
-                ++ j;
-                status &gt;&gt;&#x3D; 1;
-        &#125;
-        if (j % 2)
-                ans ^&#x3D; cnt;
-        return ans;
-&#125;
-int main ()&#123;
-        LL al,n,m;
-        memset(sg_mem,-1,sizeof(sg_mem));
-        cin &gt;&gt; T;
-        while(T--)&#123;
-                scanf(&quot;%lld&quot;,&amp;n);
-                LL ans &#x3D; 0;
-                for (LL i &#x3D; 1;i &lt;&#x3D; n;++ i)&#123;
-                        LL s &#x3D; 0;
-                        scanf(&quot;%lld&quot;,&amp;m);
-                        for (LL i &#x3D; 1;i &lt;&#x3D; m;++ i)&#123;
-                                scanf(&quot;%lld&quot;,&amp;al);
-                                s |&#x3D; (1 &lt;&lt; (20 - al));
-                        &#125;
-                        ans ^&#x3D; sg(s);
-                &#125;
-                if (ans)
-                        printf(&quot;YES\n&quot;);
-                else
-                        printf(&quot;NO\n&quot;);
-        &#125;
-        return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>文结.</p>
 

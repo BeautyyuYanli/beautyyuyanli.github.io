@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -304,6 +304,167 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/09/04/2018-9-04-NOI2001%E7%82%AE%E5%85%B5%E9%98%B5%E5%9C%B0%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/09/04/2018-9-04-NOI2001%E7%82%AE%E5%85%B5%E9%98%B5%E5%9C%B0%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">NOI2001炮兵阵地|题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>司令部的将军们打算在N<em>M的网格地图上部署他们的炮兵部队。一个N</em>M的地图由N行M列组成，地图的每一格可能是山地（用“H”  表示），也可能是平原（用“P”表示），如下图。在每一格平原地形上最多可以布置一支炮兵部队（山地上不能够部署炮兵部队）；一支炮兵部队在地图上的攻击范围如图中黑色区域所示：</p>
+<p><img src="https://pics1.beautyyu.top/origin/origin.png" alt="img"> </p>
+<p>如果在地图中的灰色所标识的平原上部署一支炮兵部队，则图中的黑色的网格表示它能够攻击到的区域：沿横向左右各两格，沿纵向上下各两格。图上其它白色网格均攻击不到。从图上可见炮兵的攻击范围不受地形的影响。   现在，将军们规划如何部署炮兵部队，在防止误伤的前提下（保证任何两支炮兵部队之间不能互相攻击，即任何一支炮兵部队都不在其他支炮兵部队的攻击范围内），在整个地图区域内最多能够摆放多少我军的炮兵部队。</p>
+</blockquote>
+<p>是一道经典的状压dp题,很可惜代码丑得自己都看不下去..</p>
+<p>设$f(i,S_{self},S_{father})$为考虑前i行,第i行状态为$S_{self}$,第i-1行状态为$S_{father}$时的最优解</p>
+<p>设$cnt(S)$为状态$S$上放置炮兵的数量</p>
+<p>转移方程为<br>$$<br>f(i,S_{self},S_{father})=max{f(i-1,S_{father},S_{grandfather})+cnt(S_{self})}<br>$$<br>按顺序枚举$S_{self},S_{father},S_{grandfather}$进行转移,枚举时应当保证三个$S$互不冲突且对于地形合法</p>
+<p>注意两点:</p>
+<ol>
+<li>要考虑$S$可以为空集,即该行不放炮兵</li>
+<li>注意滚动数组优化,否则空间不足</li>
+</ol>
+<p>代码如下</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+#include &lt;ctime&gt;
+#define LL int 
+using namespace std;
+LL map_[200],dp[2][2000][2000],p &#x3D; 0;
+LL cal(LL se)&#123;
+        LL cnt &#x3D; 0;
+        while (se)&#123;
+                se -&#x3D; se&amp;(-se);
+                cnt ++;
+        &#125;
+        return cnt;
+&#125;
+int main()&#123;
+        LL n,m;
+        cin &gt;&gt; n &gt;&gt; m;
+        for (LL i &#x3D; 1;i &lt;&#x3D; n;++ i)&#123;
+                map_[i] &#x3D; 0;
+                for (LL j &#x3D; 1;j &lt;&#x3D; m;++ j)&#123;
+                        char al &#x3D; getchar();
+                        while (al !&#x3D; &#39;P&#39; &amp;&amp; al !&#x3D; &#39;H&#39;) al &#x3D; getchar();
+                        map_[i] &lt;&lt;&#x3D; 1;
+                        if (al &#x3D;&#x3D; &#39;P&#39;)
+                                map_[i] |&#x3D; 1;
+                &#125;
+        &#125;
+        memset(dp,0,sizeof(dp));
+        for (LL s &#x3D; map_[1];s;s &#x3D; (s - 1) &amp; map_[1])&#123;
+                if (((s &lt;&lt; 1) &amp; s) || ((s &lt;&lt; 2) &amp; s))
+                        continue;
+                dp[0][0][s] &#x3D; cal(s);
+        &#125;
+        for (LL k &#x3D; 2;k &lt;&#x3D; n;++ k)&#123;
+                p &#x3D; !p;
+                for (LL se &#x3D; map_[k];se!&#x3D;-1;se &#x3D; se?(se - 1) &amp; map_[k]:-1)&#123;
+                        if (((se &lt;&lt; 1) &amp; se) || ((se &lt;&lt; 2) &amp; se))
+                                continue;
+                        LL cal_se &#x3D; cal(se);
+                        LL tmp &#x3D; map_[k - 1]&amp;(~se);
+                        for (LL fa &#x3D; tmp;fa!&#x3D;-1;fa &#x3D; fa?(fa - 1) &amp; tmp:-1)&#123;
+                                dp[p][fa][se] &#x3D; 0;
+                                if (((fa &lt;&lt; 1) &amp; fa) || ((fa &lt;&lt; 2) &amp; fa))
+                                        continue;
+                                LL tmp1 &#x3D; map_[k - 2]&amp;(~fa)&amp;(~se);
+                                for (LL gfa &#x3D; tmp1;gfa!&#x3D;-1;gfa &#x3D; gfa?(gfa - 1) &amp; tmp1:-1)&#123;
+                                        if (((gfa &lt;&lt; 1) &amp; gfa) || ((gfa &lt;&lt; 2) &amp; gfa))
+                                                continue;
+                                        dp[p][fa][se] &#x3D; max(dp[p][fa][se],dp[!p][gfa][fa]+cal_se);
+                                &#125;
+                        &#125;
+                &#125;
+        &#125;
+        LL ans &#x3D; 0;
+        for (LL se &#x3D; map_[n];se!&#x3D;-1;se &#x3D; se?(se - 1) &amp; map_[n]:-1)&#123;
+                if (((se &lt;&lt; 1) &amp; se) || ((se &lt;&lt; 2) &amp; se))
+                        continue;
+                LL tmp &#x3D; map_[n-1]&amp;(~se);
+                for (LL fa &#x3D; tmp;fa !&#x3D; -1;fa &#x3D; fa?(fa - 1) &amp; tmp:-1)&#123;
+                        if (((fa &lt;&lt; 1) &amp; fa) || ((fa &lt;&lt; 2) &amp; fa))
+                                continue;
+                        ans &#x3D; max(ans,dp[p][fa][se]);
+                &#125;
+        &#125;
+        cout &lt;&lt; ans;
+
+        return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>文结</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -899,150 +1060,6 @@ int main ()&#123;
 
         return 0;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/07/20/2018-7-20-Luogu1156%E5%9E%83%E5%9C%BE%E9%99%B7%E9%98%B1%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
-      <meta itemprop="name" content="BeautyYu言醴">
-      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="银河美术馆-Beautyyu">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/07/20/2018-7-20-Luogu1156%E5%9E%83%E5%9C%BE%E9%99%B7%E9%98%B1%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">Luogu1156垃圾陷阱|题解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-07-20 12:12:12" itemprop="dateCreated datePublished" datetime="2018-07-20T12:12:12+08:00">2018-07-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>卡门――农夫约翰极其珍视的一条<code>Holsteins</code>奶牛――已经落了到“垃圾井”中。“垃圾井”是农夫们扔垃圾的地方，它的深度为 D(2≤D≤100)英尺。</p>
-<p>卡门想把垃圾堆起来，等到堆得与井同样高时，她就能逃出井外了。另外，卡门可以通过吃一些垃圾来维持自己的生命。</p>
-<p>每个垃圾都可以用来吃或堆放，并且堆放垃圾不用花费卡门的时间。</p>
-<p>假设卡门预先知道了每个垃圾扔下的时间 t(0&lt;t≤1000)，以及每个垃圾堆放的高度 h(1≤h≤25)和吃进该垃圾能维持生命的时间 f(1≤f≤30)，要求出卡门最早能逃出井外的时间，假设卡门当前体内有足够持续 10小时的能量，如果卡门 10小时内没有进食，卡门就将饿死。</p>
-</blockquote>
-<p>是一道经典的dp题,并没有太大的难度,但有值得注意的地方</p>
-<p>题目中存在三个元素:时间,高度,生命</p>
-<p>其中生命和时间都处于时间轴中,显然依照时间轴划分阶段,根据直觉应当以垃圾掉落时间划阶段</p>
-<p>接着生命和高度都可以作为状态.</p>
-<p>如果以生命作为状态</p>
-<ol>
-<li>数据范围大,导致复杂度(常数)大</li>
-<li>处于时间轴中,设计转移策略时可能干扰思路</li>
-<li>转移策略较复杂,且不方便枚举</li>
-</ol>
-<p>总之显得很不自然</p>
-<p>所以应当选定高度作为状态</p>
-<p>接着设计转移策略时:</p>
-<ol>
-<li>填表法:注意到如果高度大于D(即卡门已经得救时),难以枚举</li>
-<li>刷表法:自然且方便判定死亡或得救</li>
-</ol>
-<p>总体上是一道考验代码能力的题目.</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;cstring&gt;
-#include &lt;string&gt;
-#include &lt;algorithm&gt;
-#include &lt;cmath&gt;
-#define llint long long
-using namespace std;
-int xx[2][200],*dp[2];
-struct xxx&#123;
-        int t,f,h;
-        bool operator &lt; (const xxx &amp;be)const&#123;
-                if (t !&#x3D; be.t)
-                        return t &lt; be.t;
-                if (f !&#x3D; be.t)
-                        return f &gt; be.f;
-                return h &gt; be.f;
-        &#125;
-&#125;tra[200];
-int main ()&#123;
-        int D,G,ans &#x3D; 0x3f3f3f3f,ans2 &#x3D; 0;
-        cin &gt;&gt; D &gt;&gt; G;
-        for (int i &#x3D; 1;i &lt;&#x3D; G;++ i)
-                scanf(&quot;%d%d%d&quot;,&amp;tra[i].t,&amp;tra[i].f,&amp;tra[i].h);
-        sort(tra + 1,tra + 1 + G);
-        memset(xx,-1,sizeof(xx));
-        dp[0] &#x3D; xx[0];dp[1] &#x3D; xx[1];
-        dp[1][0] &#x3D; 10;
-        for (int i &#x3D; 1;i &lt;&#x3D; G;++ i)&#123;
-                swap(dp[0],dp[1]);
-                for (int j &#x3D; 0;j &lt; D;++ j)&#123;
-                        if (dp[0][j] &lt; tra[i].t)
-                                continue;
-                        if (j + tra[i].h &gt;&#x3D; D) ans &#x3D; min(ans,tra[i].t);
-                        dp[1][j + tra[i].h] &#x3D; max(dp[1][j + tra[i].h],dp[0][j]);
-                        dp[1][j] &#x3D; max(dp[1][j],dp[0][j] + tra[i].f);
-                        ans2 &#x3D; max(ans2,dp[1][j]);
-                &#125;
-        &#125;
-        if (ans &#x3D;&#x3D; 0x3f3f3f3f)&#123;
-                cout &lt;&lt; ans2;
-                return 0;
-        &#125;
-        cout &lt;&lt; ans;
-        return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>以上.</p>
 
       
     </div>
