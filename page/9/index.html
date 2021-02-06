@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -304,6 +304,135 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/01/30/2018-1-30-USACO06FEBShuZiSanJiaoXin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/01/30/2018-1-30-USACO06FEBShuZiSanJiaoXin/" class="post-title-link" itemprop="url">USACO06FEB数字三角形|题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-30 17:30:11" itemprop="dateCreated datePublished" datetime="2018-01-30T17:30:11+08:00">2018-01-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>观察易得 答案实际上是一个杨辉三角形分别乘上对应数字的和</p>
+<h4 id="杨辉三角形"><a href="#杨辉三角形" class="headerlink" title="杨辉三角形"></a>杨辉三角形</h4><p>直接打表即可</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">    int yanghui[13][13] &#x3D; &#123;&#123;0,0,0,0,0,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,0,0,0,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,1,0,0,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,2,1,0,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,3,3,1,0,0,0,0,0,0,0,0&#125;,
+&#123;0,1,4,6,4,1,0,0,0,0,0,0,0&#125;,
+&#123;0,1,5,10,10,5,1,0,0,0,0,0,0&#125;,
+&#123;0,1,6,15,20,15,6,1,0,0,0,0,0&#125;,
+&#123;0,1,7,21,35,35,21,7,1,0,0,0,0&#125;,
+&#123;0,1,8,28,56,70,56,28,8,1,0,0,0&#125;,
+&#123;0,1,9,36,84,126,126,84,36,9,1,0,0&#125;,
+&#123;0,1,10,45,120,210,252,210,120,45,10,1,0&#125;,
+&#123;0,1,11,55,165,330,462,462,330,165,55,11,1&#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>生成杨辉的代码</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for (int i &#x3D; 1;i &lt;&#x3D; 12;++ i)&#123;
+        yanghui[i][1] &#x3D; yanghui[i][i] &#x3D; 1;
+        for (int j &#x3D; 2;j &lt; i;++ j)&#123;
+            yanghui[i][j] &#x3D; yanghui[i - 1][j - 1]+yanghui[i - 1][j];
+        &#125;
+    &#125;printf(&quot;&#123;&quot;);
+    for (int i &#x3D; 0;i &lt;&#x3D; 12;++ i)&#123;
+        printf(&quot;&#123;&quot;);
+        for (int j &#x3D; 0;j &lt;&#x3D; 11;++ j)
+            printf(&quot;%d,&quot;,yanghui[i][j]);
+        printf(&quot;%d&#125;,\n&quot;,yanghui[i][12]);
+    &#125;
+    printf(&quot;&#125;\n&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>然后这道题就成了求1-n的全排列<br>这里我用了<code>swap</code>实现全排列</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void dfs(int handle,int weight)&#123;
+    for (int i &#x3D; handle;i &lt;&#x3D; n;++ i)&#123;
+        swap(arr[i],arr[handle]);
+        dfs(handle + 1,weight + arr[handle] * yanghui[n][handle]);
+        swap(arr[i],arr[handle]);
+    &#125;
+    return ;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p><strong>但这样不保证字典序</strong><br>通过观察可以发现 杨辉三角满足轴对称<br>例如n = 4 时<code>a b c d</code>和<code>a c b d</code>和<code>d b c a</code>和<code>d c b a</code>这样不同的排序可以得到相同的sum<br>因此我在输出时强行把它变成字典序</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">if (handle &gt; n &amp;&amp; weight &#x3D;&#x3D; m)&#123;
+        for (int i &#x3D; 1;i &lt;&#x3D; n;++ i)
+        &#123;
+            if (i &lt;&#x3D; n &#x2F; 2 &amp;&amp; arr[n - i + 1] &lt; arr[i])
+                swap(arr[i],arr[n - i + 1]);
+            printf(&quot;%d &quot;,arr[i]);
+        &#125;
+        exit(0);
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="这个方法不确保答案的正确性-但在n-lt-12的规模下还是不会出问题的"><a href="#这个方法不确保答案的正确性-但在n-lt-12的规模下还是不会出问题的" class="headerlink" title="这个方法不确保答案的正确性 但在n&lt;=12的规模下还是不会出问题的"></a><strong><em>这个方法不确保答案的正确性 但在<code>n&lt;=12</code>的规模下还是不会出问题的</em></strong></h2><hr>
+<h3 id="4"><a href="#4" class="headerlink" title="4"></a>4</h3><p>最后加上一行剪枝<code>if (weight &gt;= m) return;</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   

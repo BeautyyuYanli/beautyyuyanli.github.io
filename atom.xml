@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://beautyyu.top/"/>
-  <updated>2021-02-03T12:39:55.179Z</updated>
+  <updated>2021-02-06T14:07:05.279Z</updated>
   <id>http://beautyyu.top/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>管理你的本地音乐库: 逃离流媒体</title>
+    <link href="http://beautyyu.top/2021/02/06/2021-2-06%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E6%9C%AC%E5%9C%B0%E9%9F%B3%E4%B9%90%E5%BA%93_%E9%80%83%E7%A6%BB%E6%B5%81%E5%AA%92%E4%BD%93/"/>
+    <id>http://beautyyu.top/2021/02/06/2021-2-06%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E6%9C%AC%E5%9C%B0%E9%9F%B3%E4%B9%90%E5%BA%93_%E9%80%83%E7%A6%BB%E6%B5%81%E5%AA%92%E4%BD%93/</id>
+    <published>2021-02-05T16:00:00.000Z</published>
+    <updated>2021-02-06T14:07:05.279Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="其他" scheme="http://beautyyu.top/categories/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="生活" scheme="http://beautyyu.top/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>一种基于数值的dp遍历方法 Codeforces1475G Strange Beauty|题解</title>

@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">45</span></a>
 
   </li>
         <li class="menu-item menu-item-关于我">
@@ -304,6 +304,192 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/10/19/2018-10-19-Luogu1484%E7%A7%8D%E6%A0%91%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/custom-logo.jpg">
+      <meta itemprop="name" content="BeautyYu言醴">
+      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="银河美术馆-Beautyyu">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/19/2018-10-19-Luogu1484%E7%A7%8D%E6%A0%91%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">Luogu1484种树|题解</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-10-19 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-19T00:00:00+08:00">2018-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>cyrcyr今天在种树，他在一条直线上挖了n个坑。这n个坑都可以种树，但为了保证每一棵树都有充足的养料，cyrcyr不会在相邻的两个坑中种树。而且由于cyrcyr的树种不够，他至多会种k棵树。假设cyrcyr有某种神能力，能预知自己在某个坑种树的获利会是多少（可能为负），请你帮助他计算出他的最大获利。</p>
+<p>n&lt;=500000</p>
+</blockquote>
+<p>很有趣的一道题</p>
+<p>dp的做法我就不多赘述了.主要讲讲怎么$O(klogn)$实现它</p>
+<hr>
+<p>首先我们考虑一个特殊情形:不限制树的数量上限,所有权值都为正数</p>
+<p>假设$n=3$,用$01$串表示种树的情况的话,无非就是这两种:</p>
+<ol>
+<li>$010$</li>
+<li>$101$</li>
+</ol>
+<p>假如目前策略是$010$的话,总价值$ans$为$val[2]$,如果满足条件:</p>
+<p>$val[1]+val[3]&gt;val[2]$</p>
+<p>我们就可以改用策略$101$,此时价值增加量$f_1=val[1]+val[3]-val[2]$,种下的树的数量增加$1$</p>
+<p>假设$n$大一些,例如$n=5$时,从$01010$转为$10101$的情形也大致一样:种下的树数量增加$1$,价值增加量为$f_2=val[1]+val[5]-f_1,(f_1含义见上一行,即01010的增加量)$</p>
+<p>如果$f_2&gt;0$,那么这个新的策略是值得的</p>
+<p>于是我们发现了它重要的规律:<strong>这极其类似于求二分图匹配的增广路算法</strong></p>
+<p>也就是:路径上的$0$变为$1$,$1$变为$0$,种的树数量增加$1$</p>
+<p>不过有一个区别:本题中进行一次类似”增广”的操作,会产生一个价值$f$,这个$f$可以通过容斥原理求得.</p>
+<p>那么原题题意就明了了:我们的任务是进行不多于$k$次类似”增广”的操作,使得所有$f$之和最大</p>
+<hr>
+<p>那么怎么实现这个操作呢?双向链表.</p>
+<p>我们用一个节点来表示一段<strong>交错种树</strong>的坑的区间,初始状态下一个节点对应一个坑.</p>
+<p>这个节点里要保存这段区间进行一次”增广”后产生的价值.初始状态就是原先这个坑的价值</p>
+<p>如果进行了一次增广,那么区间就会和它左/右两边的区间合并,例如$0010100$,如果我们对区间$[3:5]$进行一次”增广”,那么就变成了$0101010$,区间扩大为$[2:6]$.这时候表示$[2:2]$的节点和表示$[6:6]$的节点都被$[2:6]$覆盖了,因此我们新建一个节点表示$[2:6]$,而原先的三个节点都打上删除标记.新节点直接与节点$[1:1]$和节点$[7:7]$相连.</p>
+<p>由于我们要使$k$次”增广”的价值之和最大,显然把所有节点丢进一个大根堆里,按价值$f$从大到小取出就好了.</p>
+<hr>
+<p>代码如下.</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;algorithm&gt;
+#include &lt;string&gt;
+#include &lt;cstring&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#define LL long long
+using namespace std;
+struct qwq&#123;
+        &#x2F;&#x2F;the node in the Linked-list
+        &#x2F;&#x2F;it represents a sub-sequence of the array of holes
+        LL val;&#x2F;&#x2F;the value that the sequence can provide if we make it expand
+        qwq *left,*right;
+        bool if_del;&#x2F;&#x2F;if the node has been deleted
+        qwq (LL al,qwq *be):
+                val(al),left(be),right(NULL),if_del(0)&#123;&#125;
+        qwq (LL al):
+                val(al),left(NULL),right(NULL),if_del(0)&#123;&#125;
+&#125;;
+struct pwp&#123;
+        &#x2F;&#x2F;pointer to the node on the Linked-list
+        qwq *p;
+        bool operator &lt; (const pwp &amp;be)const&#123;
+                return p-&gt;val &lt; be.p-&gt;val;
+        &#125;
+&#125;;
+priority_queue&lt;pwp&gt; h;
+int main()&#123;
+        LL n,k;
+        cin &gt;&gt; n &gt;&gt; k;
+        LL al;qwq *be;
+        scanf(&quot;%lld&quot;,&amp;al);
+        be &#x3D; new qwq(al,NULL);
+        h.push((pwp)&#123;be&#125;);
+        for (LL i &#x3D; 2;i &lt;&#x3D; n;++ i)&#123;
+                scanf(&quot;%lld&quot;,&amp;al);
+                be-&gt;right &#x3D; new qwq(al,be);
+                be &#x3D; be-&gt;right;
+                h.push((pwp)&#123;be&#125;);
+        &#125;
+        LL ans &#x3D; 0;
+        for (LL i &#x3D; 1;i &lt;&#x3D; k;++ i)&#123;
+                &#x2F;&#x2F;take the node which owns the max value
+                while(h.size() &amp;&amp; h.top().p-&gt;if_del)
+                        h.pop();
+                qwq *p &#x3D; h.top().p;
+                h.pop();
+                &#x2F;&#x2F;we needen&#39;t to exactly chose k holes 
+                if (p-&gt;val &lt;&#x3D; 0)
+                        break;
+                &#x2F;&#x2F;make the sequence expand
+                ans +&#x3D; p-&gt;val;&#x2F;&#x2F;add value to the answer
+                qwq *new_ &#x3D; new qwq(0 - p-&gt;val);&#x2F;&#x2F;create a new node to represent the larger sequence
+                &#x2F;&#x2F;the new node &#39;s value is (left-&gt;val)+(right-&gt;val)-(origin-&gt;val)
+                &#x2F;&#x2F;if the left&#x2F;right node exist
+                &#x2F;&#x2F;just like Augmenting-Path algorithm in gragh theory
+                if (p-&gt;left !&#x3D; NULL)&#123;
+                        &#x2F;&#x2F;delete the left node,because it&#39;s sequence will be contained by the sequence of the new node
+                        p-&gt;left-&gt;if_del &#x3D; 1;
+                        new_-&gt;val +&#x3D; p-&gt;left-&gt;val;
+                        new_-&gt;left &#x3D; p-&gt;left-&gt;left;
+                        if (new_-&gt;left !&#x3D; NULL)
+                                new_-&gt;left-&gt;right &#x3D; new_;
+                &#125;
+                else
+                        new_-&gt;right &#x3D; NULL;
+                if (p-&gt;right !&#x3D; NULL)&#123;
+                        p-&gt;right-&gt;if_del &#x3D; 1;
+                        new_-&gt;val +&#x3D; p-&gt;right-&gt;val;
+                        new_-&gt;right &#x3D; p-&gt;right-&gt;right;
+                        if(new_-&gt;right !&#x3D; NULL)
+                                new_-&gt;right-&gt;left &#x3D; new_;
+                &#125;
+                else
+                        new_-&gt;right &#x3D; NULL;
+                &#x2F;&#x2F;push the new node to the heap
+                h.push((pwp)&#123;new_&#125;);
+        &#125;
+        cout &lt;&lt; ans;
+        return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>文结.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -849,151 +1035,6 @@ int main ()&#123;
 <p>越是疲倦,越不能歇.</p>
 <p>祝自己和微笙计协都能够越来越好.</p>
 <p>文结.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://beautyyu.top/2018/09/15/2018-9-15-luogu1268%E6%A0%91%E7%9A%84%E9%87%8D%E9%87%8F%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/custom-logo.jpg">
-      <meta itemprop="name" content="BeautyYu言醴">
-      <meta itemprop="description" content="热爱ACGN和技术的学生; 谈论设计, 音乐, 自然科学和文学">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="银河美术馆-Beautyyu">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/09/15/2018-9-15-luogu1268%E6%A0%91%E7%9A%84%E9%87%8D%E9%87%8F%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">luogu1268树的重量|题解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-15T00:00:00+08:00">2018-09-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文引用洛谷图床图片可能无法显示,请复制链接至新标签页查看</p>
-<blockquote>
-<p>树可以用来表示物种之间的进化关系。一棵“进化树”是一个带边权的树，其叶节点表示一个物种，两个叶节点之间的距离表示两个物种的差异。现在，一个重要的问题是，根据物种之间的距离，重构相应的“进化树”。</p>
-<p>令N={1..n}，用一个N上的矩阵M来定义树T。其中，矩阵M满足：对于任意的i，j，k，有M[i,j] + M[j,k] &gt;= M[i,k]。树T满足：</p>
-<p>1．叶节点属于集合N；</p>
-<p>2．边权均为非负整数；</p>
-<p>3．dT(i,j)=M[i,j]，其中dT(i,j)表示树上i到j的最短路径长度。</p>
-<p>如下图，矩阵M描述了一棵树。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/pic/82.png" alt="img"> </p>
-<p>树的重量是指树上所有边权之和。对于任意给出的合法矩阵M，它所能表示树的重量是惟一确定的，不可能找到两棵不同重量的树，它们都符合矩阵M。你的任务就是，根据给出的矩阵M，计算M所表示树的重量。下图是上面给出的矩阵M所能表示的一棵树，这棵树的总重量为15。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/pic/83.png" alt="img"></p>
-</blockquote>
-<p>非常巧妙的一道构造题.</p>
-<hr>
-<p>题面指出 $对于任意的i,j,k 有M[i,j] + M[j,k] \geq M[i,k]$</p>
-<p>那么很显然$M$描述的是两点之间的最短路了,也就是$M[i,j]=M[i,lca(i,j)]+M[j,lca(i,j)]$</p>
-<hr>
-<p>我们取出一个叶子节点$a$,将它作为树根.</p>
-<p>接下来我们逐个将叶子加入这颗树里.这个叶子一定会产生一个新枝,我们把这个叶子产生的枝加入答案$ans$</p>
-<p>对于第二个叶子$b$,显然它只能直接和$a$连一条边,$ans=M[a,b]$</p>
-<p>对于第三个叶子$c$,显然它只能加入链$[a,b]$中,根据$M$的信息我们可以算出$c$产生的枝长度$L$为$(M[a,c]+M[b,c]-M[a,b])/2$,将这个数字加入$ans$</p>
-<p>对于第四个叶子$d$,事情就没有这么简单了.它有可能加入链$[a,b]$,分枝长度$L_1$;也有可能加入链$[a,c]$,分枝长度$L_2$.我们分类讨论不同情况:</p>
-<ol>
-<li>分支点位于$[a,lca(b,c)]$,则$L_1=L_2$</li>
-<li>分支点位于$[lca(b,c),b]$,则$L_1$为$d$到$lca(b,d)$的距离;$L_2$为$d$到$lca(c,d)即lca(b,c)$的距离.显然$L_1&lt;L_2$.如果我们认为$L$为$L_2$,那么$lca(b,d)到lca(b,c)$的这一段距离就会重复计算(我们在加入$b$的时候就把这一段加入$ans$了).所以$L$为$L_1$</li>
-<li>分支点位于$[lca(b,c),c]$的时候情形同上</li>
-</ol>
-<p>综上,对于第四个节点,$L=\min(L_1,L_2)$</p>
-<p>……</p>
-<p>推广到第$n$个节点,$L=\min{L_i}$</p>
-<p><img src="https://pics1.beautyyu.top/origin/iaPOOI.png" alt="img"> </p>
-<p><img src="https://pics1.beautyyu.top/origin/iaPjmt.png" alt="img"> </p>
-<p>图片引自<a target="_blank" rel="noopener" href="https://pics1.beautyyu.top/origin-p1268">TsReaper的博客</a></p>
-<hr>
-<p>代码如下</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;cstdlib&gt;
-#include &lt;algorithm&gt;
-#include &lt;string&gt;
-#include &lt;cstring&gt;
-#include &lt;cmath&gt;
-#define LL int
-using namespace std;
-LL map_[100][100],len[100],n;
-int main()&#123;
-        while (1)&#123;
-                scanf(&quot;%d&quot;,&amp;n);
-                if (n &#x3D;&#x3D; 0)
-                        break;
-                else &#123;
-                        memset(map_,0,sizeof(map_));
-                        memset(len,0x3f,sizeof(len));
-                        for (LL i &#x3D; 1;i &lt;&#x3D; n;++ i)&#123;
-                                for (LL j &#x3D; 1 + i;j &lt;&#x3D; n;++ j)&#123;
-                                        scanf(&quot;%d&quot;,&amp;map_[i][j]);
-                                        map_[j][i] &#x3D; map_[i][j];
-                                &#125;
-                        &#125;
-                &#125;
-                LL ans &#x3D; len[2] &#x3D; map_[1][2];
-                for (LL i &#x3D; 3;i &lt;&#x3D; n;++ i)&#123;
-                        for (LL j &#x3D; 2;j &lt; i;++ j)&#123;
-                                len[i] &#x3D; min(len[i],(map_[i][j] + map_[i][1] - map_[1][j]) &gt;&gt; 1);
-                        &#125;
-                        ans +&#x3D; len[i];
-                &#125;
-                printf(&quot;%d\n&quot;,ans);
-        &#125;
-
-        return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>文结</p>
 
       
     </div>
